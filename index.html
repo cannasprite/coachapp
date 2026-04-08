@@ -4,6 +4,27 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>COACH</title>
+  <meta name="theme-color" content="#b8ff57" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="COACH" />
+  <script>
+    (function () {
+      var icon = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='36' fill='%230a0a0a'/%3E%3Ctext x='96' y='132' font-size='110' font-weight='800' font-family='sans-serif' text-anchor='middle' fill='%23b8ff57'%3EC%3C/text%3E%3C/svg%3E";
+      var manifest = JSON.stringify({
+        name: 'COACH', short_name: 'COACH', display: 'standalone',
+        background_color: '#0a0a0a', theme_color: '#b8ff57', start_url: '.',
+        icons: [
+          { src: icon, sizes: '192x192', type: 'image/svg+xml' },
+          { src: icon, sizes: '512x512', type: 'image/svg+xml' }
+        ]
+      });
+      var link = document.createElement('link');
+      link.rel  = 'manifest';
+      link.href = URL.createObjectURL(new Blob([manifest], { type: 'application/manifest+json' }));
+      document.head.appendChild(link);
+    })();
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
@@ -404,6 +425,14 @@
     }
 
     .hidden { display: none !important; }
+
+    .form-error {
+      display: block;
+      font-size: 12px;
+      color: var(--warn);
+      margin-top: 4px;
+      margin-bottom: 4px;
+    }
 
     /* ── Train tab ── */
     .train-header {
@@ -1962,11 +1991,30 @@
       return JSON.parse(localStorage.getItem('coach_food_' + todayKey()) || '[]');
     }
 
+    function showFieldError(id, msg) {
+      clearFieldError(id);
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.style.borderColor = 'rgba(255,159,67,0.5)';
+      const err = document.createElement('span');
+      err.className = 'form-error';
+      err.textContent = msg;
+      err.dataset.errorFor = id;
+      el.insertAdjacentElement('afterend', err);
+    }
+
+    function clearFieldError(id) {
+      const el = document.getElementById(id);
+      if (el) el.style.borderColor = '';
+      document.querySelectorAll('[data-error-for="' + id + '"]').forEach(e => e.remove());
+    }
+
     function logFood() {
       const name = document.getElementById('food-name').value.trim();
       const cal  = parseFloat(document.getElementById('food-cal').value)  || 0;
       const prot = parseFloat(document.getElementById('food-prot').value) || 0;
-      if (!name) return;
+      if (!name) { showFieldError('food-name', 'Food name is required'); return; }
+      clearFieldError('food-name');
       const log = getFoodLog();
       log.push({ name, cal, protein: prot, flagged: false });
       localStorage.setItem('coach_food_' + todayKey(), JSON.stringify(log));
@@ -2456,7 +2504,8 @@
       const name = document.getElementById('new-recipe-name').value.trim();
       const cal  = parseFloat(document.getElementById('new-recipe-cal').value)  || 0;
       const prot = parseFloat(document.getElementById('new-recipe-prot').value) || 0;
-      if (!name) return;
+      if (!name) { showFieldError('new-recipe-name', 'Recipe name is required'); return; }
+      clearFieldError('new-recipe-name');
       const recipes = JSON.parse(localStorage.getItem('coach_recipes') || '[]');
       recipes.push({ name, cal, protein: prot });
       localStorage.setItem('coach_recipes', JSON.stringify(recipes));
@@ -2801,6 +2850,33 @@ Write Sprite's weekly performance report with sections: Nutrition, Training, Rec
       toast.classList.add('show');
       if (toastTimer) clearTimeout(toastTimer);
       toastTimer = setTimeout(() => toast.classList.remove('show'), 3000);
+    }
+
+    // ── Service Worker (cache-first offline support) ───────────────────────────
+    if ('serviceWorker' in navigator) {
+      const swSrc = `
+        const CACHE = 'coach-v1';
+        self.addEventListener('install',  () => self.skipWaiting());
+        self.addEventListener('activate', e  => e.waitUntil(clients.claim()));
+        self.addEventListener('fetch', e => {
+          if (e.request.mode !== 'navigate') return;
+          e.respondWith(
+            caches.open(CACHE).then(cache =>
+              cache.match(e.request).then(cached => {
+                const network = fetch(e.request).then(resp => {
+                  cache.put(e.request, resp.clone());
+                  return resp;
+                });
+                return cached || network;
+              })
+            )
+          );
+        });
+      `;
+      try {
+        const blob  = new Blob([swSrc], { type: 'text/javascript' });
+        navigator.serviceWorker.register(URL.createObjectURL(blob)).catch(() => {});
+      } catch (_) {}
     }
   </script>
 </body>
