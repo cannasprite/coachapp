@@ -847,6 +847,251 @@
     .cardio-hist-item:last-child { border-bottom: none; }
     .cardio-hist-date { font-size: 12px; color: var(--muted); margin-top: 2px; }
 
+    /* ── Chat tab ── */
+    #tab-chat.active {
+      display: flex;
+      flex-direction: column;
+      padding: 0;
+      height: calc(100vh - 88px);
+    }
+    .chat-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 16px 12px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+    .chat-header h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+    }
+    .chat-clear-btn {
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 5px 10px;
+      color: var(--muted);
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 12px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .chat-clear-btn:hover { border-color: var(--warn); color: var(--warn); }
+
+    .chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .chat-bubble {
+      max-width: 82%;
+      padding: 10px 14px;
+      border-radius: 14px;
+      font-size: 14px;
+      line-height: 1.5;
+      word-break: break-word;
+    }
+    .chat-bubble.user {
+      align-self: flex-end;
+      background: var(--accent);
+      color: #0a0a0a;
+      border-bottom-right-radius: 4px;
+    }
+    .chat-bubble.assistant {
+      align-self: flex-start;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-bottom-left-radius: 4px;
+    }
+    .chat-input-bar {
+      padding: 10px 12px 12px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 8px;
+      background: var(--surface);
+      flex-shrink: 0;
+    }
+    .chat-input {
+      flex: 1;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 10px 14px;
+      color: var(--text);
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 14px;
+      outline: none;
+      resize: none;
+      line-height: 1.4;
+      transition: border-color 0.15s;
+    }
+    .chat-input:focus { border-color: rgba(184,255,87,0.4); }
+    .chat-send-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      border: none;
+      background: var(--accent);
+      color: #0a0a0a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: opacity 0.15s;
+    }
+    .chat-send-btn:active { opacity: 0.8; }
+    .chat-send-btn svg { width: 18px; height: 18px; }
+
+    /* ── Journal tab ── */
+    .tag-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .tag-pill {
+      padding: 6px 14px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background: var(--surface2);
+      color: var(--muted);
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.15s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .tag-pill.selected {
+      border-color: var(--accent);
+      background: rgba(184,255,87,0.1);
+      color: var(--accent);
+    }
+    .journal-entry-card {
+      background: linear-gradient(160deg, #1e1e1e 0%, #181818 100%);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      margin-bottom: 10px;
+      overflow: hidden;
+    }
+    .journal-entry-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 16px;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .journal-entry-date {
+      font-family: 'Syne', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+    }
+    .journal-entry-tags {
+      display: flex;
+      gap: 4px;
+      flex-wrap: wrap;
+      margin-top: 4px;
+    }
+    .journal-tag-chip {
+      font-size: 10px;
+      padding: 2px 7px;
+      border-radius: 10px;
+      background: rgba(184,255,87,0.1);
+      color: var(--accent);
+      font-weight: 500;
+    }
+    .journal-entry-body {
+      display: none;
+      padding: 0 16px 14px;
+      border-top: 1px solid var(--border);
+    }
+    .journal-entry-body p {
+      font-size: 14px;
+      line-height: 1.6;
+      margin-top: 12px;
+    }
+    .journal-win {
+      margin-top: 10px;
+      font-size: 13px;
+      color: var(--accent);
+    }
+
+    /* ── More tab ── */
+    .settings-field { margin-bottom: 12px; }
+    .settings-field label {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 5px;
+    }
+    .settings-input {
+      width: 100%;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 12px;
+      color: var(--text);
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.15s;
+      -moz-appearance: textfield;
+    }
+    .settings-input::-webkit-outer-spin-button,
+    .settings-input::-webkit-inner-spin-button { -webkit-appearance: none; }
+    .settings-input:focus { border-color: rgba(184,255,87,0.4); }
+
+    .recipe-mgmt-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+    }
+    .recipe-mgmt-item:last-child { border-bottom: none; }
+    .recipe-mgmt-info { flex: 1; min-width: 0; }
+    .recipe-delete-btn {
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 4px 10px;
+      color: var(--muted);
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 12px;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: all 0.15s;
+    }
+    .recipe-delete-btn:hover { border-color: var(--warn); color: var(--warn); }
+
+    .btn-secondary {
+      width: 100%;
+      padding: 12px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: var(--surface2);
+      color: var(--text);
+      font-family: 'Syne', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+      margin-top: 0;
+    }
+    .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
     /* ── Toast ── */
     #toast {
       position: fixed;
@@ -1179,9 +1424,110 @@
         <p style="color:var(--muted);font-size:13px;">No cardio logged yet.</p>
       </div>
     </div>
-    <div id="tab-chat"   class="tab-panel"></div>
-    <div id="tab-journal" class="tab-panel"></div>
-    <div id="tab-more"   class="tab-panel"></div>
+    <div id="tab-chat" class="tab-panel">
+      <div class="chat-header">
+        <h2>Coach Chat</h2>
+        <button class="chat-clear-btn" onclick="clearChat()">Clear</button>
+      </div>
+      <div class="chat-messages" id="chat-messages"></div>
+      <div class="chat-input-bar">
+        <textarea class="chat-input" id="chat-input" placeholder="Ask your coach…" rows="1"
+          onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMsg();}"></textarea>
+        <button class="chat-send-btn" onclick="sendMsg()" title="Send">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div id="tab-journal" class="tab-panel">
+      <div class="today-header">
+        <h2 style="font-size:22px;font-weight:700;letter-spacing:-0.3px;">Journal</h2>
+        <p style="font-size:13px;color:var(--muted);margin-top:2px;" id="journal-date"></p>
+      </div>
+
+      <div class="card">
+        <div class="field-label">Mood</div>
+        <div class="emoji-scale">
+          <input type="radio" name="journal-mood" id="jmood-1" value="1" /><label for="jmood-1">😞</label>
+          <input type="radio" name="journal-mood" id="jmood-2" value="2" /><label for="jmood-2">😕</label>
+          <input type="radio" name="journal-mood" id="jmood-3" value="3" /><label for="jmood-3">😐</label>
+          <input type="radio" name="journal-mood" id="jmood-4" value="4" /><label for="jmood-4">🙂</label>
+          <input type="radio" name="journal-mood" id="jmood-5" value="5" /><label for="jmood-5">😄</label>
+        </div>
+
+        <div class="field-label">Tags</div>
+        <div class="tag-pills" id="journal-tags">
+          <button class="tag-pill" data-tag="energy"   onclick="toggleTag(this)">energy</button>
+          <button class="tag-pill" data-tag="food"     onclick="toggleTag(this)">food</button>
+          <button class="tag-pill" data-tag="training" onclick="toggleTag(this)">training</button>
+          <button class="tag-pill" data-tag="body"     onclick="toggleTag(this)">body</button>
+          <button class="tag-pill" data-tag="mental"   onclick="toggleTag(this)">mental</button>
+        </div>
+
+        <div class="field-label">Entry</div>
+        <textarea class="text-input" id="journal-text" rows="4" placeholder="What's on your mind today?"></textarea>
+
+        <div class="field-label">Today's Win</div>
+        <textarea class="text-input" id="journal-win" rows="2" placeholder="One thing you're proud of…"></textarea>
+
+        <button class="btn-primary" onclick="saveJournalEntry()">Save Entry</button>
+      </div>
+
+      <div class="section-label" style="margin-top:16px;">Past Entries</div>
+      <div id="journal-entries-list"></div>
+    </div>
+
+    <div id="tab-more" class="tab-panel">
+      <div class="today-header">
+        <h2 style="font-size:22px;font-weight:700;letter-spacing:-0.3px;">More</h2>
+      </div>
+
+      <div class="section-label">Settings</div>
+      <div class="card">
+        <div class="settings-field">
+          <label for="setting-apikey">Anthropic API Key</label>
+          <input type="password" class="settings-input" id="setting-apikey" placeholder="sk-ant-…" autocomplete="off" />
+        </div>
+        <div class="settings-field">
+          <label for="setting-name">Display Name</label>
+          <input type="text" class="settings-input" id="setting-name" placeholder="Sprite" />
+        </div>
+        <div class="settings-field">
+          <label for="setting-goalweight">Goal Weight (lbs)</label>
+          <input type="number" class="settings-input" id="setting-goalweight" placeholder="125" min="0" step="0.1" />
+        </div>
+        <div class="settings-field">
+          <label for="setting-caltarget">Calorie Target</label>
+          <input type="number" class="settings-input" id="setting-caltarget" placeholder="1250" min="0" />
+        </div>
+        <div class="settings-field" style="margin-bottom:0;">
+          <label for="setting-prottarget">Protein Target (g)</label>
+          <input type="number" class="settings-input" id="setting-prottarget" placeholder="130" min="0" />
+        </div>
+        <button class="btn-primary" style="margin-top:14px;" onclick="saveSettings()">Save Settings</button>
+      </div>
+
+      <div class="section-label" style="margin-top:16px;">Recipes</div>
+      <div class="card">
+        <div id="recipe-mgmt-list"></div>
+        <div class="divider" style="margin:12px 0;"></div>
+        <div class="field-label">Add Recipe</div>
+        <input type="text" class="food-name-input" id="new-recipe-name" placeholder="Recipe name" />
+        <div class="food-macros-row">
+          <input type="number" class="set-input" id="new-recipe-cal"  placeholder="cal"       min="0" />
+          <input type="number" class="set-input" id="new-recipe-prot" placeholder="g protein" min="0" />
+          <button class="log-food-btn" onclick="addRecipe()">Add</button>
+        </div>
+      </div>
+
+      <div class="section-label" style="margin-top:16px;">Tools</div>
+      <div class="card" style="display:flex;flex-direction:column;gap:8px;">
+        <button class="btn-secondary" onclick="generateCoachReport()">Generate Weekly Report</button>
+        <button class="btn-secondary" onclick="exportData()">Export Data (JSON)</button>
+      </div>
+    </div>
 
     <nav id="bottom-nav">
       <div class="nav-tabs">
@@ -1897,6 +2243,229 @@
     document.getElementById('bottom-nav').addEventListener('click', function (e) {
       if (e.target.closest('[data-tab="stats"]')) initStats();
     });
+
+    // ── Chat tab ──────────────────────────────────────────────────────────────
+
+    function renderChatMessages() {
+      const history = JSON.parse(localStorage.getItem('coach_chat_history') || '[]');
+      const area    = document.getElementById('chat-messages');
+      if (!area) return;
+      const intro = '<div class="chat-bubble assistant">Hey! I\'m your coach. Ask me anything about training, nutrition, or recovery. 💪</div>';
+      area.innerHTML = intro + history.map(m =>
+        `<div class="chat-bubble ${m.role === 'user' ? 'user' : 'assistant'}">${m.content}</div>`
+      ).join('');
+      area.scrollTop = area.scrollHeight;
+    }
+
+    function clearChat() {
+      localStorage.removeItem('coach_chat_history');
+      renderChatMessages();
+    }
+
+    function sendMsg() {
+      const input = document.getElementById('chat-input');
+      const text  = input?.value.trim();
+      if (!text) return;
+
+      const history = JSON.parse(localStorage.getItem('coach_chat_history') || '[]');
+      history.push({ role: 'user', content: text });
+      if (history.length > 50) history.splice(0, history.length - 50);
+      localStorage.setItem('coach_chat_history', JSON.stringify(history));
+      input.value = '';
+      renderChatMessages();
+
+      const settings = JSON.parse(localStorage.getItem('coach_settings') || '{}');
+      const reply = settings.apiKey
+        ? '(AI response will appear here once API integration is wired up.)'
+        : 'API key required — add it in More → Settings.';
+      history.push({ role: 'assistant', content: reply });
+      localStorage.setItem('coach_chat_history', JSON.stringify(history));
+      renderChatMessages();
+    }
+
+    document.getElementById('bottom-nav').addEventListener('click', function (e) {
+      if (e.target.closest('[data-tab="chat"]')) renderChatMessages();
+    });
+
+    renderChatMessages();
+
+    // ── Journal tab ───────────────────────────────────────────────────────────
+
+    let selectedTags = [];
+
+    function toggleTag(el) {
+      const tag = el.dataset.tag;
+      el.classList.toggle('selected');
+      if (selectedTags.includes(tag)) {
+        selectedTags = selectedTags.filter(t => t !== tag);
+      } else {
+        selectedTags.push(tag);
+      }
+    }
+
+    function toggleJournalEntry(el) {
+      const body = el.parentElement.querySelector('.journal-entry-body');
+      if (body) body.style.display = body.style.display === 'none' ? 'block' : 'none';
+    }
+
+    function saveJournalEntry() {
+      const key  = todayKey();
+      const mood = document.querySelector('input[name="journal-mood"]:checked')?.value || null;
+      const text = document.getElementById('journal-text').value.trim();
+      const win  = document.getElementById('journal-win').value.trim();
+      const data = { date: key, mood, tags: [...selectedTags], text, win };
+
+      localStorage.setItem('coach_journal_' + key, JSON.stringify(data));
+
+      document.querySelectorAll('input[name="journal-mood"]').forEach(r => r.checked = false);
+      document.getElementById('journal-text').value = '';
+      document.getElementById('journal-win').value  = '';
+      document.querySelectorAll('#journal-tags .tag-pill').forEach(p => p.classList.remove('selected'));
+      selectedTags = [];
+
+      showBadgeToast('Journal entry saved!');
+      renderJournalEntries();
+    }
+
+    function renderJournalEntries() {
+      const list = document.getElementById('journal-entries-list');
+      if (!list) return;
+      const moodEmoji = ['', '😞','😕','😐','🙂','😄'];
+      const entries   = [];
+      const today     = new Date();
+      for (let i = 0; i < 60; i++) {
+        const d   = new Date(today);
+        d.setDate(today.getDate() - i);
+        const raw = localStorage.getItem('coach_journal_' + d.toISOString().split('T')[0]);
+        if (raw) entries.push(JSON.parse(raw));
+      }
+      if (!entries.length) {
+        list.innerHTML = '<p style="color:var(--muted);font-size:13px;padding:4px 0;">No entries yet.</p>';
+        return;
+      }
+      list.innerHTML = entries.map(e => {
+        const tags = (e.tags || []).map(t => `<span class="journal-tag-chip">${t}</span>`).join('');
+        return `<div class="journal-entry-card">
+          <div class="journal-entry-header" onclick="toggleJournalEntry(this)">
+            <div>
+              <div class="journal-entry-date">${e.date} ${e.mood ? moodEmoji[e.mood] : ''}</div>
+              <div class="journal-entry-tags">${tags}</div>
+            </div>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+          <div class="journal-entry-body">
+            <p>${e.text || '<em style="color:var(--muted)">No entry text.</em>'}</p>
+            ${e.win ? `<div class="journal-win">⭐ ${e.win}</div>` : ''}
+          </div>
+        </div>`;
+      }).join('');
+    }
+
+    document.getElementById('bottom-nav').addEventListener('click', function (e) {
+      if (e.target.closest('[data-tab="journal"]')) renderJournalEntries();
+    });
+
+    (function initJournal() {
+      const el = document.getElementById('journal-date');
+      if (el) el.textContent = new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
+      renderJournalEntries();
+    })();
+
+    // ── More tab ──────────────────────────────────────────────────────────────
+
+    function saveSettings() {
+      const settings = {
+        apiKey:     document.getElementById('setting-apikey').value.trim(),
+        name:       document.getElementById('setting-name').value.trim(),
+        goalWeight: document.getElementById('setting-goalweight').value,
+        calTarget:  document.getElementById('setting-caltarget').value,
+        protTarget: document.getElementById('setting-prottarget').value,
+      };
+      localStorage.setItem('coach_settings', JSON.stringify(settings));
+      showBadgeToast('Settings saved!');
+    }
+
+    function loadSettings() {
+      const s = JSON.parse(localStorage.getItem('coach_settings') || '{}');
+      if (s.apiKey)     document.getElementById('setting-apikey').value     = s.apiKey;
+      if (s.name)       document.getElementById('setting-name').value       = s.name;
+      if (s.goalWeight) document.getElementById('setting-goalweight').value = s.goalWeight;
+      if (s.calTarget)  document.getElementById('setting-caltarget').value  = s.calTarget;
+      if (s.protTarget) document.getElementById('setting-prottarget').value = s.protTarget;
+    }
+
+    function renderRecipeMgmt() {
+      const list    = document.getElementById('recipe-mgmt-list');
+      if (!list) return;
+      const recipes = JSON.parse(localStorage.getItem('coach_recipes') || '[]');
+      if (!recipes.length) {
+        list.innerHTML = '<p style="color:var(--muted);font-size:13px;margin-bottom:4px;">No saved recipes.</p>';
+        return;
+      }
+      list.innerHTML = recipes.map((r, i) => `
+        <div class="recipe-mgmt-item">
+          <div class="recipe-mgmt-info">
+            <div style="font-weight:500;">${r.name}</div>
+            <div style="font-size:12px;color:var(--muted);">${r.cal} cal · ${r.protein}g protein</div>
+          </div>
+          <button class="recipe-delete-btn" onclick="deleteRecipe(${i})">Delete</button>
+        </div>`).join('');
+    }
+
+    function addRecipe() {
+      const name = document.getElementById('new-recipe-name').value.trim();
+      const cal  = parseFloat(document.getElementById('new-recipe-cal').value)  || 0;
+      const prot = parseFloat(document.getElementById('new-recipe-prot').value) || 0;
+      if (!name) return;
+      const recipes = JSON.parse(localStorage.getItem('coach_recipes') || '[]');
+      recipes.push({ name, cal, protein: prot });
+      localStorage.setItem('coach_recipes', JSON.stringify(recipes));
+      document.getElementById('new-recipe-name').value = '';
+      document.getElementById('new-recipe-cal').value  = '';
+      document.getElementById('new-recipe-prot').value = '';
+      renderRecipeMgmt();
+      renderRecipes();
+      showBadgeToast('Recipe added!');
+    }
+
+    function deleteRecipe(idx) {
+      const recipes = JSON.parse(localStorage.getItem('coach_recipes') || '[]');
+      recipes.splice(idx, 1);
+      localStorage.setItem('coach_recipes', JSON.stringify(recipes));
+      renderRecipeMgmt();
+      renderRecipes();
+    }
+
+    function generateCoachReport() {
+      showBadgeToast('Generating…');
+    }
+
+    function exportData() {
+      const out = {};
+      for (let i = 0; i < localStorage.length; i++) {
+        const k = localStorage.key(i);
+        if (k.startsWith('coach_')) {
+          try { out[k] = JSON.parse(localStorage.getItem(k)); }
+          catch { out[k] = localStorage.getItem(k); }
+        }
+      }
+      const blob = new Blob([JSON.stringify(out, null, 2)], { type: 'application/json' });
+      const url  = URL.createObjectURL(blob);
+      const a    = document.createElement('a');
+      a.href     = url;
+      a.download = 'coach-data-' + todayKey() + '.json';
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    document.getElementById('bottom-nav').addEventListener('click', function (e) {
+      if (e.target.closest('[data-tab="more"]')) { loadSettings(); renderRecipeMgmt(); }
+    });
+
+    (function initMore() {
+      loadSettings();
+      renderRecipeMgmt();
+    })();
 
     // ── showBadgeToast ─────────────────────────────────────────────────────────
 
