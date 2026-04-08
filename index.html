@@ -404,6 +404,235 @@
     }
 
     .hidden { display: none !important; }
+
+    /* ── Train tab ── */
+    .train-header {
+      padding: 20px 0 8px;
+    }
+    .train-header h2 {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+    }
+
+    .day-selector {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 16px;
+      overflow-x: auto;
+      padding-bottom: 2px;
+      scrollbar-width: none;
+    }
+    .day-selector::-webkit-scrollbar { display: none; }
+
+    .day-pill {
+      flex-shrink: 0;
+      padding: 7px 16px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background: var(--surface2);
+      color: var(--muted);
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .day-pill.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #0a0a0a;
+    }
+
+    .exercise-card {
+      background: linear-gradient(160deg, #1e1e1e 0%, #181818 100%);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 16px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.05), 0 2px 12px rgba(0,0,0,0.4);
+      margin-bottom: 10px;
+    }
+
+    .exercise-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .exercise-name {
+      font-family: 'Syne', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: -0.2px;
+    }
+
+    .yt-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--surface2);
+      color: #ff4444;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: border-color 0.15s, background 0.15s;
+      text-decoration: none;
+    }
+    .yt-btn:hover {
+      border-color: #ff4444;
+      background: rgba(255,68,68,0.1);
+    }
+    .yt-btn svg { width: 14px; height: 14px; }
+
+    .set-header {
+      display: grid;
+      grid-template-columns: 28px 1fr 1fr;
+      gap: 6px;
+      margin-bottom: 6px;
+    }
+    .set-header span {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .set-row {
+      display: grid;
+      grid-template-columns: 28px 1fr 1fr;
+      gap: 6px;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+    .set-num {
+      font-size: 12px;
+      color: var(--muted);
+      text-align: center;
+      font-weight: 600;
+    }
+    .set-input {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px;
+      color: var(--text);
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 14px;
+      text-align: center;
+      outline: none;
+      width: 100%;
+      -moz-appearance: textfield;
+      transition: border-color 0.15s;
+    }
+    .set-input::-webkit-outer-spin-button,
+    .set-input::-webkit-inner-spin-button { -webkit-appearance: none; }
+    .set-input:focus { border-color: rgba(184,255,87,0.4); }
+
+    .add-set-btn {
+      width: 100%;
+      padding: 8px;
+      border-radius: 8px;
+      border: 1px dashed var(--border);
+      background: transparent;
+      color: var(--muted);
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.15s;
+      margin-top: 4px;
+    }
+    .add-set-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .exercise-notes {
+      width: 100%;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 10px;
+      color: var(--text);
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 13px;
+      line-height: 1.4;
+      resize: none;
+      outline: none;
+      margin-top: 10px;
+      transition: border-color 0.15s;
+    }
+    .exercise-notes:focus { border-color: rgba(184,255,87,0.4); }
+
+    .cardio-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 8px;
+    }
+    .cardio-field label {
+      display: block;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    .recovery-card-content {
+      text-align: center;
+      padding: 12px 0 8px;
+    }
+    .recovery-icon {
+      font-size: 48px;
+      display: block;
+      margin-bottom: 12px;
+    }
+    .recovery-card-content h3 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .recovery-card-content p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ── Toast ── */
+    #toast {
+      position: fixed;
+      bottom: 100px;
+      left: 50%;
+      transform: translateX(-50%) translateY(16px);
+      background: var(--surface2);
+      border: 1px solid var(--border-accent);
+      border-radius: 12px;
+      padding: 11px 20px;
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text);
+      z-index: 200;
+      opacity: 0;
+      transition: opacity 0.25s, transform 0.25s;
+      pointer-events: none;
+      white-space: nowrap;
+      max-width: calc(100vw - 48px);
+      text-align: center;
+    }
+    #toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
   </style>
 </head>
 <body>
@@ -593,7 +822,24 @@
       </div>
 
     </div>
-    <div id="tab-train"  class="tab-panel"></div>
+    <div id="tab-train" class="tab-panel">
+      <div class="train-header">
+        <h2 id="train-day-title">Push Day</h2>
+        <p id="train-day-sub" style="font-size:13px;color:var(--muted);margin-top:2px;"></p>
+      </div>
+
+      <div class="day-selector" id="day-selector">
+        <button class="day-pill" data-day="mon" onclick="selectDay('mon')">Mon</button>
+        <button class="day-pill" data-day="tue" onclick="selectDay('tue')">Tue</button>
+        <button class="day-pill" data-day="wed" onclick="selectDay('wed')">Wed</button>
+        <button class="day-pill" data-day="thu" onclick="selectDay('thu')">Thu</button>
+        <button class="day-pill" data-day="fri" onclick="selectDay('fri')">Fri</button>
+        <button class="day-pill" data-day="sat" onclick="selectDay('sat')">Sat</button>
+        <button class="day-pill" data-day="sun" onclick="selectDay('sun')">Sun</button>
+      </div>
+
+      <div id="workout-content"></div>
+    </div>
     <div id="tab-eat"    class="tab-panel"></div>
     <div id="tab-stats"  class="tab-panel"></div>
     <div id="tab-chat"   class="tab-panel"></div>
@@ -801,6 +1047,225 @@
       localStorage.setItem('coach_night_' + key, JSON.stringify(data));
 
       document.getElementById('goodnight-card').classList.remove('hidden');
+    }
+
+    // ── Train tab ─────────────────────────────────────────────────────────────
+
+    const WORKOUT_PLAN = {
+      mon: { label: 'Push',        day: 'Monday',    exercises: ['Bench Press','Shoulder Press','Lateral Raises','Tricep Pushdowns','Cable Flyes'] },
+      tue: { label: 'Glute / Ham', day: 'Tuesday',   exercises: ['Romanian Deadlift','Hip Thrust','Leg Curl','Glute Kickback','Walking Lunges'] },
+      wed: { label: 'Pull',        day: 'Wednesday', exercises: ['Lat Pulldown','Seated Row','Face Pulls','Bicep Curls','Rear Delt Flyes'] },
+      thu: { label: 'Core',        day: 'Thursday',  exercises: ['Plank','Cable Crunch','Hanging Leg Raise','Russian Twist','Dead Bug'] },
+      fri: { label: 'Quad / Calf', day: 'Friday',    exercises: ['Leg Press','Squats','Leg Extension','Standing Calf Raise','Bulgarian Split Squat'] },
+      sat: { label: 'Cardio',      day: 'Saturday',  exercises: [] },
+      sun: { label: 'Rest',        day: 'Sunday',    exercises: [] },
+    };
+
+    const CARDIO_EXERCISES = ['Treadmill', 'Stairmaster', 'Bike', 'Rowing Machine'];
+
+    let activeDay = null;
+
+    function exSlug(name) {
+      return name.toLowerCase().replace(/[^a-z0-9]/g, '-');
+    }
+
+    function setRowHTML(n) {
+      return `<div class="set-row" data-set="${n}">
+        <span class="set-num">${n}</span>
+        <input type="number" class="set-input" placeholder="reps" min="1" />
+        <input type="number" class="set-input" placeholder="lbs" min="0" step="2.5" />
+      </div>`;
+    }
+
+    function exerciseCardHTML(name) {
+      const slug = exSlug(name);
+      const ytQ  = encodeURIComponent(name + ' exercise form');
+      return `<div class="exercise-card" id="ex-${slug}">
+        <div class="exercise-header">
+          <span class="exercise-name">${name}</span>
+          <a class="yt-btn" href="https://www.youtube.com/results?search_query=${ytQ}" target="_blank" rel="noopener" title="Search YouTube">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 15l5.19-3L10 9v6zm11.56-7.83c.13.47.22 1.1.28 1.9.07.8.1 1.49.1 2.09L22 12c0 2.19-.16 3.8-.44 4.83-.25.9-.83 1.48-1.73 1.73-.47.13-1.33.22-2.65.28-1.3.07-2.49.1-3.59.1L12 19c-4.19 0-6.8-.16-7.83-.44-.9-.25-1.48-.83-1.73-1.73-.13-.47-.22-1.1-.28-1.9-.07-.8-.1-1.49-.1-2.09L2 12c0-2.19.16-3.8.44-4.83.25-.9.83-1.48 1.73-1.73.47-.13 1.33-.22 2.65-.28 1.3-.07 2.49-.1 3.59-.1L12 5c4.19 0 6.8.16 7.83.44.9.25 1.48.83 1.73 1.73z"/></svg>
+          </a>
+        </div>
+        <div class="set-header"><span>#</span><span>Reps</span><span>Weight</span></div>
+        <div class="set-rows" id="sets-${slug}">
+          ${setRowHTML(1)}${setRowHTML(2)}${setRowHTML(3)}
+        </div>
+        <button class="add-set-btn" onclick="addSet('${slug}')">+ Add Set</button>
+        <textarea class="exercise-notes" placeholder="Notes…" rows="1" id="notes-${slug}"></textarea>
+      </div>`;
+    }
+
+    function cardioBlockHTML(name) {
+      const slug = exSlug(name);
+      return `<div class="exercise-card" id="ex-${slug}">
+        <div class="exercise-header">
+          <span class="exercise-name">${name}</span>
+        </div>
+        <div class="cardio-row">
+          <div class="cardio-field">
+            <label for="cardio-dur-${slug}">Duration (min)</label>
+            <input type="number" class="set-input" id="cardio-dur-${slug}" placeholder="30" min="0" />
+          </div>
+          <div class="cardio-field">
+            <label for="cardio-int-${slug}">Intensity (1–10)</label>
+            <input type="number" class="set-input" id="cardio-int-${slug}" placeholder="7" min="1" max="10" />
+          </div>
+        </div>
+        <textarea class="exercise-notes" placeholder="Notes…" rows="1" id="notes-${slug}"></textarea>
+      </div>`;
+    }
+
+    function renderWorkout(dayKey) {
+      const plan    = WORKOUT_PLAN[dayKey];
+      const content = document.getElementById('workout-content');
+
+      document.getElementById('train-day-title').textContent = plan.label + ' Day';
+      document.getElementById('train-day-sub').textContent   = plan.day;
+
+      if (dayKey === 'sun') {
+        content.innerHTML = `<div class="card">
+          <div class="recovery-card-content">
+            <span class="recovery-icon">🧘</span>
+            <h3>Rest &amp; Recover</h3>
+            <p>Your body grows when you rest. Take today to recover, stretch, and recharge for the week ahead.</p>
+          </div>
+          <button class="btn-primary" style="margin-top:16px;" onclick="saveRestDay()">Save Rest Day</button>
+        </div>`;
+        return;
+      }
+
+      let html = '';
+
+      if (dayKey === 'sat') {
+        html += '<div class="section-label">Cardio</div>';
+        html += CARDIO_EXERCISES.map(cardioBlockHTML).join('');
+      } else {
+        html += plan.exercises.map(exerciseCardHTML).join('');
+        html += `<div class="card" style="margin-top:4px; padding:16px;">
+          <button class="collapsible-toggle" id="cardio-toggle" onclick="toggleCardioSection()">
+            Optional Cardio
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+          </button>
+          <div class="collapsible-content" id="cardio-content">
+            <div style="margin-top:14px;">${CARDIO_EXERCISES.map(cardioBlockHTML).join('')}</div>
+          </div>
+        </div>`;
+      }
+
+      html += `<button class="btn-primary" style="margin-top:12px;" onclick="saveWorkout()">Save Workout</button>`;
+      content.innerHTML = html;
+    }
+
+    function addSet(slug) {
+      const container = document.getElementById('sets-' + slug);
+      const n = container.querySelectorAll('.set-row').length + 1;
+      const div = document.createElement('div');
+      div.innerHTML = setRowHTML(n);
+      container.appendChild(div.firstElementChild);
+    }
+
+    function toggleCardioSection() {
+      document.getElementById('cardio-toggle').classList.toggle('open');
+      document.getElementById('cardio-content').classList.toggle('open');
+    }
+
+    function selectDay(dayKey) {
+      activeDay = dayKey;
+      document.querySelectorAll('.day-pill').forEach(p => {
+        p.classList.toggle('active', p.dataset.day === dayKey);
+      });
+      renderWorkout(dayKey);
+    }
+
+    (function initTrain() {
+      const dayMap   = ['sun','mon','tue','wed','thu','fri','sat'];
+      const todayDay = dayMap[new Date().getDay()];
+      selectDay(todayDay);
+    })();
+
+    // ── saveWorkout ────────────────────────────────────────────────────────────
+
+    function saveWorkout() {
+      const key  = todayKey();
+      const plan = WORKOUT_PLAN[activeDay];
+      const exercises = {};
+
+      plan.exercises.forEach(name => {
+        const slug    = exSlug(name);
+        const setRows = document.querySelectorAll('#sets-' + slug + ' .set-row');
+        const sets    = [];
+        setRows.forEach(row => {
+          const inputs = row.querySelectorAll('.set-input');
+          const reps   = inputs[0]?.value || '';
+          const weight = inputs[1]?.value || '';
+          if (reps || weight) sets.push({ reps, weight });
+        });
+        const notes = document.getElementById('notes-' + slug)?.value.trim() || '';
+        exercises[name] = { sets, notes };
+
+        if (sets.length) {
+          const maxWeight = Math.max(...sets.map(s => parseFloat(s.weight) || 0));
+          if (maxWeight > 0) checkNewPR(name, maxWeight);
+        }
+      });
+
+      const cardio = {};
+      CARDIO_EXERCISES.forEach(name => {
+        const slug = exSlug(name);
+        const dur  = document.getElementById('cardio-dur-' + slug);
+        const int_ = document.getElementById('cardio-int-' + slug);
+        if (dur?.value || int_?.value) {
+          cardio[name] = {
+            duration:  dur?.value  || '',
+            intensity: int_?.value || '',
+            notes: document.getElementById('notes-' + slug)?.value.trim() || '',
+          };
+        }
+      });
+
+      const data = { date: key, day: activeDay, label: plan.label, exercises, cardio };
+      localStorage.setItem('coach_workout_' + key, JSON.stringify(data));
+      showBadgeToast('Workout saved!');
+    }
+
+    function saveRestDay() {
+      const key = todayKey();
+      localStorage.setItem('coach_workout_' + key, JSON.stringify({
+        date: key, day: 'sun', label: 'Rest', exercises: {}, cardio: {}
+      }));
+      showBadgeToast('Rest day saved. Recover well!');
+    }
+
+    // ── checkNewPR ─────────────────────────────────────────────────────────────
+
+    function checkNewPR(exercise, weight) {
+      const prs     = JSON.parse(localStorage.getItem('coach_prs') || '{}');
+      const current = prs[exercise] || 0;
+      if (weight > current) {
+        prs[exercise] = weight;
+        localStorage.setItem('coach_prs', JSON.stringify(prs));
+        showBadgeToast('🏆 New PR! ' + exercise + ' — ' + weight + ' lbs');
+      }
+    }
+
+    // ── showBadgeToast ─────────────────────────────────────────────────────────
+
+    let toastTimer = null;
+
+    function showBadgeToast(msg) {
+      let toast = document.getElementById('toast');
+      if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'toast';
+        document.body.appendChild(toast);
+      }
+      toast.textContent = msg;
+      toast.classList.add('show');
+      if (toastTimer) clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove('show'), 3000);
     }
   </script>
 </body>
