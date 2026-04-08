@@ -1699,6 +1699,8 @@
       if (getHour() < 12) {
         document.getElementById('morning-section').classList.add('hidden');
       }
+      checkMilestones();
+      generateMorningFocus();
     }
 
     // ── saveNight ──────────────────────────────────────────────────────────────
@@ -1730,6 +1732,7 @@
       localStorage.setItem('coach_night_' + key, JSON.stringify(data));
 
       document.getElementById('goodnight-card').classList.remove('hidden');
+      checkMilestones();
     }
 
     // ── Train tab ─────────────────────────────────────────────────────────────
@@ -1912,6 +1915,8 @@
       const data = { date: key, day: activeDay, label: plan.label, exercises, cardio };
       localStorage.setItem('coach_workout_' + key, JSON.stringify(data));
       showBadgeToast('Workout saved!');
+      checkMilestones();
+      generateWorkoutNote();
     }
 
     function saveRestDay() {
@@ -2262,23 +2267,58 @@
       renderChatMessages();
     }
 
-    function sendMsg() {
-      const input = document.getElementById('chat-input');
-      const text  = input?.value.trim();
+    async function sendMsg() {
+      const input    = document.getElementById('chat-input');
+      const text     = input?.value.trim();
       if (!text) return;
+      const settings = JSON.parse(localStorage.getItem('coach_settings') || '{}');
+      const history  = JSON.parse(localStorage.getItem('coach_chat_history') || '[]');
 
-      const history = JSON.parse(localStorage.getItem('coach_chat_history') || '[]');
       history.push({ role: 'user', content: text });
       if (history.length > 50) history.splice(0, history.length - 50);
-      localStorage.setItem('coach_chat_history', JSON.stringify(history));
       input.value = '';
+
+      if (!settings.apiKey) {
+        history.push({ role: 'assistant', content: 'API key required — add it in More → Settings.' });
+        localStorage.setItem('coach_chat_history', JSON.stringify(history));
+        renderChatMessages();
+        return;
+      }
+
+      // Show thinking placeholder
+      history.push({ role: 'assistant', content: '…' });
+      localStorage.setItem('coach_chat_history', JSON.stringify(history));
       renderChatMessages();
 
-      const settings = JSON.parse(localStorage.getItem('coach_settings') || '{}');
-      const reply = settings.apiKey
-        ? '(AI response will appear here once API integration is wired up.)'
-        : 'API key required — add it in More → Settings.';
-      history.push({ role: 'assistant', content: reply });
+      try {
+        const ctx  = buildTodayContext();
+        const msgs = history.slice(0, -1).map(m => ({ role: m.role, content: m.content }));
+        const resp = await fetch('https://api.anthropic.com/v1/messages', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-api-key': settings.apiKey,
+            'anthropic-version': '2023-06-01',
+            'anthropic-dangerous-direct-browser-access': 'true',
+          },
+          body: JSON.stringify({
+            model: 'claude-sonnet-4-20250514',
+            max_tokens: 1024,
+            system: 'You are COACH, a personal trainer and wellness coach for Sprite, a 34-year-old wellness competitor. Be direct, supportive, and specific.\n\n' + ctx,
+            messages: msgs,
+          }),
+        });
+        if (!resp.ok) {
+          const err = await resp.json().catch(() => ({}));
+          throw new Error(err.error?.message || 'API error ' + resp.status);
+        }
+        const data = await resp.json();
+        history[history.length - 1] = { role: 'assistant', content: data.content[0].text };
+      } catch (e) {
+        history[history.length - 1] = { role: 'assistant', content: 'Error: ' + e.message };
+      }
+
+      if (history.length > 50) history.splice(0, history.length - 50);
       localStorage.setItem('coach_chat_history', JSON.stringify(history));
       renderChatMessages();
     }
@@ -2436,8 +2476,83 @@
       renderRecipes();
     }
 
-    function generateCoachReport() {
-      showBadgeToast('Generating…');
+    async function generateCoachReport() {
+      showBadgeToast('Generating report…');
+      const today = new Date();
+      let calTotal = 0, protTotal = 0, calDays = 0;
+      let workoutDays = 0, moodTotal = 0, moodDays = 0, sleepTotal = 0, sleepDays = 0;
+      const flaggedFoods = [], wins = [];
+      let startWeight = null, endWeight = null;
+
+      for (let i = 6; i >= 0; i--) {
+        const d = new Date(today);
+        d.setDate(today.getDate() - i);
+        const key = d.toISOString().split('T')[0];
+
+        const food = JSON.parse(localStorage.getItem('coach_food_' + key) || '[]');
+        if (food.length) {
+          calTotal  += food.reduce((s, e) => s + (e.cal     || 0), 0);
+          protTotal += food.reduce((s, e) => s + (e.protein || 0), 0);
+          calDays++;
+          food.filter(e => e.flagged).forEach(e => flaggedFoods.push(e.name));
+        }
+        const morning = localStorage.getItem('coach_morning_' + key);
+        if (morning) {
+          const m = JSON.parse(morning);
+          if (m.mood)  { moodTotal  += +m.mood;  moodDays++;  }
+          if (m.sleep) { sleepTotal += +m.sleep; sleepDays++; }
+        }
+        const night = localStorage.getItem('coach_night_' + key);
+        if (night) {
+          const n = JSON.parse(night);
+          if (n.win) wins.push(n.win);
+          const w = parseFloat(n?.body?.weight);
+          if (w > 0) { if (!startWeight) startWeight = w; endWeight = w; }
+        }
+        if (localStorage.getItem('coach_workout_' + key)) workoutDays++;
+      }
+
+      const avgCal    = calDays   ? Math.round(calTotal / calDays)          : 'N/A';
+      const avgProt   = calDays   ? Math.round(protTotal / calDays)         : 'N/A';
+      const avgMood   = moodDays  ? (moodTotal  / moodDays).toFixed(1)      : 'N/A';
+      const avgSleep  = sleepDays ? (sleepTotal / sleepDays).toFixed(1)     : 'N/A';
+      const wtChange  = (startWeight && endWeight) ? (endWeight - startWeight).toFixed(1) : 'N/A';
+
+      const prompt = `Weekly data for Sprite:
+Avg calories: ${avgCal}/day (target 1250)
+Avg protein: ${avgProt}g/day (target 130g)
+Workouts completed: ${workoutDays}/6
+Avg mood: ${avgMood}/5, avg sleep quality: ${avgSleep}/5
+Weight: ${startWeight || '?'} → ${endWeight || '?'} lbs (change: ${wtChange} lbs)
+Flagged foods: ${flaggedFoods.length ? flaggedFoods.join(', ') : 'none'}
+Wins: ${wins.length ? wins.join(' | ') : 'none logged'}
+
+Write Sprite's weekly performance report with sections: Nutrition, Training, Recovery, Body, Focus for Next Week. Be direct, specific, motivating.`;
+
+      try {
+        const text = await claudeCall('claude-sonnet-4-20250514', 'You are COACH writing Sprite\'s weekly performance report.', prompt);
+        showReportModal(text);
+      } catch (e) {
+        showBadgeToast(e.message === 'no-key' ? 'Add API key in More → Settings first.' : 'Report failed: ' + e.message);
+      }
+    }
+
+    function showReportModal(text) {
+      let modal = document.getElementById('report-modal');
+      if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'report-modal';
+        modal.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:300;display:flex;align-items:flex-end;padding:0;';
+        document.body.appendChild(modal);
+      }
+      modal.innerHTML = `<div style="background:var(--surface);border-radius:20px 20px 0 0;width:100%;max-width:480px;margin:0 auto;padding:20px;max-height:80vh;overflow-y:auto;box-shadow:0 -4px 32px rgba(0,0,0,0.5);">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+          <span style="font-family:'Syne',sans-serif;font-size:16px;font-weight:700;">Weekly Report</span>
+          <button onclick="document.getElementById('report-modal').style.display='none'" style="background:none;border:1px solid var(--border);border-radius:8px;padding:4px 10px;color:var(--muted);cursor:pointer;font-size:12px;font-family:'Instrument Sans',sans-serif;">Close</button>
+        </div>
+        <div style="font-size:14px;line-height:1.7;white-space:pre-wrap;color:var(--text);">${text}</div>
+      </div>`;
+      modal.style.display = 'flex';
     }
 
     function exportData() {
@@ -2465,6 +2580,210 @@
     (function initMore() {
       loadSettings();
       renderRecipeMgmt();
+    })();
+
+    // ── API Integration ───────────────────────────────────────────────────────
+
+    function buildTodayContext() {
+      const key      = todayKey();
+      const date     = new Date();
+      const dayNames = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+      const dayIdx   = date.getDay();
+      const dayKey   = ['sun','mon','tue','wed','thu','fri','sat'][dayIdx];
+      const plan     = WORKOUT_PLAN[dayKey];
+      let ctx = `Today: ${key} (${dayNames[dayIdx]})\nPlanned workout: ${plan.label}\n`;
+
+      const morning = localStorage.getItem('coach_morning_' + key);
+      if (morning) {
+        const m = JSON.parse(morning);
+        ctx += `Morning — Mood: ${m.mood || '?'}/5, Energy: ${m.energy || '?'}/5, Sleep quality: ${m.sleep || '?'}/5\n`;
+      }
+
+      const food     = JSON.parse(localStorage.getItem('coach_food_' + key) || '[]');
+      const totalCal = food.reduce((s, e) => s + (e.cal     || 0), 0);
+      const totalPro = food.reduce((s, e) => s + (e.protein || 0), 0);
+      ctx += `Nutrition today: ${totalCal} cal / ${totalPro}g protein (targets: 1250 cal / 130g protein)\n`;
+
+      const water = JSON.parse(localStorage.getItem('coach_water_' + key) || '[]');
+      ctx += `Water: ${water.filter(Boolean).length}/16 cups\n`;
+
+      for (let i = 0; i < 30; i++) {
+        const d = new Date(date);
+        d.setDate(date.getDate() - i);
+        const night = localStorage.getItem('coach_night_' + d.toISOString().split('T')[0]);
+        if (night) {
+          const w = parseFloat(JSON.parse(night)?.body?.weight);
+          if (w > 0) { ctx += `Latest weight: ${w} lbs\n`; break; }
+        }
+      }
+
+      return ctx.trim();
+    }
+
+    async function claudeCall(model, system, userMsg) {
+      const settings = JSON.parse(localStorage.getItem('coach_settings') || '{}');
+      if (!settings.apiKey) throw new Error('no-key');
+      const resp = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': settings.apiKey,
+          'anthropic-version': '2023-06-01',
+          'anthropic-dangerous-direct-browser-access': 'true',
+        },
+        body: JSON.stringify({
+          model,
+          max_tokens: 512,
+          system,
+          messages: [{ role: 'user', content: userMsg }],
+        }),
+      });
+      if (!resp.ok) {
+        const err = await resp.json().catch(() => ({}));
+        throw new Error(err.error?.message || 'API error ' + resp.status);
+      }
+      const data = await resp.json();
+      return data.content[0].text;
+    }
+
+    async function generateMorningFocus() {
+      const key    = todayKey();
+      const cached = localStorage.getItem('coach_morning_focus_' + key);
+      const card   = document.querySelector('#tab-today .ai-card .ai-card-text');
+      if (!card) return;
+      if (cached) { card.textContent = cached; return; }
+      card.textContent = 'Loading focus note…';
+      try {
+        const dayIdx  = new Date().getDay();
+        const dayKey  = ['sun','mon','tue','wed','thu','fri','sat'][dayIdx];
+        const workout = WORKOUT_PLAN[dayKey].label;
+        const text    = await claudeCall(
+          'claude-haiku-4-5-20251001',
+          'You are COACH, a sharp motivating personal trainer for Sprite, a 34-year-old wellness competitor.',
+          buildTodayContext() + `\n\nGenerate a 3-line motivational focus note for today's ${workout} session. Be specific, punchy, personal. No fluff.`
+        );
+        localStorage.setItem('coach_morning_focus_' + key, text);
+        card.textContent = text;
+      } catch (e) {
+        card.textContent = e.message === 'no-key' ? 'Add your API key in More → Settings.' : 'Could not load focus note.';
+      }
+    }
+
+    async function generateWorkoutNote() {
+      const key     = todayKey();
+      const workout = JSON.parse(localStorage.getItem('coach_workout_' + key) || '{}');
+      const content = document.getElementById('workout-content');
+      if (!content) return;
+
+      let noteCard = document.getElementById('workout-note-card');
+      if (!noteCard) {
+        noteCard = document.createElement('div');
+        noteCard.id        = 'workout-note-card';
+        noteCard.className = 'card ai-card';
+        noteCard.style.marginTop = '12px';
+        noteCard.innerHTML = '<div class="ai-card-label">💪 Coach Note</div><div class="ai-card-text" id="workout-note-text">Generating…</div>';
+        content.appendChild(noteCard);
+      }
+      const noteText = document.getElementById('workout-note-text');
+      if (noteText) noteText.textContent = 'Generating…';
+
+      try {
+        const exSummary = Object.entries(workout.exercises || {}).map(([name, data]) => {
+          if (!data.sets?.length) return null;
+          const best = data.sets.reduce((b, s) => (+s.weight > +(b.weight || 0) ? s : b), {});
+          return `${name}: ${data.sets.length} sets, best ${best.weight || '?'} lbs × ${best.reps || '?'} reps`;
+        }).filter(Boolean).join('\n');
+
+        const text = await claudeCall(
+          'claude-haiku-4-5-20251001',
+          'You are COACH, a personal trainer. Give brief, motivating post-workout feedback.',
+          buildTodayContext() + `\n\nWorkout completed:\n${exSummary || 'No sets recorded'}\n\nWrite 2-3 sentences of post-workout feedback. Be specific and personal.`
+        );
+        if (noteText) noteText.textContent = text;
+      } catch (e) {
+        if (noteText) noteText.textContent = e.message === 'no-key' ? 'Add your API key in More → Settings.' : 'Could not generate note.';
+      }
+    }
+
+    async function generateDietAdherence() {
+      const card = document.querySelector('#tab-eat .ai-card .ai-card-text');
+      if (!card) return;
+      const log = getFoodLog();
+      if (!log.length) return;
+      card.textContent = 'Analyzing…';
+      try {
+        const entries = log.map(e => `${e.name}: ${e.cal} cal, ${e.protein}g protein${e.flagged ? ' [FLAGGED]' : ''}`).join('\n');
+        const flagged = log.filter(e => e.flagged).map(e => e.name).join(', ');
+        const text    = await claudeCall(
+          'claude-sonnet-4-20250514',
+          'You are COACH, a nutrition coach for Sprite. Target: 1250 cal / 130g protein daily.',
+          buildTodayContext() + `\n\nToday's food log:\n${entries}\n${flagged ? 'Flagged foods: ' + flagged + '\n' : ''}Analyze today's nutrition. Be direct. Note flagged foods if any. Under 100 words.`
+        );
+        card.textContent = text;
+      } catch (e) {
+        card.textContent = e.message === 'no-key' ? 'Add your API key in More → Settings.' : 'Could not analyze diet.';
+      }
+    }
+
+    document.getElementById('bottom-nav').addEventListener('click', function (e) {
+      if (e.target.closest('[data-tab="eat"]')) {
+        setTimeout(() => { if (getFoodLog().length) generateDietAdherence(); }, 50);
+      }
+    });
+
+    // ── checkMilestones ────────────────────────────────────────────────────────
+
+    function checkMilestones() {
+      const ms    = JSON.parse(localStorage.getItem('coach_milestones') || '{}');
+      const today = new Date();
+
+      function countStreak() {
+        let n = 0;
+        for (let i = 0; i < 30; i++) {
+          const d = new Date(today);
+          d.setDate(today.getDate() - i);
+          if (localStorage.getItem('coach_morning_' + d.toISOString().split('T')[0])) n++;
+          else break;
+        }
+        return n;
+      }
+
+      function countWorkouts(days) {
+        let n = 0;
+        for (let i = 0; i < days; i++) {
+          const d = new Date(today);
+          d.setDate(today.getDate() - i);
+          const w = localStorage.getItem('coach_workout_' + d.toISOString().split('T')[0]);
+          if (w && JSON.parse(w).label !== 'Rest') n++;
+        }
+        return n;
+      }
+
+      if (!ms.streak7  && countStreak() >= 7)    { ms.streak7  = true; showBadgeToast('🔥 7-day streak! Consistency is everything!'); }
+      if (!ms.streak30 && countStreak() >= 30)   { ms.streak30 = true; showBadgeToast('💎 30-day streak! You\'re unstoppable!'); }
+      if (!ms.workouts10 && countWorkouts(90)  >= 10)  { ms.workouts10 = true; showBadgeToast('🏋️ 10 workouts logged! Keep crushing it!'); }
+      if (!ms.workouts50 && countWorkouts(365) >= 50)  { ms.workouts50 = true; showBadgeToast('🏆 50 workouts! You\'re a champion!'); }
+
+      if (!ms.fiveLbs) {
+        for (let i = 0; i < 90; i++) {
+          const d = new Date(today);
+          d.setDate(today.getDate() - i);
+          const night = localStorage.getItem('coach_night_' + d.toISOString().split('T')[0]);
+          if (night) {
+            const w = parseFloat(JSON.parse(night)?.body?.weight);
+            if (w > 0 && w <= 132) { ms.fiveLbs = true; showBadgeToast('⚡ 5 lbs down from 137! Amazing progress!'); break; }
+          }
+        }
+      }
+
+      localStorage.setItem('coach_milestones', JSON.stringify(ms));
+    }
+
+    // Load cached morning focus on page init
+    (function () {
+      const cached = localStorage.getItem('coach_morning_focus_' + todayKey());
+      const card   = document.querySelector('#tab-today .ai-card .ai-card-text');
+      if (cached && card && card.textContent.includes('will appear')) card.textContent = cached;
     })();
 
     // ── showBadgeToast ─────────────────────────────────────────────────────────
