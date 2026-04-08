@@ -121,11 +121,478 @@
       color: var(--accent);
       background: rgba(184, 255, 87, 0.08);
     }
+
+    /* ── Today tab ── */
+    .today-header {
+      padding: 20px 0 8px;
+    }
+
+    .today-header h1 {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+    }
+
+    .today-header p {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .section-label {
+      font-family: 'Syne', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    .card + .card,
+    .card + .section-label {
+      margin-top: 12px;
+    }
+
+    .field-label {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .emoji-scale {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+
+    .emoji-scale input[type="radio"] {
+      display: none;
+    }
+
+    .emoji-scale label {
+      flex: 1;
+      text-align: center;
+      font-size: 22px;
+      padding: 6px 0;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--surface2);
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+      line-height: 1;
+    }
+
+    .emoji-scale input[type="radio"]:checked + label {
+      border-color: var(--accent);
+      background: rgba(184,255,87,0.1);
+    }
+
+    .checklist {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .check-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .check-item input[type="checkbox"] {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 6px;
+      border: 1.5px solid var(--border);
+      background: var(--surface2);
+      flex-shrink: 0;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+      position: relative;
+    }
+
+    .check-item input[type="checkbox"]:checked {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .check-item input[type="checkbox"]:checked::after {
+      content: '';
+      position: absolute;
+      left: 5px;
+      top: 2px;
+      width: 6px;
+      height: 10px;
+      border: 2px solid #0a0a0a;
+      border-top: none;
+      border-left: none;
+      transform: rotate(45deg);
+    }
+
+    .text-input {
+      width: 100%;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 12px;
+      color: var(--text);
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 14px;
+      line-height: 1.4;
+      resize: none;
+      outline: none;
+      transition: border-color 0.15s;
+      margin-bottom: 12px;
+    }
+
+    .text-input:focus {
+      border-color: rgba(184,255,87,0.4);
+    }
+
+    .number-input {
+      width: 100%;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 12px;
+      color: var(--text);
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.15s;
+      -moz-appearance: textfield;
+    }
+
+    .number-input::-webkit-outer-spin-button,
+    .number-input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+    }
+
+    .number-input:focus {
+      border-color: rgba(184,255,87,0.4);
+    }
+
+    .toggle-row {
+      display: flex;
+      gap: 8px;
+    }
+
+    .toggle-btn {
+      flex: 1;
+      padding: 9px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--surface2);
+      color: var(--muted);
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .toggle-btn.selected {
+      border-color: var(--accent);
+      background: rgba(184,255,87,0.1);
+      color: var(--accent);
+    }
+
+    .body-checkin-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .body-field label.field-label {
+      display: block;
+    }
+
+    .collapsible-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      padding: 0;
+      background: none;
+      border: none;
+      color: var(--muted);
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      width: 100%;
+      margin-bottom: 0;
+    }
+
+    .collapsible-toggle svg {
+      width: 16px;
+      height: 16px;
+      transition: transform 0.2s;
+    }
+
+    .collapsible-toggle.open svg {
+      transform: rotate(180deg);
+    }
+
+    .collapsible-content {
+      display: none;
+      margin-top: 14px;
+    }
+
+    .collapsible-content.open {
+      display: block;
+    }
+
+    .btn-primary {
+      width: 100%;
+      padding: 14px;
+      border-radius: 12px;
+      border: none;
+      background: var(--accent);
+      color: #0a0a0a;
+      font-family: 'Syne', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: opacity 0.15s, transform 0.1s;
+      margin-top: 4px;
+    }
+
+    .btn-primary:active {
+      opacity: 0.85;
+      transform: scale(0.98);
+    }
+
+    .btn-primary.night {
+      background: var(--night);
+      color: #fff;
+    }
+
+    .ai-card {
+      border-color: var(--border-accent);
+    }
+
+    .ai-card-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .ai-card-label.night-label {
+      color: var(--night);
+    }
+
+    .ai-card-text {
+      font-size: 14px;
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 20px 0;
+    }
+
+    .hidden { display: none !important; }
   </style>
 </head>
 <body>
   <div id="app">
-    <div id="tab-today"  class="tab-panel active"></div>
+    <div id="tab-today" class="tab-panel active">
+
+      <!-- Header -->
+      <div class="today-header">
+        <h1 id="today-greeting">Good morning</h1>
+        <p id="today-date"></p>
+      </div>
+
+      <!-- AI Focus Card -->
+      <div class="card ai-card" style="margin-bottom:12px;">
+        <div class="ai-card-label">&#10024; Today's Focus</div>
+        <div class="ai-card-text">AI focus note will appear here.</div>
+      </div>
+
+      <!-- ── MORNING SECTION ── -->
+      <div id="morning-section">
+        <div class="section-label">Morning Check-in</div>
+
+        <div class="card">
+          <!-- Mood -->
+          <div class="field-label">Mood</div>
+          <div class="emoji-scale">
+            <input type="radio" name="morning-mood" id="mood-1" value="1" />
+            <label for="mood-1">😞</label>
+            <input type="radio" name="morning-mood" id="mood-2" value="2" />
+            <label for="mood-2">😕</label>
+            <input type="radio" name="morning-mood" id="mood-3" value="3" />
+            <label for="mood-3">😐</label>
+            <input type="radio" name="morning-mood" id="mood-4" value="4" />
+            <label for="mood-4">🙂</label>
+            <input type="radio" name="morning-mood" id="mood-5" value="5" />
+            <label for="mood-5">😄</label>
+          </div>
+
+          <!-- Energy -->
+          <div class="field-label">Energy</div>
+          <div class="emoji-scale">
+            <input type="radio" name="morning-energy" id="energy-1" value="1" />
+            <label for="energy-1">🪫</label>
+            <input type="radio" name="morning-energy" id="energy-2" value="2" />
+            <label for="energy-2">😴</label>
+            <input type="radio" name="morning-energy" id="energy-3" value="3" />
+            <label for="energy-3">😑</label>
+            <input type="radio" name="morning-energy" id="energy-4" value="4" />
+            <label for="energy-4">⚡</label>
+            <input type="radio" name="morning-energy" id="energy-5" value="5" />
+            <label for="energy-5">🔥</label>
+          </div>
+
+          <!-- Sleep Quality -->
+          <div class="field-label">Sleep Quality</div>
+          <div class="emoji-scale">
+            <input type="radio" name="morning-sleep" id="sleep-1" value="1" />
+            <label for="sleep-1">😩</label>
+            <input type="radio" name="morning-sleep" id="sleep-2" value="2" />
+            <label for="sleep-2">😪</label>
+            <input type="radio" name="morning-sleep" id="sleep-3" value="3" />
+            <label for="sleep-3">😶</label>
+            <input type="radio" name="morning-sleep" id="sleep-4" value="4" />
+            <label for="sleep-4">😌</label>
+            <input type="radio" name="morning-sleep" id="sleep-5" value="5" />
+            <label for="sleep-5">🌟</label>
+          </div>
+
+          <div class="divider" style="margin: 4px 0 14px;"></div>
+
+          <!-- Pre-gym checklist -->
+          <div class="field-label">Pre-gym checklist</div>
+          <div class="checklist">
+            <label class="check-item">
+              <input type="checkbox" id="check-water" />
+              Drank water
+            </label>
+            <label class="check-item">
+              <input type="checkbox" id="check-supps" />
+              Took supplements
+            </label>
+            <label class="check-item">
+              <input type="checkbox" id="check-meal" />
+              Ate pre-workout meal
+            </label>
+          </div>
+
+          <button class="btn-primary" onclick="saveMorning()">Save Morning</button>
+        </div>
+      </div>
+
+      <!-- ── NIGHT SECTION ── -->
+      <div id="night-section" class="hidden">
+        <div class="section-label" style="margin-top:20px;">Night Close-out</div>
+
+        <div class="card">
+          <!-- Evening Mood -->
+          <div class="field-label">Evening Mood</div>
+          <div class="emoji-scale">
+            <input type="radio" name="night-mood" id="nmood-1" value="1" />
+            <label for="nmood-1">😞</label>
+            <input type="radio" name="night-mood" id="nmood-2" value="2" />
+            <label for="nmood-2">😕</label>
+            <input type="radio" name="night-mood" id="nmood-3" value="3" />
+            <label for="nmood-3">😐</label>
+            <input type="radio" name="night-mood" id="nmood-4" value="4" />
+            <label for="nmood-4">🙂</label>
+            <input type="radio" name="night-mood" id="nmood-5" value="5" />
+            <label for="nmood-5">😄</label>
+          </div>
+
+          <div class="field-label">Today's Win</div>
+          <textarea class="text-input" id="night-win" rows="2" placeholder="Something you crushed today…"></textarea>
+
+          <div class="field-label">One Thing to Improve</div>
+          <textarea class="text-input" id="night-improve" rows="2" placeholder="What would you do differently?"></textarea>
+
+          <div class="divider" style="margin: 4px 0 14px;"></div>
+
+          <!-- Habits -->
+          <div class="field-label">Habits</div>
+          <div class="checklist" style="margin-bottom:14px;">
+            <label class="check-item">
+              <input type="checkbox" id="habit-protein" />
+              Hit protein goal
+            </label>
+            <label class="check-item">
+              <input type="checkbox" id="habit-water" />
+              Drank 8+ cups of water
+            </label>
+            <label class="check-item">
+              <input type="checkbox" id="habit-stretch" />
+              Stretched
+            </label>
+            <label class="check-item">
+              <input type="checkbox" id="habit-skincare" />
+              Skincare
+            </label>
+            <label class="check-item">
+              <input type="checkbox" id="habit-meds" />
+              Meds / supplements
+            </label>
+          </div>
+
+          <div class="divider" style="margin: 4px 0 14px;"></div>
+
+          <!-- Collapsible body check-in -->
+          <button class="collapsible-toggle" id="body-toggle" onclick="toggleBodyCheckin()">
+            Body Check-in (optional)
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+          </button>
+
+          <div class="collapsible-content" id="body-checkin">
+            <div class="body-checkin-grid">
+              <div class="body-field">
+                <label class="field-label" for="body-weight">Weight (lbs)</label>
+                <input type="number" class="number-input" id="body-weight" placeholder="e.g. 136.4" step="0.1" min="0" />
+              </div>
+              <div class="body-field">
+                <label class="field-label" for="body-bloat">Bloat (1–5)</label>
+                <input type="number" class="number-input" id="body-bloat" placeholder="1–5" min="1" max="5" />
+              </div>
+              <div class="body-field" style="grid-column: span 2;">
+                <label class="field-label">Skin Flare?</label>
+                <div class="toggle-row">
+                  <button class="toggle-btn" id="skin-no" onclick="selectSkin('no')">No</button>
+                  <button class="toggle-btn" id="skin-yes" onclick="selectSkin('yes')">Yes</button>
+                </div>
+              </div>
+              <div class="body-field" style="grid-column: span 2;">
+                <label class="field-label" for="body-pain">Pain Level (1–5)</label>
+                <input type="number" class="number-input" id="body-pain" placeholder="1–5" min="1" max="5" />
+              </div>
+            </div>
+          </div>
+
+          <button class="btn-primary night" style="margin-top:16px;" onclick="saveNight()">Close Out Day</button>
+        </div>
+
+        <!-- Goodnight Card -->
+        <div class="card ai-card hidden" id="goodnight-card" style="margin-top:12px;">
+          <div class="ai-card-label night-label">&#127769; Goodnight</div>
+          <div class="ai-card-text">Goodnight message will appear here.</div>
+        </div>
+      </div>
+
+    </div>
     <div id="tab-train"  class="tab-panel"></div>
     <div id="tab-eat"    class="tab-panel"></div>
     <div id="tab-stats"  class="tab-panel"></div>
@@ -182,6 +649,18 @@
   </div>
 
   <script>
+    // ── Utilities ──────────────────────────────────────────────────────────────
+
+    function todayKey() {
+      return new Date().toISOString().split('T')[0];
+    }
+
+    function getHour() {
+      return new Date().getHours();
+    }
+
+    // ── Tab navigation ─────────────────────────────────────────────────────────
+
     (function () {
       const tabs = document.querySelectorAll('.nav-tab');
       const panels = document.querySelectorAll('.tab-panel');
@@ -197,6 +676,132 @@
 
       showTab('today');
     })();
+
+    // ── Today tab init ─────────────────────────────────────────────────────────
+
+    (function initToday() {
+      const date = new Date();
+      const key  = todayKey();
+      const hour = date.getHours();
+
+      // Header
+      const greeting = hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : 'Good evening';
+      document.getElementById('today-greeting').textContent = greeting;
+      document.getElementById('today-date').textContent = date.toLocaleDateString('en-US', {
+        weekday: 'long', month: 'long', day: 'numeric'
+      });
+
+      const morningData = localStorage.getItem('coach_morning_' + key);
+      const nightData   = localStorage.getItem('coach_night_' + key);
+
+      const showMorning = hour < 12 || !morningData;
+      const showNight   = hour >= 18 || !!morningData;
+
+      document.getElementById('morning-section').classList.toggle('hidden', !showMorning);
+      document.getElementById('night-section').classList.toggle('hidden', !showNight);
+
+      if (nightData) {
+        const parsed = JSON.parse(nightData);
+        restoreNightForm(parsed);
+        document.getElementById('goodnight-card').classList.remove('hidden');
+      }
+    })();
+
+    function restoreNightForm(data) {
+      if (data.mood) {
+        const el = document.querySelector('input[name="night-mood"][value="' + data.mood + '"]');
+        if (el) el.checked = true;
+      }
+      if (data.win)     document.getElementById('night-win').value     = data.win;
+      if (data.improve) document.getElementById('night-improve').value = data.improve;
+      ['protein','water','stretch','skincare','meds'].forEach(h => {
+        if (data.habits && data.habits[h]) document.getElementById('habit-' + h).checked = true;
+      });
+      if (data.body) {
+        if (data.body.weight) document.getElementById('body-weight').value = data.body.weight;
+        if (data.body.bloat)  document.getElementById('body-bloat').value  = data.body.bloat;
+        if (data.body.skin)   selectSkin(data.body.skin);
+        if (data.body.pain)   document.getElementById('body-pain').value   = data.body.pain;
+      }
+    }
+
+    // ── Body check-in collapsible ──────────────────────────────────────────────
+
+    function toggleBodyCheckin() {
+      const toggle  = document.getElementById('body-toggle');
+      const content = document.getElementById('body-checkin');
+      toggle.classList.toggle('open');
+      content.classList.toggle('open');
+    }
+
+    let skinSelection = null;
+
+    function selectSkin(val) {
+      skinSelection = val;
+      document.getElementById('skin-yes').classList.toggle('selected', val === 'yes');
+      document.getElementById('skin-no').classList.toggle('selected',  val === 'no');
+    }
+
+    // ── saveMorning ────────────────────────────────────────────────────────────
+
+    function saveMorning() {
+      const key = todayKey();
+
+      const mood   = document.querySelector('input[name="morning-mood"]:checked')?.value   || null;
+      const energy = document.querySelector('input[name="morning-energy"]:checked')?.value || null;
+      const sleep  = document.querySelector('input[name="morning-sleep"]:checked')?.value  || null;
+
+      const data = {
+        date: key,
+        mood,
+        energy,
+        sleep,
+        checklist: {
+          water: document.getElementById('check-water').checked,
+          supps: document.getElementById('check-supps').checked,
+          meal:  document.getElementById('check-meal').checked,
+        }
+      };
+
+      localStorage.setItem('coach_morning_' + key, JSON.stringify(data));
+
+      // Show night section, hide morning if before noon
+      document.getElementById('night-section').classList.remove('hidden');
+      if (getHour() < 12) {
+        document.getElementById('morning-section').classList.add('hidden');
+      }
+    }
+
+    // ── saveNight ──────────────────────────────────────────────────────────────
+
+    function saveNight() {
+      const key = todayKey();
+
+      const mood    = document.querySelector('input[name="night-mood"]:checked')?.value || null;
+      const win     = document.getElementById('night-win').value.trim();
+      const improve = document.getElementById('night-improve').value.trim();
+
+      const habits = {
+        protein:  document.getElementById('habit-protein').checked,
+        water:    document.getElementById('habit-water').checked,
+        stretch:  document.getElementById('habit-stretch').checked,
+        skincare: document.getElementById('habit-skincare').checked,
+        meds:     document.getElementById('habit-meds').checked,
+      };
+
+      const body = {
+        weight: document.getElementById('body-weight').value || null,
+        bloat:  document.getElementById('body-bloat').value  || null,
+        skin:   skinSelection,
+        pain:   document.getElementById('body-pain').value   || null,
+      };
+
+      const data = { date: key, mood, win, improve, habits, body };
+
+      localStorage.setItem('coach_night_' + key, JSON.stringify(data));
+
+      document.getElementById('goodnight-card').classList.remove('hidden');
+    }
   </script>
 </body>
 </html>
