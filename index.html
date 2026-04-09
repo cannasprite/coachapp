@@ -806,6 +806,122 @@
     }
     .log-food-btn:active { opacity: 0.8; }
 
+    /* AI food log */
+    .ai-food-input-row {
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+    }
+    .ai-food-input-row textarea {
+      flex: 1;
+      resize: none;
+    }
+    .ai-food-log-btn {
+      flex-shrink: 0;
+      padding: 10px 16px;
+      border-radius: 10px;
+      border: none;
+      background: var(--accent);
+      color: #0a0a0a;
+      font-family: 'Syne', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: opacity 0.15s;
+      align-self: flex-end;
+    }
+    .ai-food-log-btn:disabled { opacity: 0.5; cursor: default; }
+    .ai-food-log-btn:active { opacity: 0.8; }
+    .food-confirm-card {
+      background: rgba(184,255,87,0.05);
+      border: 1px solid rgba(184,255,87,0.25);
+      border-radius: 14px;
+      padding: 16px;
+      margin-top: 10px;
+    }
+    .food-confirm-name {
+      font-family: 'Syne', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .food-confirm-qty {
+      font-size: 12px;
+      color: var(--accent);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 10px;
+    }
+    .food-confirm-macros {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+    .food-confirm-macro {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+    .food-confirm-macro-val {
+      font-family: 'Syne', sans-serif;
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--text);
+    }
+    .food-confirm-macro-lbl {
+      font-size: 10px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 700;
+    }
+    .food-confirm-actions {
+      display: flex;
+      gap: 8px;
+    }
+    .food-confirm-ok {
+      flex: 1;
+      padding: 10px;
+      border-radius: 10px;
+      border: none;
+      background: var(--accent);
+      color: #0a0a0a;
+      font-family: 'Syne', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: opacity 0.15s;
+    }
+    .food-confirm-ok:active { opacity: 0.8; }
+    .food-confirm-edit {
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: none;
+      color: var(--muted);
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .food-confirm-edit:hover { border-color: var(--accent); color: var(--accent); }
+    .food-edit-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+    .food-edit-grid .food-name-input { margin-bottom: 0; grid-column: span 2; }
+    .macro-totals-sub {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 3px;
+    }
     .food-entry {
       display: flex;
       align-items: center;
@@ -829,6 +945,12 @@
       color: var(--muted);
       margin-top: 2px;
     }
+    .food-entry-actions {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      flex-shrink: 0;
+    }
     .flag-btn {
       background: none;
       border: none;
@@ -840,7 +962,20 @@
       flex-shrink: 0;
       line-height: 1;
     }
-    .flag-btn.flagged { opacity: 1; filter: none; }
+    .flag-btn.flagged { opacity: 1; }
+    .food-del-btn {
+      background: none;
+      border: none;
+      color: var(--muted);
+      cursor: pointer;
+      padding: 4px 6px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      transition: color 0.15s;
+    }
+    .food-del-btn:hover { color: var(--warn); }
+    .food-del-btn svg { width: 13px; height: 13px; }
 
     .water-subhead {
       font-family: 'Syne', sans-serif;
@@ -2715,6 +2850,7 @@
             </div>
             <div class="progress-bar"><div class="progress-fill" id="cal-bar"></div></div>
             <span class="total-remaining" id="cal-remaining">1250 remaining</span>
+            <div class="macro-totals-sub" id="carbs-fat-totals"></div>
           </div>
           <div>
             <div class="total-header">
@@ -2727,13 +2863,72 @@
         </div>
       </div>
 
-      <!-- Log form -->
-      <div class="card" style="margin-top:10px;">
-        <input type="text" class="food-name-input" id="food-name" placeholder="Food name…" />
-        <div class="food-macros-row">
-          <input type="number" class="set-input" id="food-cal"  placeholder="cal"       min="0" />
-          <input type="number" class="set-input" id="food-prot" placeholder="g protein" min="0" />
-          <button class="log-food-btn" onclick="logFood()">+ Log</button>
+      <!-- AI log form -->
+      <div class="card" style="margin-top:10px;" id="food-log-card">
+        <!-- AI input (shown when API key set) -->
+        <div id="food-ai-input">
+          <div class="ai-food-input-row">
+            <textarea class="text-input" id="food-ai-text" rows="2"
+              placeholder="What did you eat? (e.g. 2 eggs, grilled chicken 6oz, post-workout shake with 2 scoops whey and banana)"
+              style="margin-bottom:0;font-size:14px;"></textarea>
+            <button class="ai-food-log-btn" id="food-ai-btn" onclick="logFoodWithAI()">Log</button>
+          </div>
+          <div id="food-ai-status" style="font-size:12px;color:var(--muted);margin-top:6px;min-height:16px;"></div>
+        </div>
+
+        <!-- No-key fallback (hidden by default, shown if no API key) -->
+        <div id="food-manual-fallback" style="display:none;">
+          <div style="font-size:12px;color:var(--muted);margin-bottom:10px;">
+            Add your API key in Settings to enable smart food logging.
+          </div>
+          <input type="text" class="food-name-input" id="food-name" placeholder="Food name…" />
+          <div class="food-macros-row">
+            <input type="number" class="set-input" id="food-cal"  placeholder="cal"       min="0" />
+            <input type="number" class="set-input" id="food-prot" placeholder="g protein" min="0" />
+            <button class="log-food-btn" onclick="logFood()">+ Log</button>
+          </div>
+        </div>
+
+        <!-- AI confirmation card (hidden until AI responds) -->
+        <div id="food-confirm-wrapper" style="display:none;margin-top:12px;">
+          <div class="food-confirm-card">
+            <div class="food-confirm-name" id="confirm-name"></div>
+            <div class="food-confirm-qty" id="confirm-qty"></div>
+            <div class="food-confirm-macros">
+              <div class="food-confirm-macro">
+                <span class="food-confirm-macro-val" id="confirm-cal">0</span>
+                <span class="food-confirm-macro-lbl">cal</span>
+              </div>
+              <div class="food-confirm-macro">
+                <span class="food-confirm-macro-val" id="confirm-prot">0</span>
+                <span class="food-confirm-macro-lbl">protein</span>
+              </div>
+              <div class="food-confirm-macro">
+                <span class="food-confirm-macro-val" id="confirm-carbs">0</span>
+                <span class="food-confirm-macro-lbl">carbs</span>
+              </div>
+              <div class="food-confirm-macro">
+                <span class="food-confirm-macro-val" id="confirm-fat">0</span>
+                <span class="food-confirm-macro-lbl">fat</span>
+              </div>
+            </div>
+            <div class="food-confirm-actions">
+              <button class="food-confirm-ok" onclick="logFoodConfirm()">Looks right, log it</button>
+              <button class="food-confirm-edit" onclick="logFoodShowEdit()">Edit manually</button>
+            </div>
+          </div>
+          <!-- Edit form (hidden until "Edit manually" tapped) -->
+          <div id="food-edit-form" style="display:none;margin-top:10px;">
+            <div class="food-edit-grid">
+              <input type="text" class="food-name-input" id="edit-food-name" placeholder="Food name" />
+              <input type="text" class="food-name-input" id="edit-food-qty" placeholder="Quantity (e.g. 6oz)" style="grid-column:unset;" />
+              <input type="number" class="set-input" id="edit-food-cal"   placeholder="cal"   min="0" />
+              <input type="number" class="set-input" id="edit-food-prot"  placeholder="prot g" min="0" step="0.1" />
+              <input type="number" class="set-input" id="edit-food-carbs" placeholder="carbs g" min="0" step="0.1" />
+              <input type="number" class="set-input" id="edit-food-fat"   placeholder="fat g"  min="0" step="0.1" />
+            </div>
+            <button class="log-food-btn" style="width:100%;" onclick="logFoodSaveEdit()">Save</button>
+          </div>
         </div>
       </div>
 
@@ -4042,18 +4237,136 @@
       document.querySelectorAll('[data-error-for="' + id + '"]').forEach(e => e.remove());
     }
 
-    function logFood() {
-      const name = document.getElementById('food-name').value.trim();
-      const cal  = parseFloat(document.getElementById('food-cal').value)  || 0;
-      const prot = parseFloat(document.getElementById('food-prot').value) || 0;
-      if (!name) { showFieldError('food-name', 'Food name is required'); return; }
-      clearFieldError('food-name');
+    // ── AI food logging ────────────────────────────────────────────────────────
+
+    // Pending AI result — stored so confirm/edit can reference it
+    let _pendingFood = null;
+
+    function eatCheckApiKey() {
+      const settings = JSON.parse(localStorage.getItem('coach_settings') || '{}');
+      const hasKey = !!settings.apiKey;
+      const aiEl = document.getElementById('food-ai-input');
+      const manualEl = document.getElementById('food-manual-fallback');
+      if (aiEl)     aiEl.style.display     = hasKey ? 'block' : 'none';
+      if (manualEl) manualEl.style.display  = hasKey ? 'none'  : 'block';
+      return hasKey;
+    }
+
+    async function logFoodWithAI(prefillText) {
+      const textEl  = document.getElementById('food-ai-text');
+      const btn     = document.getElementById('food-ai-btn');
+      const statusEl = document.getElementById('food-ai-status');
+      const input   = (prefillText || (textEl && textEl.value) || '').trim();
+      if (!input) return;
+
+      if (btn)     { btn.disabled = true; btn.textContent = '…'; }
+      if (statusEl) statusEl.textContent = 'Looking that up...';
+      document.getElementById('food-confirm-wrapper').style.display = 'none';
+      document.getElementById('food-edit-form').style.display = 'none';
+
+      try {
+        const raw = await claudeCall(
+          'claude-haiku-4-5-20251001',
+          'You are a nutrition database. The user will describe food they ate. Return ONLY a JSON object with these exact fields: { "name": string (clean food name), "calories": number, "protein": number (grams), "carbs": number (grams), "fat": number (grams), "quantity": string (e.g. "2 eggs", "6oz", "1 cup") }. Be accurate. Use standard nutrition data. No explanation, no markdown, just the JSON object.',
+          input
+        );
+
+        // Strip any markdown code fences before parsing
+        const cleaned = raw.replace(/```[a-z]*\n?/g, '').replace(/```/g, '').trim();
+        const food = JSON.parse(cleaned);
+
+        _pendingFood = {
+          name:     food.name     || input,
+          quantity: food.quantity || '',
+          cal:      Math.round(food.calories || 0),
+          protein:  Math.round((food.protein || 0) * 10) / 10,
+          carbs:    Math.round((food.carbs   || 0) * 10) / 10,
+          fat:      Math.round((food.fat     || 0) * 10) / 10,
+          flagged:  false
+        };
+
+        document.getElementById('confirm-name').textContent  = _pendingFood.name;
+        document.getElementById('confirm-qty').textContent   = _pendingFood.quantity;
+        document.getElementById('confirm-cal').textContent   = _pendingFood.cal;
+        document.getElementById('confirm-prot').textContent  = _pendingFood.protein + 'g';
+        document.getElementById('confirm-carbs').textContent = _pendingFood.carbs + 'g';
+        document.getElementById('confirm-fat').textContent   = _pendingFood.fat + 'g';
+        document.getElementById('food-confirm-wrapper').style.display = 'block';
+        if (statusEl) statusEl.textContent = '';
+        if (textEl)   textEl.value = '';
+
+      } catch (err) {
+        if (statusEl) statusEl.textContent = err.message === 'no-key'
+          ? 'Add your API key in Settings.'
+          : 'Could not parse — try again or add manually.';
+      } finally {
+        if (btn) { btn.disabled = false; btn.textContent = 'Log'; }
+      }
+    }
+
+    function logFoodConfirm() {
+      if (!_pendingFood) return;
       const log = getFoodLog();
-      log.push({ name, cal, protein: prot, flagged: false });
+      log.push({ ..._pendingFood });
       localStorage.setItem('coach_food_' + todayKey(), JSON.stringify(log));
-      document.getElementById('food-name').value  = '';
-      document.getElementById('food-cal').value   = '';
-      document.getElementById('food-prot').value  = '';
+      _pendingFood = null;
+      document.getElementById('food-confirm-wrapper').style.display = 'none';
+      renderFoodLog();
+      showBadgeToast('Logged!');
+    }
+
+    function logFoodShowEdit() {
+      if (!_pendingFood) return;
+      document.getElementById('edit-food-name').value  = _pendingFood.name;
+      document.getElementById('edit-food-qty').value   = _pendingFood.quantity;
+      document.getElementById('edit-food-cal').value   = _pendingFood.cal;
+      document.getElementById('edit-food-prot').value  = _pendingFood.protein;
+      document.getElementById('edit-food-carbs').value = _pendingFood.carbs;
+      document.getElementById('edit-food-fat').value   = _pendingFood.fat;
+      document.getElementById('food-edit-form').style.display = 'block';
+    }
+
+    function logFoodSaveEdit() {
+      const entry = {
+        name:     document.getElementById('edit-food-name').value.trim()  || (_pendingFood && _pendingFood.name) || 'Food',
+        quantity: document.getElementById('edit-food-qty').value.trim(),
+        cal:      parseFloat(document.getElementById('edit-food-cal').value)   || 0,
+        protein:  parseFloat(document.getElementById('edit-food-prot').value)  || 0,
+        carbs:    parseFloat(document.getElementById('edit-food-carbs').value) || 0,
+        fat:      parseFloat(document.getElementById('edit-food-fat').value)   || 0,
+        flagged:  false
+      };
+      const log = getFoodLog();
+      log.push(entry);
+      localStorage.setItem('coach_food_' + todayKey(), JSON.stringify(log));
+      _pendingFood = null;
+      document.getElementById('food-confirm-wrapper').style.display = 'none';
+      document.getElementById('food-edit-form').style.display = 'none';
+      renderFoodLog();
+      showBadgeToast('Logged!');
+    }
+
+    // Manual fallback (no-key path)
+    function logFood() {
+      const nameEl = document.getElementById('food-name');
+      const name   = nameEl ? nameEl.value.trim() : '';
+      const cal    = parseFloat(document.getElementById('food-cal')?.value)  || 0;
+      const prot   = parseFloat(document.getElementById('food-prot')?.value) || 0;
+      if (!name) { if (nameEl) showFieldError('food-name', 'Food name is required'); return; }
+      if (nameEl) clearFieldError('food-name');
+      const log = getFoodLog();
+      log.push({ name, quantity: '', cal, protein: prot, carbs: 0, fat: 0, flagged: false });
+      localStorage.setItem('coach_food_' + todayKey(), JSON.stringify(log));
+      if (nameEl) nameEl.value = '';
+      document.getElementById('food-cal').value  = '';
+      document.getElementById('food-prot').value = '';
+      renderFoodLog();
+    }
+
+    function deleteFoodEntry(idx) {
+      const log = getFoodLog();
+      log.splice(idx, 1);
+      localStorage.setItem('coach_food_' + todayKey(), JSON.stringify(log));
       renderFoodLog();
     }
 
@@ -4067,44 +4380,68 @@
     }
 
     function renderFoodLog() {
-      const log       = getFoodLog();
-      const totalCal  = log.reduce((s, e) => s + (e.cal     || 0), 0);
-      const totalProt = log.reduce((s, e) => s + (e.protein || 0), 0);
+      const log        = getFoodLog();
+      const totalCal   = log.reduce((s, e) => s + (e.cal     || 0), 0);
+      const totalProt  = log.reduce((s, e) => s + (e.protein || 0), 0);
+      const totalCarbs = log.reduce((s, e) => s + (e.carbs   || 0), 0);
+      const totalFat   = log.reduce((s, e) => s + (e.fat     || 0), 0);
 
-      document.getElementById('cal-used').textContent  = totalCal;
-      document.getElementById('prot-used').textContent = totalProt;
+      document.getElementById('cal-used').textContent  = Math.round(totalCal);
+      document.getElementById('prot-used').textContent = Math.round(totalProt);
 
       const calRem  = CAL_TARGET  - totalCal;
       const protRem = PROT_TARGET - totalProt;
-      document.getElementById('cal-remaining').textContent  = calRem  >= 0 ? calRem  + ' remaining'  : Math.abs(calRem)  + ' over';
-      document.getElementById('prot-remaining').textContent = protRem >= 0 ? protRem + 'g remaining' : Math.abs(protRem) + 'g over';
+      document.getElementById('cal-remaining').textContent  = calRem  >= 0 ? Math.round(calRem)  + ' remaining'  : Math.abs(Math.round(calRem))  + ' over';
+      document.getElementById('prot-remaining').textContent = protRem >= 0 ? Math.round(protRem) + 'g remaining' : Math.abs(Math.round(protRem)) + 'g over';
       document.getElementById('cal-bar').style.width  = Math.min(100, (totalCal  / CAL_TARGET)  * 100) + '%';
       document.getElementById('prot-bar').style.width = Math.min(100, (totalProt / PROT_TARGET) * 100) + '%';
+
+      const cfEl = document.getElementById('carbs-fat-totals');
+      if (cfEl) cfEl.textContent = totalCarbs ? Math.round(totalCarbs) + 'g carbs · ' + Math.round(totalFat) + 'g fat' : '';
 
       const list = document.getElementById('food-log-list');
       if (!log.length) {
         list.innerHTML = '<p style="color:var(--muted);font-size:13px;padding:4px 0;">Nothing logged yet today.</p>';
         return;
       }
-      list.innerHTML = log.map((e, i) => `
+      list.innerHTML = log.map((e, i) => {
+        const macroExtra = [];
+        if (e.carbs) macroExtra.push(e.carbs + 'g carbs');
+        if (e.fat)   macroExtra.push(e.fat + 'g fat');
+        return `
         <div class="food-entry">
           <div class="food-entry-info">
-            <div class="food-entry-name">${e.name}</div>
-            <div class="food-entry-macros">${e.cal} cal &middot; ${e.protein}g protein</div>
+            <div class="food-entry-name">${e.name}${e.quantity ? ' <span style="font-weight:400;color:var(--muted);font-size:12px;">· ' + e.quantity + '</span>' : ''}</div>
+            <div class="food-entry-macros">${Math.round(e.cal)} cal · ${e.protein}g protein${macroExtra.length ? ' · ' + macroExtra.join(' · ') : ''}</div>
           </div>
-          <button class="flag-btn ${e.flagged ? 'flagged' : ''}" onclick="toggleFoodFlag(${i})" title="Flag food">🚩</button>
-        </div>`).join('');
+          <div class="food-entry-actions">
+            <button class="flag-btn ${e.flagged ? 'flagged' : ''}" onclick="toggleFoodFlag(${i})" title="Flag food">🚩</button>
+            <button class="food-del-btn" onclick="deleteFoodEntry(${i})" title="Delete">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/>
+              </svg>
+            </button>
+          </div>
+        </div>`;
+      }).join('');
     }
 
     function quickLogRecipe(idx) {
       const recipes = JSON.parse(localStorage.getItem('coach_recipes') || '[]');
       const r = recipes[idx];
       if (!r) return;
-      const log = getFoodLog();
-      log.push({ name: r.name, cal: r.cal, protein: r.protein, flagged: false });
-      localStorage.setItem('coach_food_' + todayKey(), JSON.stringify(log));
-      renderFoodLog();
-      showBadgeToast(r.name + ' logged!');
+      const settings = JSON.parse(localStorage.getItem('coach_settings') || '{}');
+      if (settings.apiKey) {
+        // Switch to Eat tab first, then AI-log the recipe name
+        document.querySelector('.nav-tab[data-tab="eat"]').click();
+        setTimeout(() => logFoodWithAI(r.name + ' (' + r.cal + ' cal, ' + r.protein + 'g protein)'), 60);
+      } else {
+        const log = getFoodLog();
+        log.push({ name: r.name, quantity: '', cal: r.cal, protein: r.protein, carbs: 0, fat: 0, flagged: false });
+        localStorage.setItem('coach_food_' + todayKey(), JSON.stringify(log));
+        renderFoodLog();
+        showBadgeToast(r.name + ' logged!');
+      }
     }
 
     function renderRecipes() {
@@ -4154,6 +4491,7 @@
       const el = document.getElementById('eat-date');
       if (el) el.textContent = d.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
       seedRecipes();
+      eatCheckApiKey();
       renderFoodLog();
       renderRecipes();
       renderWater();
