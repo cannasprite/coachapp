@@ -4129,6 +4129,20 @@
       showTab('today');
     })();
 
+    // ── Workout plan (must be declared before initToday runs) ──────────────────
+
+    const WORKOUT_PLAN = {
+      mon: { label: 'Push',        day: 'Monday',    exercises: ['Bench Press','Shoulder Press','Lateral Raises','Tricep Pushdowns','Cable Flyes'] },
+      tue: { label: 'Glute / Ham', day: 'Tuesday',   exercises: ['Romanian Deadlift','Hip Thrust','Leg Curl','Glute Kickback','Walking Lunges'] },
+      wed: { label: 'Pull',        day: 'Wednesday', exercises: ['Lat Pulldown','Seated Row','Face Pulls','Bicep Curls','Rear Delt Flyes'] },
+      thu: { label: 'Core',        day: 'Thursday',  exercises: ['Plank','Cable Crunch','Hanging Leg Raise','Russian Twist','Dead Bug'] },
+      fri: { label: 'Quad / Calf', day: 'Friday',    exercises: ['Leg Press','Squats','Leg Extension','Standing Calf Raise','Bulgarian Split Squat'] },
+      sat: { label: 'Cardio',      day: 'Saturday',  exercises: [] },
+      sun: { label: 'Rest',        day: 'Sunday',    exercises: [] },
+    };
+
+    const CARDIO_EXERCISES = ['Treadmill', 'Stairmaster', 'Bike', 'Rowing Machine'];
+
     // ── Today tab init ─────────────────────────────────────────────────────────
 
     (function initToday() {
@@ -4387,18 +4401,6 @@
     }
 
     // ── Train tab ─────────────────────────────────────────────────────────────
-
-    const WORKOUT_PLAN = {
-      mon: { label: 'Push',        day: 'Monday',    exercises: ['Bench Press','Shoulder Press','Lateral Raises','Tricep Pushdowns','Cable Flyes'] },
-      tue: { label: 'Glute / Ham', day: 'Tuesday',   exercises: ['Romanian Deadlift','Hip Thrust','Leg Curl','Glute Kickback','Walking Lunges'] },
-      wed: { label: 'Pull',        day: 'Wednesday', exercises: ['Lat Pulldown','Seated Row','Face Pulls','Bicep Curls','Rear Delt Flyes'] },
-      thu: { label: 'Core',        day: 'Thursday',  exercises: ['Plank','Cable Crunch','Hanging Leg Raise','Russian Twist','Dead Bug'] },
-      fri: { label: 'Quad / Calf', day: 'Friday',    exercises: ['Leg Press','Squats','Leg Extension','Standing Calf Raise','Bulgarian Split Squat'] },
-      sat: { label: 'Cardio',      day: 'Saturday',  exercises: [] },
-      sun: { label: 'Rest',        day: 'Sunday',    exercises: [] },
-    };
-
-    const CARDIO_EXERCISES = ['Treadmill', 'Stairmaster', 'Bike', 'Rowing Machine'];
 
     let activeDay = null;
 
@@ -7326,12 +7328,11 @@ Write Sprite's weekly performance report with sections: Nutrition, Training, Rec
     // ── Service Worker (cache-first offline + notification click) ─────────────
     if ('serviceWorker' in navigator) {
       const swSrc = `
-        const CACHE = 'lifecoach-v3';
-        const OLD_CACHES = ['coach-v1', 'lifecoach-v2'];
+        const CACHE = 'lifecoach-v4';
         self.addEventListener('install',  () => self.skipWaiting());
         self.addEventListener('activate', e => e.waitUntil(
           caches.keys().then(keys => Promise.all(
-            keys.filter(k => OLD_CACHES.includes(k)).map(k => caches.delete(k))
+            keys.filter(k => k !== CACHE).map(k => caches.delete(k))
           )).then(() => clients.claim())
         ));
         self.addEventListener('fetch', e => {
