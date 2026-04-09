@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>COACH</title>
+  <title>Life.Coach</title>
   <meta name="theme-color" content="#b8ff57" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="apple-mobile-web-app-title" content="COACH" />
+  <meta name="apple-mobile-web-app-title" content="Life.Coach" />
   <script>
     (function () {
       var icon = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='36' fill='%230a0a0a'/%3E%3Ctext x='96' y='132' font-size='110' font-weight='800' font-family='sans-serif' text-anchor='middle' fill='%23b8ff57'%3EC%3C/text%3E%3C/svg%3E";
       var manifest = JSON.stringify({
-        name: 'COACH', short_name: 'COACH', display: 'standalone',
+        name: 'Life.Coach', short_name: 'Life.Coach', display: 'standalone',
         background_color: '#0a0a0a', theme_color: '#b8ff57', start_url: '.',
         icons: [
           { src: icon, sizes: '192x192', type: 'image/svg+xml' },
@@ -92,19 +92,26 @@
       transform: translateX(-50%);
       width: 100%;
       max-width: 480px;
-      background: rgba(20, 20, 20, 0.8);
+      background: rgba(20, 20, 20, 0.88);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border-top: 1px solid var(--border);
-      padding: 8px 4px 16px;
+      padding: 10px 12px 18px;
       z-index: 100;
     }
 
     .nav-tabs {
       display: flex;
-      justify-content: space-around;
+      flex-wrap: nowrap;
       align-items: center;
-      gap: 2px;
+      gap: 6px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .nav-tabs::-webkit-scrollbar {
+      display: none;
     }
 
     .nav-tab {
@@ -112,35 +119,38 @@
       flex-direction: column;
       align-items: center;
       gap: 3px;
-      padding: 6px 8px;
-      border-radius: 12px;
-      border: none;
-      background: transparent;
+      padding: 7px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--surface);
       color: var(--muted);
       cursor: pointer;
       font-family: 'Instrument Sans', sans-serif;
       font-size: 10px;
-      font-weight: 500;
+      font-weight: 600;
       line-height: 1;
-      min-width: 44px;
-      transition: color 0.15s, background 0.15s;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: color 0.15s, background 0.15s, border-color 0.15s, box-shadow 0.15s;
       -webkit-tap-highlight-color: transparent;
     }
 
     .nav-tab svg {
-      width: 20px;
-      height: 20px;
+      width: 16px;
+      height: 16px;
       flex-shrink: 0;
     }
 
     .nav-tab:hover {
       color: var(--text);
-      background: var(--glass);
+      background: var(--surface2);
     }
 
     .nav-tab.active {
-      color: var(--accent);
-      background: rgba(184, 255, 87, 0.08);
+      color: var(--tab-accent, var(--accent));
+      background: rgba(var(--tab-accent-rgb, 184, 255, 87), 0.1);
+      border-color: rgba(var(--tab-accent-rgb, 184, 255, 87), 0.3);
+      box-shadow: 0 0 10px rgba(var(--tab-accent-rgb, 184, 255, 87), 0.15);
     }
 
     /* ── Today tab ── */
@@ -1455,7 +1465,7 @@
     </div>
     <div id="tab-chat" class="tab-panel">
       <div class="chat-header">
-        <h2>Coach Chat</h2>
+        <h2>Life.Coach Chat</h2>
         <button class="chat-clear-btn" onclick="clearChat()">Clear</button>
       </div>
       <div class="chat-messages" id="chat-messages"></div>
@@ -1558,49 +1568,92 @@
       </div>
     </div>
 
+    <!-- New tab panels -->
+    <div id="tab-checkin" class="tab-panel">
+      <div class="today-header"><h1>Check-in</h1><p>Daily check-in coming soon.</p></div>
+    </div>
+
+    <div id="tab-body" class="tab-panel">
+      <div class="today-header"><h1>Body</h1><p>Body tracking coming soon.</p></div>
+    </div>
+
+    <div id="tab-money" class="tab-panel">
+      <div class="today-header"><h1>Money</h1><p>Finance tracking coming soon.</p></div>
+    </div>
+
+    <div id="tab-life" class="tab-panel">
+      <div class="today-header"><h1>Life</h1><p>Life tracking coming soon.</p></div>
+    </div>
+
+    <div id="tab-projects" class="tab-panel">
+      <div class="today-header"><h1>Projects</h1><p>Projects coming soon.</p></div>
+    </div>
+
+    <div id="tab-goals" class="tab-panel">
+      <div class="today-header"><h1>Goals</h1><p>Goals coming soon.</p></div>
+    </div>
+
     <nav id="bottom-nav">
       <div class="nav-tabs">
-        <button class="nav-tab active" data-tab="today">
+        <button class="nav-tab active" data-tab="today" data-accent="#f0f0f0" data-accent-rgb="240,240,240">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
           </svg>
-          Today
+          Home
         </button>
-        <button class="nav-tab" data-tab="train">
+        <button class="nav-tab" data-tab="checkin" data-accent="#c4b5fd" data-accent-rgb="196,181,253">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M6 4v16M18 4v16M2 8h4M18 8h4M2 16h4M18 16h4"/>
+            <path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
           </svg>
-          Train
+          Check-in
         </button>
-        <button class="nav-tab" data-tab="eat">
+        <button class="nav-tab" data-tab="body" data-accent="#b8ff57" data-accent-rgb="184,255,87">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/>
+            <circle cx="12" cy="5" r="3"/><path d="M6.5 8a6 6 0 0 0 0 8M17.5 8a6 6 0 0 1 0 8M12 8v13"/>
           </svg>
-          Eat
+          Body
         </button>
-        <button class="nav-tab" data-tab="stats">
+        <button class="nav-tab" data-tab="money" data-accent="#f5c542" data-accent-rgb="245,197,66">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>
+            <line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
           </svg>
-          Stats
+          Money
         </button>
-        <button class="nav-tab" data-tab="chat">
+        <button class="nav-tab" data-tab="life" data-accent="#ff8c69" data-accent-rgb="255,140,105">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
           </svg>
-          Chat
+          Life
         </button>
-        <button class="nav-tab" data-tab="journal">
+        <button class="nav-tab" data-tab="projects" data-accent="#7dd3fc" data-accent-rgb="125,211,252">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/>
+          </svg>
+          Projects
+        </button>
+        <button class="nav-tab" data-tab="goals" data-accent="#fbbf24" data-accent-rgb="251,191,36">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>
+          </svg>
+          Goals
+        </button>
+        <button class="nav-tab" data-tab="journal" data-accent="#fbbf24" data-accent-rgb="251,191,36">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
           </svg>
           Journal
         </button>
-        <button class="nav-tab" data-tab="more">
+        <button class="nav-tab" data-tab="chat" data-accent="#f0f0f0" data-accent-rgb="240,240,240">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/>
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
           </svg>
-          More
+          Chat
+        </button>
+        <button class="nav-tab" data-tab="more" data-accent="#f0f0f0" data-accent-rgb="240,240,240">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"/><path d="M19.07 4.93A10 10 0 0 1 21 12a10 10 0 0 1-1.93 7.07M4.93 4.93A10 10 0 0 0 3 12a10 10 0 0 0 1.93 7.07"/>
+          </svg>
+          Settings
         </button>
       </div>
     </nav>
@@ -1624,8 +1677,20 @@
       const panels = document.querySelectorAll('.tab-panel');
 
       function showTab(id) {
-        tabs.forEach(t => t.classList.toggle('active', t.dataset.tab === id));
+        tabs.forEach(t => {
+          const active = t.dataset.tab === id;
+          t.classList.toggle('active', active);
+          if (active) {
+            const accent = t.dataset.accent || '#b8ff57';
+            const rgb = t.dataset.accentRgb || '184,255,87';
+            t.style.setProperty('--tab-accent', accent);
+            t.style.setProperty('--tab-accent-rgb', rgb);
+          }
+        });
         panels.forEach(p => p.classList.toggle('active', p.id === 'tab-' + id));
+        // Scroll active tab into view
+        const activeTab = document.querySelector('.nav-tab.active');
+        if (activeTab) activeTab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
       }
 
       tabs.forEach(tab => {
