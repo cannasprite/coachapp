@@ -7326,21 +7326,22 @@ Write Sprite's weekly performance report with sections: Nutrition, Training, Rec
     // ── Service Worker (cache-first offline + notification click) ─────────────
     if ('serviceWorker' in navigator) {
       const swSrc = `
-        const CACHE = 'lifecoach-v2';
+        const CACHE = 'lifecoach-v3';
+        const OLD_CACHES = ['coach-v1', 'lifecoach-v2'];
         self.addEventListener('install',  () => self.skipWaiting());
-        self.addEventListener('activate', e  => e.waitUntil(clients.claim()));
+        self.addEventListener('activate', e => e.waitUntil(
+          caches.keys().then(keys => Promise.all(
+            keys.filter(k => OLD_CACHES.includes(k)).map(k => caches.delete(k))
+          )).then(() => clients.claim())
+        ));
         self.addEventListener('fetch', e => {
           if (e.request.mode !== 'navigate') return;
           e.respondWith(
-            caches.open(CACHE).then(cache =>
-              cache.match(e.request).then(cached => {
-                const network = fetch(e.request).then(resp => {
-                  cache.put(e.request, resp.clone());
-                  return resp;
-                }).catch(() => cached);
-                return cached || network;
-              })
-            )
+            fetch(e.request).then(resp => {
+              const clone = resp.clone();
+              caches.open(CACHE).then(c => c.put(e.request, clone));
+              return resp;
+            }).catch(() => caches.match(e.request))
           );
         });
         self.addEventListener('notificationclick', e => {
