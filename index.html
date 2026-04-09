@@ -2997,25 +2997,39 @@
       </div>
 
     </div>
-    <div id="tab-train" class="tab-panel">
-      <div class="train-header">
-        <h2 id="train-day-title">Push Day</h2>
-        <p id="train-day-sub" style="font-size:13px;color:var(--muted);margin-top:2px;"></p>
+    <div id="tab-body" class="tab-panel">
+      <div class="money-header">
+        <h2>Body</h2>
       </div>
 
-      <div class="day-selector" id="day-selector">
-        <button class="day-pill" data-day="mon" onclick="selectDay('mon')">Mon</button>
-        <button class="day-pill" data-day="tue" onclick="selectDay('tue')">Tue</button>
-        <button class="day-pill" data-day="wed" onclick="selectDay('wed')">Wed</button>
-        <button class="day-pill" data-day="thu" onclick="selectDay('thu')">Thu</button>
-        <button class="day-pill" data-day="fri" onclick="selectDay('fri')">Fri</button>
-        <button class="day-pill" data-day="sat" onclick="selectDay('sat')">Sat</button>
-        <button class="day-pill" data-day="sun" onclick="selectDay('sun')">Sun</button>
+      <!-- Section pill nav -->
+      <div class="checkin-section-nav" id="body-section-nav">
+        <button class="checkin-section-pill active" data-bsec="train" onclick="showBodySection('train')">Train</button>
+        <button class="checkin-section-pill" data-bsec="eat"   onclick="showBodySection('eat')">Eat</button>
+        <button class="checkin-section-pill" data-bsec="stats" onclick="showBodySection('stats')">Stats</button>
       </div>
 
-      <div id="workout-content"></div>
-    </div>
-    <div id="tab-eat" class="tab-panel">
+      <!-- ── TRAIN ── -->
+      <div class="checkin-section active" id="body-section-train">
+        <div class="train-header">
+          <h2 id="train-day-title">Push Day</h2>
+          <p id="train-day-sub" style="font-size:13px;color:var(--muted);margin-top:2px;"></p>
+        </div>
+        <div class="day-selector" id="day-selector">
+          <button class="day-pill" data-day="mon" onclick="selectDay('mon')">Mon</button>
+          <button class="day-pill" data-day="tue" onclick="selectDay('tue')">Tue</button>
+          <button class="day-pill" data-day="wed" onclick="selectDay('wed')">Wed</button>
+          <button class="day-pill" data-day="thu" onclick="selectDay('thu')">Thu</button>
+          <button class="day-pill" data-day="fri" onclick="selectDay('fri')">Fri</button>
+          <button class="day-pill" data-day="sat" onclick="selectDay('sat')">Sat</button>
+          <button class="day-pill" data-day="sun" onclick="selectDay('sun')">Sun</button>
+        </div>
+        <div id="workout-content"></div>
+      </div>
+
+      <!-- ── EAT ── -->
+      <div class="checkin-section" id="body-section-eat">
+        <div class="today-header">
       <div class="today-header">
         <h2 style="font-size:22px;font-weight:700;letter-spacing:-0.3px;">Eat</h2>
         <p style="font-size:13px;color:var(--muted);margin-top:2px;" id="eat-date"></p>
@@ -3133,47 +3147,51 @@
       <!-- Saved recipes -->
       <div class="section-label" style="margin-top:16px;">Saved Recipes</div>
       <div id="recipes-list"></div>
-    </div>
+      </div><!-- end body-section-eat -->
 
-    <div id="tab-stats" class="tab-panel">
-      <div class="today-header">
-        <h2 style="font-size:22px;font-weight:700;letter-spacing:-0.3px;">Stats</h2>
-      </div>
-
-      <!-- Weight trend -->
-      <div class="section-label">Weight Trend</div>
-      <div class="card" style="padding:16px;">
-        <canvas id="weight-chart"></canvas>
-        <p id="weight-chart-empty" style="text-align:center;color:var(--muted);font-size:13px;padding:20px 0;">No weight data yet — log your weight in the night check-in.</p>
-      </div>
-
-      <!-- This week -->
-      <div class="section-label" style="margin-top:16px;">This Week</div>
-      <div class="card"><div class="week-grid" id="week-grid"></div></div>
-
-      <!-- Current plan -->
-      <div class="section-label" style="margin-top:16px;">Current Plan</div>
-      <div class="card">
-        <div class="plan-grid">
-          <div class="plan-item"><span class="plan-val">125</span><span class="plan-lbl">Goal lbs</span></div>
-          <div class="plan-item"><span class="plan-val">1,250</span><span class="plan-lbl">Calories</span></div>
-          <div class="plan-item"><span class="plan-val">130g</span><span class="plan-lbl">Protein</span></div>
-          <div class="plan-item"><span class="plan-val">6</span><span class="plan-lbl">Days / wk</span></div>
+      <!-- ── STATS ── -->
+      <div class="checkin-section" id="body-section-stats">
+        <div class="today-header">
+          <h2 style="font-size:22px;font-weight:700;letter-spacing:-0.3px;">Stats</h2>
         </div>
-      </div>
 
-      <!-- Personal records -->
-      <div class="section-label" style="margin-top:16px;">Personal Records</div>
-      <div class="card" id="pr-card">
-        <p style="color:var(--muted);font-size:13px;">No PRs yet. Save a workout to start tracking.</p>
-      </div>
+        <!-- Weight trend -->
+        <div class="section-label">Weight Trend</div>
+        <div class="card" style="padding:16px;">
+          <canvas id="weight-chart"></canvas>
+          <p id="weight-chart-empty" style="text-align:center;color:var(--muted);font-size:13px;padding:20px 0;">No weight data yet — log your weight in the Physical check-in.</p>
+        </div>
 
-      <!-- Cardio history -->
-      <div class="section-label" style="margin-top:16px;">Cardio History</div>
-      <div class="card" id="cardio-history-card">
-        <p style="color:var(--muted);font-size:13px;">No cardio logged yet.</p>
-      </div>
-    </div>
+        <!-- This week -->
+        <div class="section-label" style="margin-top:16px;">This Week</div>
+        <div class="card"><div class="week-grid" id="week-grid"></div></div>
+
+        <!-- Current plan -->
+        <div class="section-label" style="margin-top:16px;">Current Plan</div>
+        <div class="card">
+          <div class="plan-grid">
+            <div class="plan-item"><span class="plan-val">125</span><span class="plan-lbl">Goal lbs</span></div>
+            <div class="plan-item"><span class="plan-val">1,250</span><span class="plan-lbl">Calories</span></div>
+            <div class="plan-item"><span class="plan-val">130g</span><span class="plan-lbl">Protein</span></div>
+            <div class="plan-item"><span class="plan-val">6</span><span class="plan-lbl">Days / wk</span></div>
+          </div>
+        </div>
+
+        <!-- Personal records -->
+        <div class="section-label" style="margin-top:16px;">Personal Records</div>
+        <div class="card" id="pr-card">
+          <p style="color:var(--muted);font-size:13px;">No PRs yet. Save a workout to start tracking.</p>
+        </div>
+
+        <!-- Cardio history -->
+        <div class="section-label" style="margin-top:16px;">Cardio History</div>
+        <div class="card" id="cardio-history-card">
+          <p style="color:var(--muted);font-size:13px;">No cardio logged yet.</p>
+        </div>
+      </div><!-- end body-section-stats -->
+
+    </div><!-- end tab-body -->
+
     <div id="tab-chat" class="tab-panel">
       <div class="chat-header">
         <h2>Life.Coach Chat</h2>
@@ -3575,10 +3593,6 @@
 
       </div>
 
-    </div>
-
-    <div id="tab-body" class="tab-panel">
-      <div class="today-header"><h1>Body</h1><p>Body tracking coming soon.</p></div>
     </div>
 
     <div id="tab-money" class="tab-panel">
@@ -4195,6 +4209,12 @@
       if (tab) tab.click(); else showTab(tabId);
     }
 
+    function showBodySection(sec) {
+      document.querySelectorAll('#body-section-nav .checkin-section-pill').forEach(p => p.classList.toggle('active', p.dataset.bsec === sec));
+      document.querySelectorAll('#tab-body .checkin-section').forEach(s => s.classList.toggle('active', s.id === 'body-section-' + sec));
+      if (sec === 'stats') initStats();
+    }
+
     function homePopulateGlance() {
       const key  = todayKey();
       const now  = new Date();
@@ -4807,9 +4827,9 @@
       if (!r) return;
       const settings = JSON.parse(localStorage.getItem('coach_settings') || '{}');
       if (settings.apiKey) {
-        // Switch to Eat tab first, then AI-log the recipe name
-        document.querySelector('.nav-tab[data-tab="eat"]').click();
-        setTimeout(() => logFoodWithAI(r.name + ' (' + r.cal + ' cal, ' + r.protein + 'g protein)'), 60);
+        // Switch to Body > Eat, then AI-log the recipe name
+        homeNav('body');
+        setTimeout(() => { showBodySection('eat'); logFoodWithAI(r.name + ' (' + r.cal + ' cal, ' + r.protein + 'g protein)'); }, 80);
       } else {
         const log = getFoodLog();
         log.push({ name: r.name, quantity: '', cal: r.cal, protein: r.protein, carbs: 0, fat: 0, flagged: false });
@@ -5038,9 +5058,9 @@
         </div>`).join('');
     }
 
-    // Re-render stats whenever the stats tab is opened
+    // Re-render body sub-sections when the Body tab is opened
     document.getElementById('bottom-nav').addEventListener('click', function (e) {
-      if (e.target.closest('[data-tab="stats"]')) initStats();
+      if (e.target.closest('[data-tab="body"]')) { initStats(); renderWorkout(); renderFoodLog(); renderRecipes(); renderWater(); }
     });
 
     // ── Chat tab ──────────────────────────────────────────────────────────────
@@ -5705,7 +5725,7 @@ Write Sprite's weekly performance report with sections: Nutrition, Training, Rec
     }
 
     async function generateDietAdherence() {
-      const card = document.querySelector('#tab-eat .ai-card .ai-card-text');
+      const card = document.querySelector('#body-section-eat .ai-card .ai-card-text');
       if (!card) return;
       const log = getFoodLog();
       if (!log.length) return;
@@ -5725,8 +5745,8 @@ Write Sprite's weekly performance report with sections: Nutrition, Training, Rec
     }
 
     document.getElementById('bottom-nav').addEventListener('click', function (e) {
-      if (e.target.closest('[data-tab="eat"]')) {
-        setTimeout(() => { if (getFoodLog().length) generateDietAdherence(); }, 50);
+      if (e.target.closest('[data-tab="body"]')) {
+        setTimeout(() => { if (getFoodLog().length) generateDietAdherence(); }, 100);
       }
     });
 
