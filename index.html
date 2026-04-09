@@ -2457,6 +2457,148 @@
     }
     .proj-btn-blue:active { opacity: 0.85; transform: scale(0.98); }
 
+    /* ── Check-in tab ── */
+    .checkin-section-nav {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+    .checkin-section-pill {
+      flex: 1;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--muted);
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.15s;
+    }
+    .checkin-section-pill.active {
+      color: var(--area-accent, #c4b5fd);
+      background: rgba(var(--area-accent-rgb, 196,181,253), 0.1);
+      border-color: rgba(var(--area-accent-rgb, 196,181,253), 0.35);
+    }
+    .checkin-section { display: none; }
+    .checkin-section.active { display: block; }
+    /* Status summary cards on Home tab */
+    .checkin-status-card {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 18px;
+      cursor: pointer;
+      border-radius: 14px;
+      background: linear-gradient(160deg, #1e1e1e 0%, #181818 100%);
+      border: 1px solid var(--border);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+      transition: border-color 0.15s;
+      margin-bottom: 10px;
+    }
+    .checkin-status-card:hover { border-color: rgba(var(--area-accent-rgb, 196,181,253), 0.25); }
+    .checkin-status-icon {
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+    .checkin-status-info { flex: 1; min-width: 0; }
+    .checkin-status-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .checkin-status-sub {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+    .checkin-status-badge {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 999px;
+      border: 1px solid;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .checkin-status-badge.done   { color: var(--accent); border-color: rgba(184,255,87,0.3); background: rgba(184,255,87,0.08); }
+    .checkin-status-badge.ready  { color: #c4b5fd; border-color: rgba(196,181,253,0.3); background: rgba(196,181,253,0.08); }
+    /* Physical section styles */
+    .body-comp-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .body-comp-btn {
+      flex: 1;
+      padding: 10px 8px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--surface2);
+      color: var(--muted);
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.15s;
+    }
+    .body-comp-btn.selected {
+      color: var(--area-accent, #c4b5fd);
+      background: rgba(var(--area-accent-rgb, 196,181,253), 0.1);
+      border-color: rgba(var(--area-accent-rgb, 196,181,253), 0.35);
+    }
+    .photo-upload-btn {
+      width: 100%;
+      padding: 13px;
+      border-radius: 12px;
+      border: 1px dashed rgba(196,181,253,0.35);
+      background: rgba(196,181,253,0.05);
+      color: #c4b5fd;
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .photo-upload-btn:hover { background: rgba(196,181,253,0.1); }
+    .photo-thumb {
+      width: 100%;
+      max-height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      display: block;
+      margin-top: 8px;
+    }
+    .photo-compare-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .photo-compare-img {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--surface2);
+    }
+    .photo-compare-label {
+      font-size: 11px;
+      color: var(--muted);
+      text-align: center;
+      margin-top: 4px;
+    }
+
     /* ── Toast ── */
     #toast {
       position: fixed;
@@ -2505,175 +2647,38 @@
         <div class="ai-card-text">AI focus note will appear here.</div>
       </div>
 
-      <!-- ── MORNING SECTION ── -->
-      <div id="morning-section">
-        <div class="section-label">Morning Check-in</div>
+      <!-- Check-in status summary cards -->
+      <div class="section-label">Today's Check-ins</div>
 
-        <div class="card">
-          <!-- Mood -->
-          <div class="field-label">Mood</div>
-          <div class="emoji-scale">
-            <input type="radio" name="morning-mood" id="mood-1" value="1" />
-            <label for="mood-1">😞</label>
-            <input type="radio" name="morning-mood" id="mood-2" value="2" />
-            <label for="mood-2">😕</label>
-            <input type="radio" name="morning-mood" id="mood-3" value="3" />
-            <label for="mood-3">😐</label>
-            <input type="radio" name="morning-mood" id="mood-4" value="4" />
-            <label for="mood-4">🙂</label>
-            <input type="radio" name="morning-mood" id="mood-5" value="5" />
-            <label for="mood-5">😄</label>
-          </div>
-
-          <!-- Energy -->
-          <div class="field-label">Energy</div>
-          <div class="emoji-scale">
-            <input type="radio" name="morning-energy" id="energy-1" value="1" />
-            <label for="energy-1">🪫</label>
-            <input type="radio" name="morning-energy" id="energy-2" value="2" />
-            <label for="energy-2">😴</label>
-            <input type="radio" name="morning-energy" id="energy-3" value="3" />
-            <label for="energy-3">😑</label>
-            <input type="radio" name="morning-energy" id="energy-4" value="4" />
-            <label for="energy-4">⚡</label>
-            <input type="radio" name="morning-energy" id="energy-5" value="5" />
-            <label for="energy-5">🔥</label>
-          </div>
-
-          <!-- Sleep Quality -->
-          <div class="field-label">Sleep Quality</div>
-          <div class="emoji-scale">
-            <input type="radio" name="morning-sleep" id="sleep-1" value="1" />
-            <label for="sleep-1">😩</label>
-            <input type="radio" name="morning-sleep" id="sleep-2" value="2" />
-            <label for="sleep-2">😪</label>
-            <input type="radio" name="morning-sleep" id="sleep-3" value="3" />
-            <label for="sleep-3">😶</label>
-            <input type="radio" name="morning-sleep" id="sleep-4" value="4" />
-            <label for="sleep-4">😌</label>
-            <input type="radio" name="morning-sleep" id="sleep-5" value="5" />
-            <label for="sleep-5">🌟</label>
-          </div>
-
-          <div class="divider" style="margin: 4px 0 14px;"></div>
-
-          <!-- Pre-gym checklist -->
-          <div class="field-label">Pre-gym checklist</div>
-          <div class="checklist">
-            <label class="check-item">
-              <input type="checkbox" id="check-water" />
-              Drank water
-            </label>
-            <label class="check-item">
-              <input type="checkbox" id="check-supps" />
-              Took supplements
-            </label>
-            <label class="check-item">
-              <input type="checkbox" id="check-meal" />
-              Ate pre-workout meal
-            </label>
-          </div>
-
-          <button class="btn-primary" onclick="saveMorning()">Save Morning</button>
+      <div id="home-morning-card" class="checkin-status-card" onclick="homeGoCheckin('morning')">
+        <div class="checkin-status-icon">☀️</div>
+        <div class="checkin-status-info">
+          <div class="checkin-status-title">Morning Check-in</div>
+          <div class="checkin-status-sub" id="home-morning-sub">Log mood, energy &amp; sleep</div>
         </div>
+        <span class="checkin-status-badge ready" id="home-morning-badge">Tap →</span>
       </div>
 
-      <!-- ── NIGHT SECTION ── -->
-      <div id="night-section" class="hidden">
-        <div class="section-label" style="margin-top:20px;">Night Close-out</div>
-
-        <div class="card">
-          <!-- Evening Mood -->
-          <div class="field-label">Evening Mood</div>
-          <div class="emoji-scale">
-            <input type="radio" name="night-mood" id="nmood-1" value="1" />
-            <label for="nmood-1">😞</label>
-            <input type="radio" name="night-mood" id="nmood-2" value="2" />
-            <label for="nmood-2">😕</label>
-            <input type="radio" name="night-mood" id="nmood-3" value="3" />
-            <label for="nmood-3">😐</label>
-            <input type="radio" name="night-mood" id="nmood-4" value="4" />
-            <label for="nmood-4">🙂</label>
-            <input type="radio" name="night-mood" id="nmood-5" value="5" />
-            <label for="nmood-5">😄</label>
-          </div>
-
-          <div class="field-label">Today's Win</div>
-          <textarea class="text-input" id="night-win" rows="2" placeholder="Something you crushed today…"></textarea>
-
-          <div class="field-label">One Thing to Improve</div>
-          <textarea class="text-input" id="night-improve" rows="2" placeholder="What would you do differently?"></textarea>
-
-          <div class="divider" style="margin: 4px 0 14px;"></div>
-
-          <!-- Habits -->
-          <div class="field-label">Habits</div>
-          <div class="checklist" style="margin-bottom:14px;">
-            <label class="check-item">
-              <input type="checkbox" id="habit-protein" />
-              Hit protein goal
-            </label>
-            <label class="check-item">
-              <input type="checkbox" id="habit-water" />
-              Drank 8+ cups of water
-            </label>
-            <label class="check-item">
-              <input type="checkbox" id="habit-stretch" />
-              Stretched
-            </label>
-            <label class="check-item">
-              <input type="checkbox" id="habit-skincare" />
-              Skincare
-            </label>
-            <label class="check-item">
-              <input type="checkbox" id="habit-meds" />
-              Meds / supplements
-            </label>
-          </div>
-
-          <div class="divider" style="margin: 4px 0 14px;"></div>
-
-          <!-- Collapsible body check-in -->
-          <button class="collapsible-toggle" id="body-toggle" onclick="toggleBodyCheckin()">
-            Body Check-in (optional)
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="6 9 12 15 18 9"/>
-            </svg>
-          </button>
-
-          <div class="collapsible-content" id="body-checkin">
-            <div class="body-checkin-grid">
-              <div class="body-field">
-                <label class="field-label" for="body-weight">Weight (lbs)</label>
-                <input type="number" class="number-input" id="body-weight" placeholder="e.g. 136.4" step="0.1" min="0" />
-              </div>
-              <div class="body-field">
-                <label class="field-label" for="body-bloat">Bloat (1–5)</label>
-                <input type="number" class="number-input" id="body-bloat" placeholder="1–5" min="1" max="5" />
-              </div>
-              <div class="body-field" style="grid-column: span 2;">
-                <label class="field-label">Skin Flare?</label>
-                <div class="toggle-row">
-                  <button class="toggle-btn" id="skin-no" onclick="selectSkin('no')">No</button>
-                  <button class="toggle-btn" id="skin-yes" onclick="selectSkin('yes')">Yes</button>
-                </div>
-              </div>
-              <div class="body-field" style="grid-column: span 2;">
-                <label class="field-label" for="body-pain">Pain Level (1–5)</label>
-                <input type="number" class="number-input" id="body-pain" placeholder="1–5" min="1" max="5" />
-              </div>
-            </div>
-          </div>
-
-          <button class="btn-primary night" style="margin-top:16px;" onclick="saveNight()">Close Out Day</button>
+      <div id="home-night-card" class="checkin-status-card" onclick="homeGoCheckin('night')">
+        <div class="checkin-status-icon">🌙</div>
+        <div class="checkin-status-info">
+          <div class="checkin-status-title">Night Close-out</div>
+          <div class="checkin-status-sub" id="home-night-sub">Log your win &amp; habits</div>
         </div>
-
-        <!-- Goodnight Card -->
-        <div class="card ai-card hidden" id="goodnight-card" style="margin-top:12px;">
-          <div class="ai-card-label night-label">&#127769; Goodnight</div>
-          <div class="ai-card-text">Goodnight message will appear here.</div>
-        </div>
+        <span class="checkin-status-badge ready" id="home-night-badge">Tap →</span>
       </div>
+
+      <div id="home-physical-card" class="checkin-status-card" onclick="homeGoCheckin('physical')">
+        <div class="checkin-status-icon">⚖️</div>
+        <div class="checkin-status-info">
+          <div class="checkin-status-title">Physical</div>
+          <div class="checkin-status-sub" id="home-physical-sub">Weight, body feel &amp; photo</div>
+        </div>
+        <span class="checkin-status-badge ready" id="home-physical-badge">Tap →</span>
+      </div>
+
+      <!-- Birthday banner (surfaced from Life tab) -->
+      <div id="home-bday-banner" class="bday-banner" style="display:none;margin-top:4px;"></div>
 
     </div>
     <div id="tab-train" class="tab-panel">
@@ -2900,7 +2905,213 @@
 
     <!-- New tab panels -->
     <div id="tab-checkin" class="tab-panel">
-      <div class="today-header"><h1>Check-in</h1><p>Daily check-in coming soon.</p></div>
+
+      <div class="money-header">
+        <h2>Check-in</h2>
+        <p id="checkin-date-sub"></p>
+      </div>
+
+      <div class="checkin-section-nav">
+        <button class="checkin-section-pill active" data-csec="morning">Morning</button>
+        <button class="checkin-section-pill" data-csec="night">Night</button>
+        <button class="checkin-section-pill" data-csec="physical">Physical</button>
+      </div>
+
+      <!-- ── MORNING ── -->
+      <div class="checkin-section active" id="checkin-morning">
+
+        <!-- Saved view -->
+        <div id="ci-morning-saved" class="card" style="display:none;margin-bottom:12px;">
+          <div class="ai-card-label" style="color:var(--area-accent);">&#10024; Morning Saved</div>
+          <div id="ci-morning-saved-text" style="font-size:13px;color:var(--muted);line-height:1.6;"></div>
+          <button class="btn-secondary" style="margin-top:12px;" onclick="ciEditMorning()">Edit</button>
+        </div>
+
+        <!-- Form -->
+        <div id="ci-morning-form">
+          <div class="card">
+            <div class="field-label">Mood</div>
+            <div class="emoji-scale">
+              <input type="radio" name="morning-mood" id="mood-1" value="1" /><label for="mood-1">😞</label>
+              <input type="radio" name="morning-mood" id="mood-2" value="2" /><label for="mood-2">😕</label>
+              <input type="radio" name="morning-mood" id="mood-3" value="3" /><label for="mood-3">😐</label>
+              <input type="radio" name="morning-mood" id="mood-4" value="4" /><label for="mood-4">🙂</label>
+              <input type="radio" name="morning-mood" id="mood-5" value="5" /><label for="mood-5">😄</label>
+            </div>
+            <div class="field-label">Energy</div>
+            <div class="emoji-scale">
+              <input type="radio" name="morning-energy" id="energy-1" value="1" /><label for="energy-1">🪫</label>
+              <input type="radio" name="morning-energy" id="energy-2" value="2" /><label for="energy-2">😴</label>
+              <input type="radio" name="morning-energy" id="energy-3" value="3" /><label for="energy-3">😑</label>
+              <input type="radio" name="morning-energy" id="energy-4" value="4" /><label for="energy-4">⚡</label>
+              <input type="radio" name="morning-energy" id="energy-5" value="5" /><label for="energy-5">🔥</label>
+            </div>
+            <div class="field-label">Sleep Quality</div>
+            <div class="emoji-scale">
+              <input type="radio" name="morning-sleep" id="sleep-1" value="1" /><label for="sleep-1">😩</label>
+              <input type="radio" name="morning-sleep" id="sleep-2" value="2" /><label for="sleep-2">😪</label>
+              <input type="radio" name="morning-sleep" id="sleep-3" value="3" /><label for="sleep-3">😶</label>
+              <input type="radio" name="morning-sleep" id="sleep-4" value="4" /><label for="sleep-4">😌</label>
+              <input type="radio" name="morning-sleep" id="sleep-5" value="5" /><label for="sleep-5">🌟</label>
+            </div>
+            <div class="divider" style="margin: 4px 0 14px;"></div>
+            <div class="field-label">Pre-gym checklist</div>
+            <div class="checklist">
+              <label class="check-item"><input type="checkbox" id="check-water" /> Drank water</label>
+              <label class="check-item"><input type="checkbox" id="check-supps" /> Took supplements</label>
+              <label class="check-item"><input type="checkbox" id="check-meal"  /> Ate pre-workout meal</label>
+            </div>
+            <button class="btn-primary" onclick="saveMorning()">Save Morning</button>
+          </div>
+
+          <!-- AI Focus card (shown after save) -->
+          <div class="card ai-card" id="ci-focus-card" style="margin-top:12px;display:none;">
+            <div class="ai-card-label">&#10024; Today's Focus</div>
+            <div class="ai-card-text" id="ci-focus-text">Generating...</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ── NIGHT ── -->
+      <div class="checkin-section" id="checkin-night">
+
+        <!-- Saved view -->
+        <div id="ci-night-saved" class="card" style="display:none;margin-bottom:12px;">
+          <div class="ai-card-label night-label">&#127769; Night Saved</div>
+          <div id="ci-night-saved-text" style="font-size:13px;color:var(--muted);line-height:1.6;"></div>
+          <button class="btn-secondary" style="margin-top:12px;" onclick="ciEditNight()">Edit</button>
+        </div>
+
+        <!-- Form -->
+        <div id="ci-night-form">
+          <div class="card">
+            <div class="field-label">Evening Mood</div>
+            <div class="emoji-scale">
+              <input type="radio" name="night-mood" id="nmood-1" value="1" /><label for="nmood-1">😞</label>
+              <input type="radio" name="night-mood" id="nmood-2" value="2" /><label for="nmood-2">😕</label>
+              <input type="radio" name="night-mood" id="nmood-3" value="3" /><label for="nmood-3">😐</label>
+              <input type="radio" name="night-mood" id="nmood-4" value="4" /><label for="nmood-4">🙂</label>
+              <input type="radio" name="night-mood" id="nmood-5" value="5" /><label for="nmood-5">😄</label>
+            </div>
+            <div class="field-label">Today's Win</div>
+            <textarea class="text-input" id="night-win" rows="2" placeholder="Something you crushed today…"></textarea>
+            <div class="field-label">One Thing to Improve</div>
+            <textarea class="text-input" id="night-improve" rows="2" placeholder="What would you do differently?"></textarea>
+            <div class="divider" style="margin: 4px 0 14px;"></div>
+            <div class="field-label">Habits</div>
+            <div class="checklist" style="margin-bottom:14px;">
+              <label class="check-item"><input type="checkbox" id="habit-protein"  /> Hit protein goal</label>
+              <label class="check-item"><input type="checkbox" id="habit-water"    /> Drank 8+ cups of water</label>
+              <label class="check-item"><input type="checkbox" id="habit-stretch"  /> Stretched</label>
+              <label class="check-item"><input type="checkbox" id="habit-skincare" /> Skincare</label>
+              <label class="check-item"><input type="checkbox" id="habit-meds"     /> Meds / supplements</label>
+            </div>
+            <div class="divider" style="margin: 4px 0 14px;"></div>
+            <button class="collapsible-toggle" id="body-toggle" onclick="toggleBodyCheckin()">
+              Body notes (optional)
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"/>
+              </svg>
+            </button>
+            <div class="collapsible-content" id="body-checkin">
+              <div class="body-checkin-grid">
+                <div class="body-field">
+                  <label class="field-label" for="body-bloat">Bloat (1–5)</label>
+                  <input type="number" class="number-input" id="body-bloat" placeholder="1–5" min="1" max="5" />
+                </div>
+                <div class="body-field">
+                  <label class="field-label" for="body-pain">Pain Level (1–5)</label>
+                  <input type="number" class="number-input" id="body-pain" placeholder="1–5" min="1" max="5" />
+                </div>
+                <div class="body-field" style="grid-column:span 2;">
+                  <label class="field-label">Skin Flare?</label>
+                  <div class="toggle-row">
+                    <button class="toggle-btn" id="skin-no"  onclick="selectSkin('no')">No</button>
+                    <button class="toggle-btn" id="skin-yes" onclick="selectSkin('yes')">Yes</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button class="btn-primary night" style="margin-top:16px;" onclick="saveNight()">Close Out Day</button>
+          </div>
+          <!-- Goodnight Card -->
+          <div class="card ai-card hidden" id="goodnight-card" style="margin-top:12px;">
+            <div class="ai-card-label night-label">&#127769; Goodnight</div>
+            <div class="ai-card-text">Goodnight message will appear here.</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ── PHYSICAL ── -->
+      <div class="checkin-section" id="checkin-physical">
+
+        <!-- Saved view -->
+        <div id="ci-physical-saved" class="card" style="display:none;margin-bottom:12px;">
+          <div class="ai-card-label" style="color:var(--area-accent);">&#9878; Physical Saved</div>
+          <div id="ci-physical-saved-text" style="font-size:13px;color:var(--muted);line-height:1.6;"></div>
+          <button class="btn-secondary" style="margin-top:12px;" onclick="ciEditPhysical()">Edit</button>
+        </div>
+
+        <!-- Form -->
+        <div id="ci-physical-form">
+          <div class="card" style="margin-bottom:12px;">
+            <div class="field-label" style="margin-bottom:8px;">Weight (lbs)</div>
+            <input type="number" class="money-input" id="phys-weight" placeholder="e.g. 136.4" step="0.1" min="0" style="margin-bottom:14px;" />
+
+            <div class="field-label" style="margin-bottom:8px;">Body composition feel</div>
+            <div class="body-comp-row" id="body-comp-btns">
+              <button class="body-comp-btn" data-comp="muscle" onclick="physSelectComp('muscle')">💪 More muscular</button>
+              <button class="body-comp-btn" data-comp="lean"   onclick="physSelectComp('lean')">✨ Feeling leaner</button>
+            </div>
+
+            <div class="field-label" style="margin-bottom:8px;">Bloat level (1–5)</div>
+            <input type="number" class="money-input" id="phys-bloat" placeholder="1–5" min="1" max="5" style="margin-bottom:14px;" />
+
+            <div class="field-label" style="margin-bottom:8px;">Skin Flare?</div>
+            <div class="toggle-row" style="margin-bottom:14px;">
+              <button class="toggle-btn" id="phys-skin-no"  onclick="physSelectSkin('no')">No</button>
+              <button class="toggle-btn" id="phys-skin-yes" onclick="physSelectSkin('yes')">Yes</button>
+            </div>
+
+            <div class="field-label" style="margin-bottom:8px;">Pain level (1–5)</div>
+            <input type="number" class="money-input" id="phys-pain" placeholder="1–5" min="1" max="5" style="margin-bottom:14px;" />
+
+            <div class="field-label" style="margin-bottom:8px;">Progress Photo</div>
+            <input type="file" id="phys-photo-input" accept="image/*" capture="environment" style="display:none;" onchange="physHandlePhoto(this)" />
+            <button class="photo-upload-btn" onclick="document.getElementById('phys-photo-input').click()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;">
+                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+                <circle cx="12" cy="13" r="4"/>
+              </svg>
+              Take / Upload Photo
+            </button>
+            <div id="phys-photo-preview"></div>
+
+            <button class="btn-primary" style="margin-top:16px;" onclick="savePhysical()">Save Physical</button>
+          </div>
+
+          <!-- Photo comparison -->
+          <div class="section-label" style="margin-top:16px;">Compare Photos</div>
+          <div class="card" style="margin-bottom:24px;">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;">
+              <div>
+                <div class="field-label" style="margin-bottom:4px;">From</div>
+                <input type="date" class="money-input" id="compare-from" style="font-size:13px;padding:8px 10px;" />
+              </div>
+              <div>
+                <div class="field-label" style="margin-bottom:4px;">To</div>
+                <input type="date" class="money-input" id="compare-to" style="font-size:13px;padding:8px 10px;" />
+              </div>
+            </div>
+            <button class="btn-secondary" onclick="physComparePhotos()">Compare</button>
+            <div id="compare-result" style="margin-top:12px;"></div>
+          </div>
+        </div>
+
+      </div>
+
     </div>
 
     <div id="tab-body" class="tab-panel">
@@ -3458,38 +3669,57 @@
         weekday: 'long', month: 'long', day: 'numeric'
       });
 
-      const morningData = localStorage.getItem('coach_morning_' + key);
-      const nightData   = localStorage.getItem('coach_night_' + key);
-
-      const showMorning = hour < 12 || !morningData;
-      const showNight   = hour >= 18 || !!morningData;
-
-      document.getElementById('morning-section').classList.toggle('hidden', !showMorning);
-      document.getElementById('night-section').classList.toggle('hidden', !showNight);
-
-      if (nightData) {
-        const parsed = JSON.parse(nightData);
-        restoreNightForm(parsed);
-        document.getElementById('goodnight-card').classList.remove('hidden');
-      }
+      homeUpdateCheckinStatus();
     })();
 
-    function restoreNightForm(data) {
-      if (data.mood) {
-        const el = document.querySelector('input[name="night-mood"][value="' + data.mood + '"]');
-        if (el) el.checked = true;
+    function homeUpdateCheckinStatus() {
+      const key = todayKey();
+      const mData = localStorage.getItem('coach_morning_' + key);
+      const nData = localStorage.getItem('coach_night_' + key);
+      const pData = localStorage.getItem('anchor_checkin_physical_' + key);
+
+      const mBadge = document.getElementById('home-morning-badge');
+      const mSub   = document.getElementById('home-morning-sub');
+      if (mData) {
+        const d = JSON.parse(mData);
+        const moodMap = ['','😞','😕','😐','🙂','😄'];
+        if (mBadge) { mBadge.textContent = 'Done ✓'; mBadge.className = 'checkin-status-badge done'; }
+        if (mSub)   mSub.textContent = 'Mood ' + (moodMap[d.mood] || '—') + '  Energy ' + (moodMap[d.energy] || '—');
+      } else {
+        if (mBadge) { mBadge.textContent = 'Tap →'; mBadge.className = 'checkin-status-badge ready'; }
+        if (mSub)   mSub.textContent = 'Log mood, energy & sleep';
       }
-      if (data.win)     document.getElementById('night-win').value     = data.win;
-      if (data.improve) document.getElementById('night-improve').value = data.improve;
-      ['protein','water','stretch','skincare','meds'].forEach(h => {
-        if (data.habits && data.habits[h]) document.getElementById('habit-' + h).checked = true;
-      });
-      if (data.body) {
-        if (data.body.weight) document.getElementById('body-weight').value = data.body.weight;
-        if (data.body.bloat)  document.getElementById('body-bloat').value  = data.body.bloat;
-        if (data.body.skin)   selectSkin(data.body.skin);
-        if (data.body.pain)   document.getElementById('body-pain').value   = data.body.pain;
+
+      const nBadge = document.getElementById('home-night-badge');
+      const nSub   = document.getElementById('home-night-sub');
+      if (nData) {
+        const d = JSON.parse(nData);
+        if (nBadge) { nBadge.textContent = 'Done ✓'; nBadge.className = 'checkin-status-badge done'; }
+        if (nSub)   nSub.textContent = d.win ? '"' + d.win.slice(0, 40) + (d.win.length > 40 ? '…' : '') + '"' : 'Logged';
+      } else {
+        if (nBadge) { nBadge.textContent = 'Tap →'; nBadge.className = 'checkin-status-badge ready'; }
+        if (nSub)   nSub.textContent = 'Log your win & habits';
       }
+
+      const pBadge = document.getElementById('home-physical-badge');
+      const pSub   = document.getElementById('home-physical-sub');
+      if (pData) {
+        const d = JSON.parse(pData);
+        if (pBadge) { pBadge.textContent = 'Done ✓'; pBadge.className = 'checkin-status-badge done'; }
+        if (pSub)   pSub.textContent = d.weight ? d.weight + ' lbs logged' : 'Physical logged';
+      } else {
+        if (pBadge) { pBadge.textContent = 'Tap →'; pBadge.className = 'checkin-status-badge ready'; }
+        if (pSub)   pSub.textContent = 'Weight, body feel & photo';
+      }
+    }
+
+    function homeGoCheckin(section) {
+      // Switch to check-in tab and open the right section
+      document.querySelector('.nav-tab[data-tab="checkin"]').click();
+      setTimeout(() => {
+        const pill = document.querySelector(`.checkin-section-pill[data-csec="${section}"]`);
+        if (pill) pill.click();
+      }, 60);
     }
 
     // ── Body check-in collapsible ──────────────────────────────────────────────
@@ -3519,10 +3749,7 @@
       const sleep  = document.querySelector('input[name="morning-sleep"]:checked')?.value  || null;
 
       const data = {
-        date: key,
-        mood,
-        energy,
-        sleep,
+        date: key, mood, energy, sleep,
         checklist: {
           water: document.getElementById('check-water').checked,
           supps: document.getElementById('check-supps').checked,
@@ -3531,12 +3758,8 @@
       };
 
       localStorage.setItem('coach_morning_' + key, JSON.stringify(data));
-
-      // Show night section, hide morning if before noon
-      document.getElementById('night-section').classList.remove('hidden');
-      if (getHour() < 12) {
-        document.getElementById('morning-section').classList.add('hidden');
-      }
+      homeUpdateCheckinStatus();
+      ciRenderMorningSaved(data);
       checkMilestones();
       generateMorningFocus();
     }
@@ -3559,10 +3782,9 @@
       };
 
       const body = {
-        weight: document.getElementById('body-weight').value || null,
-        bloat:  document.getElementById('body-bloat').value  || null,
-        skin:   skinSelection,
-        pain:   document.getElementById('body-pain').value   || null,
+        bloat: document.getElementById('body-bloat').value || null,
+        skin:  skinSelection,
+        pain:  document.getElementById('body-pain').value  || null,
       };
 
       const data = { date: key, mood, win, improve, habits, body };
@@ -3570,6 +3792,8 @@
       localStorage.setItem('coach_night_' + key, JSON.stringify(data));
 
       document.getElementById('goodnight-card').classList.remove('hidden');
+      homeUpdateCheckinStatus();
+      ciRenderNightSaved(data);
       checkMilestones();
     }
 
@@ -4504,13 +4728,23 @@ Write Sprite's weekly performance report with sections: Nutrition, Training, Rec
       return data.content[0].text;
     }
 
+    function focusCardSetText(text) {
+      // Update both home AI card and check-in focus card
+      const homeCard = document.querySelector('#tab-today .ai-card .ai-card-text');
+      if (homeCard) homeCard.textContent = text;
+      const ciCard = document.getElementById('ci-focus-text');
+      if (ciCard) {
+        ciCard.textContent = text;
+        const ciWrapper = document.getElementById('ci-focus-card');
+        if (ciWrapper) ciWrapper.style.display = 'block';
+      }
+    }
+
     async function generateMorningFocus() {
       const key    = todayKey();
       const cached = localStorage.getItem('coach_morning_focus_' + key);
-      const card   = document.querySelector('#tab-today .ai-card .ai-card-text');
-      if (!card) return;
-      if (cached) { card.textContent = cached; return; }
-      card.textContent = 'Loading focus note…';
+      if (cached) { focusCardSetText(cached); return; }
+      focusCardSetText('Loading focus note…');
       try {
         const dayIdx  = new Date().getDay();
         const dayKey  = ['sun','mon','tue','wed','thu','fri','sat'][dayIdx];
@@ -4521,9 +4755,9 @@ Write Sprite's weekly performance report with sections: Nutrition, Training, Rec
           buildTodayContext() + `\n\nGenerate a 3-line motivational focus note for today's ${workout} session. Be specific, punchy, personal. No fluff.`
         );
         localStorage.setItem('coach_morning_focus_' + key, text);
-        card.textContent = text;
+        focusCardSetText(text);
       } catch (e) {
-        card.textContent = e.message === 'no-key' ? 'Add your API key in More → Settings.' : 'Could not load focus note.';
+        focusCardSetText(e.message === 'no-key' ? 'Add your API key in Settings.' : 'Could not load focus note.');
       }
     }
 
@@ -4640,8 +4874,7 @@ Write Sprite's weekly performance report with sections: Nutrition, Training, Rec
     // Load cached morning focus on page init
     (function () {
       const cached = localStorage.getItem('coach_morning_focus_' + todayKey());
-      const card   = document.querySelector('#tab-today .ai-card .ai-card-text');
-      if (cached && card && card.textContent.includes('will appear')) card.textContent = cached;
+      if (cached) focusCardSetText(cached);
     })();
 
     // ── showBadgeToast ─────────────────────────────────────────────────────────
@@ -5911,6 +6144,242 @@ Write Sprite's weekly performance report with sections: Nutrition, Training, Rec
     document.querySelector('.nav-tab[data-tab="projects"]').addEventListener('click', function () {
       setTimeout(() => { projRenderProjects(); projRenderIdeas(); projCheckAllReminders(); }, 50);
     });
+
+    // ── Check-in tab ───────────────────────────────────────────────────────────
+
+    /* ── Morning saved view ── */
+
+    function ciRenderMorningSaved(data) {
+      const savedEl = document.getElementById('ci-morning-saved');
+      const formEl  = document.getElementById('ci-morning-form');
+      const textEl  = document.getElementById('ci-morning-saved-text');
+      if (!savedEl || !formEl) return;
+      const moodMap = ['','😞','😕','😐','🙂','😄'];
+      const parts = [
+        data.mood   ? 'Mood ' + (moodMap[data.mood] || data.mood)     : '',
+        data.energy ? 'Energy ' + (moodMap[data.energy] || data.energy) : '',
+        data.sleep  ? 'Sleep ' + (moodMap[data.sleep] || data.sleep)   : '',
+      ].filter(Boolean);
+      const checks = data.checklist
+        ? Object.entries(data.checklist).filter(([,v]) => v).map(([k]) => ({water:'Water',supps:'Supps',meal:'Pre-meal'}[k])).filter(Boolean)
+        : [];
+      if (checks.length) parts.push('✓ ' + checks.join(', '));
+      if (textEl) textEl.textContent = parts.join('  ·  ') || 'Saved';
+      savedEl.style.display = 'block';
+      formEl.style.display  = 'none';
+    }
+
+    function ciEditMorning() {
+      document.getElementById('ci-morning-saved').style.display = 'none';
+      document.getElementById('ci-morning-form').style.display  = 'block';
+    }
+
+    /* ── Night saved view ── */
+
+    function ciRenderNightSaved(data) {
+      const savedEl = document.getElementById('ci-night-saved');
+      const formEl  = document.getElementById('ci-night-form');
+      const textEl  = document.getElementById('ci-night-saved-text');
+      if (!savedEl || !formEl) return;
+      const parts = [];
+      if (data.win)     parts.push('Win: ' + data.win.slice(0, 60));
+      if (data.improve) parts.push('Improve: ' + data.improve.slice(0, 60));
+      const habits = data.habits
+        ? Object.entries(data.habits).filter(([,v]) => v).map(([k]) => ({protein:'Protein',water:'Water',stretch:'Stretch',skincare:'Skincare',meds:'Meds'}[k])).filter(Boolean)
+        : [];
+      if (habits.length) parts.push('Habits: ' + habits.join(', '));
+      if (textEl) textEl.textContent = parts.join('\n') || 'Saved';
+      savedEl.style.display = 'block';
+      formEl.style.display  = 'none';
+    }
+
+    function ciEditNight() {
+      document.getElementById('ci-night-saved').style.display = 'none';
+      document.getElementById('ci-night-form').style.display  = 'block';
+    }
+
+    function restoreNightForm(data) {
+      if (data.mood) {
+        const el = document.querySelector('input[name="night-mood"][value="' + data.mood + '"]');
+        if (el) el.checked = true;
+      }
+      if (data.win)     document.getElementById('night-win').value     = data.win;
+      if (data.improve) document.getElementById('night-improve').value = data.improve;
+      ['protein','water','stretch','skincare','meds'].forEach(h => {
+        if (data.habits && data.habits[h]) document.getElementById('habit-' + h).checked = true;
+      });
+      if (data.body) {
+        if (data.body.bloat) document.getElementById('body-bloat').value = data.body.bloat;
+        if (data.body.skin)  selectSkin(data.body.skin);
+        if (data.body.pain)  document.getElementById('body-pain').value  = data.body.pain;
+      }
+    }
+
+    /* ── Physical section ── */
+
+    let physCompSelection = null;
+    let physSkinSelection = null;
+
+    function physSelectComp(val) {
+      physCompSelection = val;
+      document.querySelectorAll('.body-comp-btn').forEach(b => b.classList.toggle('selected', b.dataset.comp === val));
+    }
+
+    function physSelectSkin(val) {
+      physSkinSelection = val;
+      document.getElementById('phys-skin-yes').classList.toggle('selected', val === 'yes');
+      document.getElementById('phys-skin-no').classList.toggle('selected',  val === 'no');
+    }
+
+    function physHandlePhoto(input) {
+      if (!input.files || !input.files[0]) return;
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const base64 = e.target.result;
+        localStorage.setItem('anchor_photo_' + todayKey(), base64);
+        physShowPhotoPreview(base64);
+      };
+      reader.readAsDataURL(input.files[0]);
+    }
+
+    function physShowPhotoPreview(src) {
+      const container = document.getElementById('phys-photo-preview');
+      if (!container) return;
+      if (src) {
+        container.innerHTML = `<img src="${src}" class="photo-thumb" alt="Progress photo" />`;
+      } else {
+        container.innerHTML = '';
+      }
+    }
+
+    function savePhysical() {
+      const key = todayKey();
+      const data = {
+        date:  key,
+        weight: document.getElementById('phys-weight').value || null,
+        comp:   physCompSelection,
+        bloat:  document.getElementById('phys-bloat').value  || null,
+        skin:   physSkinSelection,
+        pain:   document.getElementById('phys-pain').value   || null,
+        hasPhoto: !!localStorage.getItem('anchor_photo_' + key)
+      };
+      localStorage.setItem('anchor_checkin_physical_' + key, JSON.stringify(data));
+      homeUpdateCheckinStatus();
+      ciRenderPhysicalSaved(data);
+      showBadgeToast('Physical saved');
+    }
+
+    function ciRenderPhysicalSaved(data) {
+      const savedEl = document.getElementById('ci-physical-saved');
+      const formEl  = document.getElementById('ci-physical-form');
+      const textEl  = document.getElementById('ci-physical-saved-text');
+      if (!savedEl || !formEl) return;
+      const parts = [];
+      if (data.weight) parts.push('Weight: ' + data.weight + ' lbs');
+      if (data.comp)   parts.push('Feel: ' + (data.comp === 'muscle' ? 'More muscular 💪' : 'Feeling leaner ✨'));
+      if (data.bloat)  parts.push('Bloat: ' + data.bloat + '/5');
+      if (data.skin)   parts.push('Skin flare: ' + data.skin);
+      if (data.pain)   parts.push('Pain: ' + data.pain + '/5');
+      if (data.hasPhoto) parts.push('Photo ✓');
+      if (textEl) textEl.textContent = parts.join('  ·  ') || 'Saved';
+      savedEl.style.display = 'block';
+      formEl.style.display  = 'none';
+    }
+
+    function ciEditPhysical() {
+      document.getElementById('ci-physical-saved').style.display = 'none';
+      document.getElementById('ci-physical-form').style.display  = 'block';
+    }
+
+    /* ── Photo comparison ── */
+
+    function physComparePhotos() {
+      const from   = document.getElementById('compare-from').value;
+      const to     = document.getElementById('compare-to').value;
+      const result = document.getElementById('compare-result');
+      if (!result) return;
+      if (!from || !to) {
+        result.innerHTML = '<p style="font-size:13px;color:var(--warn);">Select both dates.</p>';
+        return;
+      }
+      const imgFrom = localStorage.getItem('anchor_photo_' + from);
+      const imgTo   = localStorage.getItem('anchor_photo_' + to);
+      if (!imgFrom && !imgTo) {
+        result.innerHTML = '<p style="font-size:13px;color:var(--muted);">Take your first progress photo to start tracking.</p>';
+        return;
+      }
+      const fromLabel = new Date(from + 'T12:00:00').toLocaleDateString('en-US', {month:'short', day:'numeric'});
+      const toLabel   = new Date(to   + 'T12:00:00').toLocaleDateString('en-US', {month:'short', day:'numeric'});
+      result.innerHTML = `
+        <div class="photo-compare-row">
+          <div>
+            ${imgFrom
+              ? `<img src="${imgFrom}" class="photo-compare-img" alt="${fromLabel}" />`
+              : `<div class="photo-compare-img" style="display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--muted);">No photo</div>`}
+            <div class="photo-compare-label">${fromLabel}</div>
+          </div>
+          <div>
+            ${imgTo
+              ? `<img src="${imgTo}" class="photo-compare-img" alt="${toLabel}" />`
+              : `<div class="photo-compare-img" style="display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--muted);">No photo</div>`}
+            <div class="photo-compare-label">${toLabel}</div>
+          </div>
+        </div>`;
+    }
+
+    /* ── Check-in section nav + init ── */
+
+    (function checkinInit() {
+      document.querySelector('#tab-checkin .checkin-section-nav').addEventListener('click', function(e) {
+        const pill = e.target.closest('.checkin-section-pill');
+        if (!pill) return;
+        const sec = pill.dataset.csec;
+        document.querySelectorAll('.checkin-section-pill').forEach(p => p.classList.toggle('active', p === pill));
+        document.querySelectorAll('.checkin-section').forEach(s => s.classList.toggle('active', s.id === 'checkin-' + sec));
+      });
+
+      // Date sub-header
+      const dateSub = document.getElementById('checkin-date-sub');
+      if (dateSub) dateSub.textContent = new Date().toLocaleDateString('en-US', {weekday:'long', month:'long', day:'numeric'});
+
+      // Compare date defaults
+      const from = document.getElementById('compare-from');
+      const to   = document.getElementById('compare-to');
+      if (from && to) {
+        to.value   = todayKey();
+        const d = new Date();
+        d.setDate(d.getDate() - 30);
+        from.value = d.toISOString().split('T')[0];
+      }
+
+      // Show today's photo if already taken
+      const todayPhoto = localStorage.getItem('anchor_photo_' + todayKey());
+      if (todayPhoto) physShowPhotoPreview(todayPhoto);
+    })();
+
+    document.querySelector('.nav-tab[data-tab="checkin"]').addEventListener('click', function () {
+      const key = todayKey();
+      const mData = localStorage.getItem('coach_morning_' + key);
+      const nData = localStorage.getItem('coach_night_' + key);
+      const pData = localStorage.getItem('anchor_checkin_physical_' + key);
+      if (mData) { const d = JSON.parse(mData); restoreMorningForm(d); ciRenderMorningSaved(d); }
+      if (nData) { const d = JSON.parse(nData); restoreNightForm(d); ciRenderNightSaved(d); }
+      if (pData) { ciRenderPhysicalSaved(JSON.parse(pData)); }
+      // Cached focus note
+      const cached = localStorage.getItem('coach_morning_focus_' + key);
+      if (cached) focusCardSetText(cached);
+    });
+
+    function restoreMorningForm(data) {
+      if (data.mood)   { const el = document.querySelector('input[name="morning-mood"][value="'   + data.mood   + '"]'); if (el) el.checked = true; }
+      if (data.energy) { const el = document.querySelector('input[name="morning-energy"][value="' + data.energy + '"]'); if (el) el.checked = true; }
+      if (data.sleep)  { const el = document.querySelector('input[name="morning-sleep"][value="'  + data.sleep  + '"]'); if (el) el.checked = true; }
+      if (data.checklist) {
+        if (data.checklist.water) document.getElementById('check-water').checked = true;
+        if (data.checklist.supps) document.getElementById('check-supps').checked = true;
+        if (data.checklist.meal)  document.getElementById('check-meal').checked  = true;
+      }
+    }
 
     // ── Service Worker (cache-first offline support) ───────────────────────────
     if ('serviceWorker' in navigator) {
