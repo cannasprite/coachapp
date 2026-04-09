@@ -2164,6 +2164,299 @@
     }
     .life-btn-coral:active { opacity: 0.85; transform: scale(0.98); }
 
+    /* ── Projects tab ── */
+    .proj-section-nav {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+    .proj-section-pill {
+      flex: 1;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--muted);
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.15s;
+    }
+    .proj-section-pill.active {
+      color: var(--area-accent, #7dd3fc);
+      background: rgba(var(--area-accent-rgb, 125,211,252), 0.1);
+      border-color: rgba(var(--area-accent-rgb, 125,211,252), 0.35);
+    }
+    .proj-section { display: none; }
+    .proj-section.active { display: block; }
+    .project-card {
+      background: linear-gradient(160deg, #1e1e1e 0%, #181818 100%);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 12px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.05), 0 2px 12px rgba(0,0,0,0.4);
+    }
+    .proj-card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+    .proj-name {
+      font-family: 'Syne', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+      flex: 1;
+    }
+    .proj-status-badge {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: 999px;
+      border: 1px solid;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .proj-status-badge.inprogress { color: #7dd3fc; border-color: rgba(125,211,252,0.3); background: rgba(125,211,252,0.08); }
+    .proj-status-badge.paused     { color: var(--warn); border-color: rgba(255,159,67,0.3); background: rgba(255,159,67,0.08); }
+    .proj-status-badge.complete   { color: var(--accent); border-color: rgba(184,255,87,0.3); background: rgba(184,255,87,0.08); }
+    .proj-meta-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+    .proj-meta-item {
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .proj-meta-item span { color: var(--text); font-weight: 600; }
+    .proj-progress-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 5px;
+    }
+    .proj-progress-text {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+    }
+    .proj-progress-pct {
+      font-family: 'Syne', sans-serif;
+      font-size: 12px;
+      font-weight: 800;
+      color: #7dd3fc;
+    }
+    .proj-progress-bar {
+      height: 5px;
+      background: var(--surface2);
+      border-radius: 3px;
+      overflow: hidden;
+      margin-bottom: 12px;
+    }
+    .proj-progress-fill {
+      height: 100%;
+      border-radius: 3px;
+      background: #7dd3fc;
+      transition: width 0.4s;
+    }
+    .proj-tasks {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .proj-task {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-size: 13px;
+    }
+    .proj-task input[type="checkbox"] {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 17px;
+      height: 17px;
+      border-radius: 5px;
+      border: 1.5px solid var(--border);
+      background: var(--surface2);
+      flex-shrink: 0;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+      position: relative;
+    }
+    .proj-task input[type="checkbox"]:checked {
+      background: #7dd3fc;
+      border-color: #7dd3fc;
+    }
+    .proj-task input[type="checkbox"]:checked::after {
+      content: '';
+      position: absolute;
+      left: 4px;
+      top: 1px;
+      width: 5px;
+      height: 9px;
+      border: 2px solid #0a0a0a;
+      border-top: none;
+      border-left: none;
+      transform: rotate(45deg);
+    }
+    .proj-task-text { flex: 1; color: var(--text); }
+    .proj-task-text.done { color: var(--muted); text-decoration: line-through; }
+    .proj-task-deadline {
+      font-size: 11px;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    .proj-task-deadline.overdue { color: var(--warn); }
+    .proj-task-del {
+      background: none;
+      border: none;
+      color: var(--muted);
+      cursor: pointer;
+      padding: 2px 4px;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      transition: color 0.15s;
+      flex-shrink: 0;
+    }
+    .proj-task-del:hover { color: var(--warn); }
+    .proj-task-del svg { width: 12px; height: 12px; }
+    .proj-add-task-form {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+    .proj-add-task-form input[type="text"] { flex: 1; min-width: 120px; }
+    .proj-add-task-form input[type="date"] { width: 140px; }
+    .proj-task-add-btn {
+      padding: 8px 14px;
+      border-radius: 10px;
+      border: 1px solid rgba(125,211,252,0.3);
+      background: rgba(125,211,252,0.08);
+      color: #7dd3fc;
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: opacity 0.15s;
+    }
+    .proj-task-add-btn:hover { opacity: 0.8; }
+    .proj-card-footer {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-top: 4px;
+    }
+    .proj-status-select {
+      flex: 1;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 7px 10px;
+      color: var(--text);
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 12px;
+      outline: none;
+      cursor: pointer;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+    .proj-del-btn {
+      padding: 7px 12px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: none;
+      color: var(--muted);
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .proj-del-btn:hover { border-color: var(--warn); color: var(--warn); }
+    /* Ideas */
+    .idea-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .idea-item:last-child { border-bottom: none; }
+    .idea-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #7dd3fc;
+      flex-shrink: 0;
+      margin-top: 5px;
+    }
+    .idea-info { flex: 1; min-width: 0; }
+    .idea-text { font-size: 14px; color: var(--text); line-height: 1.4; }
+    .idea-cat { font-size: 11px; color: var(--muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; margin-top: 2px; }
+    .idea-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      flex-shrink: 0;
+    }
+    .idea-promote-btn {
+      padding: 4px 10px;
+      border-radius: 8px;
+      border: 1px solid rgba(125,211,252,0.3);
+      background: rgba(125,211,252,0.08);
+      color: #7dd3fc;
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: opacity 0.15s;
+    }
+    .idea-promote-btn:hover { opacity: 0.8; }
+    .idea-del-btn {
+      background: none;
+      border: none;
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 11px;
+      padding: 2px 6px;
+      border-radius: 6px;
+      font-family: 'Instrument Sans', sans-serif;
+      transition: color 0.15s;
+      text-align: center;
+    }
+    .idea-del-btn:hover { color: var(--warn); }
+    .proj-btn-blue {
+      width: 100%;
+      padding: 13px;
+      border-radius: 12px;
+      border: none;
+      background: #7dd3fc;
+      color: #0a0a0a;
+      font-family: 'Syne', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: opacity 0.15s, transform 0.1s;
+    }
+    .proj-btn-blue:active { opacity: 0.85; transform: scale(0.98); }
+
     /* ── Toast ── */
     #toast {
       position: fixed;
@@ -2889,7 +3182,86 @@
     </div>
 
     <div id="tab-projects" class="tab-panel">
-      <div class="today-header"><h1>Projects</h1><p>Projects coming soon.</p></div>
+
+      <div class="money-header">
+        <h2>Projects</h2>
+        <p>Active projects &amp; ideas</p>
+      </div>
+
+      <div class="proj-section-nav">
+        <button class="proj-section-pill active" data-psec="active">Active</button>
+        <button class="proj-section-pill" data-psec="ideas">Ideas</button>
+      </div>
+
+      <!-- ── ACTIVE PROJECTS ── -->
+      <div class="proj-section active" id="proj-active">
+
+        <div id="projects-list"><!-- rendered by JS --></div>
+
+        <div class="section-label" style="margin-top:8px;">Add Project</div>
+        <div class="card" style="margin-bottom:16px;">
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <div>
+              <div class="field-label">Project Name</div>
+              <input type="text" class="money-input" id="proj-name-input" placeholder="e.g. Bedroom reset" />
+            </div>
+            <div>
+              <div class="field-label" style="margin-bottom:8px;">Deadline</div>
+              <div style="display:flex;gap:8px;align-items:center;">
+                <label style="display:flex;align-items:center;gap:6px;font-size:13px;color:var(--muted);cursor:pointer;">
+                  <input type="checkbox" id="proj-deadline-toggle" onchange="projToggleDeadline()" style="accent-color:#7dd3fc;" />
+                  Has deadline
+                </label>
+                <input type="date" class="money-input" id="proj-deadline-date" style="display:none;flex:1;" />
+              </div>
+            </div>
+            <div>
+              <div class="field-label" style="margin-bottom:8px;">Budget</div>
+              <div style="display:flex;gap:8px;align-items:center;">
+                <label style="display:flex;align-items:center;gap:6px;font-size:13px;color:var(--muted);cursor:pointer;">
+                  <input type="checkbox" id="proj-budget-toggle" onchange="projToggleBudget()" style="accent-color:#7dd3fc;" />
+                  Has budget
+                </label>
+                <input type="number" class="money-input" id="proj-budget-amount" placeholder="$0" min="0"
+                  style="display:none;flex:1;" />
+              </div>
+            </div>
+            <button class="proj-btn-blue" onclick="projSaveProject()">Save Project</button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ── IDEAS ── -->
+      <div class="proj-section" id="proj-ideas">
+
+        <div class="card" style="margin-bottom:12px;">
+          <div id="ideas-list"><!-- rendered by JS --></div>
+        </div>
+
+        <div class="section-label" style="margin-top:8px;">Add Idea</div>
+        <div class="card" style="margin-bottom:16px;">
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <div>
+              <div class="field-label">Idea</div>
+              <input type="text" class="money-input" id="idea-text-input" placeholder="What are you thinking about?" />
+            </div>
+            <div>
+              <div class="field-label" style="margin-bottom:8px;">Category</div>
+              <select class="money-select" id="idea-cat-input">
+                <option>Travel</option>
+                <option>Home</option>
+                <option>Business</option>
+                <option>Personal</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <button class="proj-btn-blue" onclick="projAddIdea()">+ Add Idea</button>
+          </div>
+        </div>
+
+      </div>
+
     </div>
 
     <div id="tab-goals" class="tab-panel">
@@ -5241,6 +5613,304 @@ Write Sprite's weekly performance report with sections: Nutrition, Training, Rec
 
     // Run birthday check on app load too
     lifeCheckBirthdays();
+
+    // ── Projects tab ───────────────────────────────────────────────────────────
+
+    const DEFAULT_PROJECTS = [
+      {
+        id: 'p1', name: 'Home reset — bedroom', status: 'In Progress',
+        deadline: (function () {
+          const d = new Date();
+          d.setDate(d.getDate() + (7 - d.getDay())); // this Sunday
+          return d.toISOString().split('T')[0];
+        })(),
+        budget: 150, spent: 0,
+        tasks: [
+          { id: 't1', text: 'Clear nightstand', done: true, deadline: '' },
+          { id: 't2', text: 'Get new bedding', done: false, deadline: '' },
+          { id: 't3', text: 'Hang lighting', done: false, deadline: '' }
+        ]
+      },
+      {
+        id: 'p2', name: 'Life.Coach app', status: 'In Progress',
+        deadline: '', budget: null, spent: 0,
+        tasks: [
+          { id: 't4', text: 'Finish COACH phase 1', done: true, deadline: '' },
+          { id: 't5', text: 'Plan Anchor/Life.Coach v1', done: true, deadline: '' },
+          { id: 't6', text: 'Build out all tabs', done: false, deadline: '' }
+        ]
+      }
+    ];
+
+    const DEFAULT_IDEAS = [
+      { id: 'i1', text: 'Trip somewhere warm — look into flights', category: 'Travel' },
+      { id: 'i2', text: 'Mercari CSV app for small business', category: 'Business' }
+    ];
+
+    function projGetProjects() {
+      const s = localStorage.getItem('anchor_projects');
+      if (s) return JSON.parse(s);
+      localStorage.setItem('anchor_projects', JSON.stringify(DEFAULT_PROJECTS));
+      return DEFAULT_PROJECTS;
+    }
+    function projSaveProjects(arr) { localStorage.setItem('anchor_projects', JSON.stringify(arr)); }
+
+    function projGetIdeas() {
+      const s = localStorage.getItem('anchor_ideas');
+      if (s) return JSON.parse(s);
+      localStorage.setItem('anchor_ideas', JSON.stringify(DEFAULT_IDEAS));
+      return DEFAULT_IDEAS;
+    }
+    function projSaveIdeas(arr) { localStorage.setItem('anchor_ideas', JSON.stringify(arr)); }
+
+    function projTaskProgress(tasks) {
+      if (!tasks || !tasks.length) return 0;
+      return Math.round((tasks.filter(t => t.done).length / tasks.length) * 100);
+    }
+
+    function projStatusClass(status) {
+      if (status === 'In Progress') return 'inprogress';
+      if (status === 'Paused') return 'paused';
+      if (status === 'Complete') return 'complete';
+      return 'inprogress';
+    }
+
+    function projRenderProjects() {
+      const projects = projGetProjects();
+      const container = document.getElementById('projects-list');
+      if (!container) return;
+      if (!projects.length) {
+        container.innerHTML = '<p style="font-size:13px;color:var(--muted);margin-bottom:12px;">No projects yet.</p>';
+        return;
+      }
+      const today = new Date().toISOString().split('T')[0];
+      container.innerHTML = projects.map((proj, pi) => {
+        const pct = projTaskProgress(proj.tasks);
+        const deadlineStr = proj.deadline
+          ? `<div class="proj-meta-item">Deadline <span style="${proj.deadline < today ? 'color:var(--warn)' : ''}">${new Date(proj.deadline + 'T12:00:00').toLocaleDateString('en-US', {month:'short', day:'numeric'})}</span></div>`
+          : '';
+        const budgetStr = proj.budget != null
+          ? `<div class="proj-meta-item">Budget <span>$${proj.spent || 0} / $${proj.budget}</span></div>`
+          : '';
+        const tasksHTML = (proj.tasks || []).map((t, ti) => {
+          const dl = t.deadline
+            ? `<span class="proj-task-deadline${t.deadline < today && !t.done ? ' overdue' : ''}">${new Date(t.deadline + 'T12:00:00').toLocaleDateString('en-US', {month:'short', day:'numeric'})}</span>`
+            : '';
+          return `
+            <div class="proj-task">
+              <input type="checkbox" ${t.done ? 'checked' : ''}
+                onchange="projToggleTask('${proj.id}', ${ti}, this.checked)" />
+              <span class="proj-task-text${t.done ? ' done' : ''}">${t.text}</span>
+              ${dl}
+              <button class="proj-task-del" onclick="projDeleteTask('${proj.id}', ${ti})" title="Delete task">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+              </button>
+            </div>`;
+        }).join('');
+        return `
+          <div class="project-card" id="proj-card-${proj.id}">
+            <div class="proj-card-top">
+              <div class="proj-name">${proj.name}</div>
+              <span class="proj-status-badge ${projStatusClass(proj.status)}">${proj.status}</span>
+            </div>
+            ${(deadlineStr || budgetStr) ? `<div class="proj-meta-row">${deadlineStr}${budgetStr}</div>` : ''}
+            <div class="proj-progress-label">
+              <span class="proj-progress-text">Tasks</span>
+              <span class="proj-progress-pct">${pct}%</span>
+            </div>
+            <div class="proj-progress-bar">
+              <div class="proj-progress-fill" style="width:${pct}%"></div>
+            </div>
+            <div class="proj-tasks">${tasksHTML}</div>
+            <!-- Add task inline form -->
+            <div class="proj-add-task-form" id="add-task-form-${proj.id}" style="display:none;">
+              <input type="text" class="money-input" id="new-task-text-${proj.id}" placeholder="Task name" style="font-size:13px;padding:8px 10px;" />
+              <input type="date" class="money-input" id="new-task-date-${proj.id}" style="font-size:13px;padding:8px 10px;" />
+              <button class="proj-task-add-btn" onclick="projAddTask('${proj.id}')">Add</button>
+            </div>
+            <div class="proj-card-footer">
+              <button class="proj-task-add-btn" style="flex:1;" onclick="projToggleAddTask('${proj.id}')">+ Add Task</button>
+              <select class="proj-status-select" onchange="projUpdateStatus('${proj.id}', this.value)">
+                <option ${proj.status === 'In Progress' ? 'selected' : ''}>In Progress</option>
+                <option ${proj.status === 'Paused'     ? 'selected' : ''}>Paused</option>
+                <option ${proj.status === 'Complete'   ? 'selected' : ''}>Complete</option>
+              </select>
+              <button class="proj-del-btn" onclick="projDeleteProject('${proj.id}')">Delete</button>
+            </div>
+          </div>`;
+      }).join('');
+    }
+
+    function projToggleAddTask(pid) {
+      const form = document.getElementById('add-task-form-' + pid);
+      if (form) form.style.display = form.style.display === 'none' ? 'flex' : 'none';
+    }
+
+    function projAddTask(pid) {
+      const textEl = document.getElementById('new-task-text-' + pid);
+      const dateEl = document.getElementById('new-task-date-' + pid);
+      const text = (textEl.value || '').trim();
+      if (!text) { textEl.style.borderColor = 'var(--warn)'; return; }
+      textEl.style.borderColor = '';
+      const projects = projGetProjects();
+      const proj = projects.find(p => p.id === pid);
+      if (!proj) return;
+      proj.tasks.push({ id: 't' + Date.now(), text, done: false, deadline: dateEl.value || '' });
+      projSaveProjects(projects);
+      projScheduleTaskReminders(proj);
+      projRenderProjects();
+    }
+
+    function projToggleTask(pid, ti, checked) {
+      const projects = projGetProjects();
+      const proj = projects.find(p => p.id === pid);
+      if (proj && proj.tasks[ti]) {
+        proj.tasks[ti].done = checked;
+        // Auto-complete project if all tasks done
+        if (checked && proj.tasks.every(t => t.done)) proj.status = 'Complete';
+        projSaveProjects(projects);
+        projRenderProjects();
+      }
+    }
+
+    function projDeleteTask(pid, ti) {
+      const projects = projGetProjects();
+      const proj = projects.find(p => p.id === pid);
+      if (proj) { proj.tasks.splice(ti, 1); projSaveProjects(projects); projRenderProjects(); }
+    }
+
+    function projUpdateStatus(pid, status) {
+      const projects = projGetProjects();
+      const proj = projects.find(p => p.id === pid);
+      if (proj) { proj.status = status; projSaveProjects(projects); }
+    }
+
+    function projDeleteProject(pid) {
+      projSaveProjects(projGetProjects().filter(p => p.id !== pid));
+      projRenderProjects();
+    }
+
+    function projToggleDeadline() {
+      const on = document.getElementById('proj-deadline-toggle').checked;
+      document.getElementById('proj-deadline-date').style.display = on ? 'block' : 'none';
+    }
+
+    function projToggleBudget() {
+      const on = document.getElementById('proj-budget-toggle').checked;
+      document.getElementById('proj-budget-amount').style.display = on ? 'block' : 'none';
+    }
+
+    function projSaveProject() {
+      const name = (document.getElementById('proj-name-input').value || '').trim();
+      if (!name) { document.getElementById('proj-name-input').style.borderColor = 'var(--warn)'; return; }
+      document.getElementById('proj-name-input').style.borderColor = '';
+      const hasDeadline = document.getElementById('proj-deadline-toggle').checked;
+      const hasBudget   = document.getElementById('proj-budget-toggle').checked;
+      const proj = {
+        id: 'p' + Date.now(), name, status: 'In Progress',
+        deadline: hasDeadline ? document.getElementById('proj-deadline-date').value : '',
+        budget:   hasBudget   ? parseFloat(document.getElementById('proj-budget-amount').value) || 0 : null,
+        spent: 0, tasks: []
+      };
+      const projects = projGetProjects();
+      projects.unshift(proj);
+      projSaveProjects(projects);
+      document.getElementById('proj-name-input').value = '';
+      document.getElementById('proj-deadline-toggle').checked = false;
+      document.getElementById('proj-budget-toggle').checked = false;
+      document.getElementById('proj-deadline-date').style.display = 'none';
+      document.getElementById('proj-budget-amount').style.display = 'none';
+      projRenderProjects();
+      showBadgeToast('Project saved');
+    }
+
+    /* ── Ideas ── */
+
+    function projRenderIdeas() {
+      const ideas = projGetIdeas();
+      const container = document.getElementById('ideas-list');
+      if (!container) return;
+      if (!ideas.length) {
+        container.innerHTML = '<p style="font-size:13px;color:var(--muted);padding:8px 0;">No ideas yet.</p>';
+        return;
+      }
+      container.innerHTML = ideas.map(idea => `
+        <div class="idea-item">
+          <div class="idea-dot"></div>
+          <div class="idea-info">
+            <div class="idea-text">${idea.text}</div>
+            <div class="idea-cat">${idea.category}</div>
+          </div>
+          <div class="idea-actions">
+            <button class="idea-promote-btn" onclick="projPromoteIdea('${idea.id}')">&#8593; Promote</button>
+            <button class="idea-del-btn" onclick="projDeleteIdea('${idea.id}')">&#215; Delete</button>
+          </div>
+        </div>`).join('');
+    }
+
+    function projAddIdea() {
+      const text = (document.getElementById('idea-text-input').value || '').trim();
+      if (!text) { document.getElementById('idea-text-input').style.borderColor = 'var(--warn)'; return; }
+      document.getElementById('idea-text-input').style.borderColor = '';
+      const ideas = projGetIdeas();
+      ideas.unshift({ id: 'i' + Date.now(), text, category: document.getElementById('idea-cat-input').value });
+      projSaveIdeas(ideas);
+      document.getElementById('idea-text-input').value = '';
+      projRenderIdeas();
+    }
+
+    function projDeleteIdea(id) {
+      projSaveIdeas(projGetIdeas().filter(i => i.id !== id));
+      projRenderIdeas();
+    }
+
+    function projPromoteIdea(id) {
+      const idea = projGetIdeas().find(i => i.id === id);
+      if (!idea) return;
+      // Switch to Active section and pre-fill form
+      document.querySelectorAll('.proj-section-pill').forEach(p => p.classList.toggle('active', p.dataset.psec === 'active'));
+      document.querySelectorAll('.proj-section').forEach(s => s.classList.toggle('active', s.id === 'proj-active'));
+      const nameInput = document.getElementById('proj-name-input');
+      if (nameInput) { nameInput.value = idea.text; nameInput.scrollIntoView({ behavior: 'smooth', block: 'center' }); nameInput.focus(); }
+    }
+
+    /* ── Notifications for task deadlines ── */
+
+    function projScheduleTaskReminders(proj) {
+      if (!('Notification' in window) || Notification.permission !== 'granted') return;
+      const tomorrow = new Date();
+      tomorrow.setDate(tomorrow.getDate() + 1);
+      const tomorrowStr = tomorrow.toISOString().split('T')[0];
+      (proj.tasks || []).forEach(t => {
+        if (!t.done && t.deadline === tomorrowStr) {
+          new Notification('Life.Coach', { body: `Task due tomorrow: "${t.text}" in ${proj.name}`, icon: '' });
+        }
+      });
+    }
+
+    function projCheckAllReminders() {
+      if (!('Notification' in window) || Notification.permission !== 'granted') return;
+      projGetProjects().forEach(projScheduleTaskReminders);
+    }
+
+    /* ── Init ── */
+
+    (function projInit() {
+      document.querySelector('#tab-projects .proj-section-nav').addEventListener('click', function(e) {
+        const pill = e.target.closest('.proj-section-pill');
+        if (!pill) return;
+        const sec = pill.dataset.psec;
+        document.querySelectorAll('.proj-section-pill').forEach(p => p.classList.toggle('active', p === pill));
+        document.querySelectorAll('.proj-section').forEach(s => s.classList.toggle('active', s.id === 'proj-' + sec));
+        if (sec === 'ideas') projRenderIdeas();
+      });
+    })();
+
+    document.querySelector('.nav-tab[data-tab="projects"]').addEventListener('click', function () {
+      setTimeout(() => { projRenderProjects(); projRenderIdeas(); projCheckAllReminders(); }, 50);
+    });
 
     // ── Service Worker (cache-first offline support) ───────────────────────────
     if ('serviceWorker' in navigator) {
