@@ -35,6 +35,21 @@
       --text: #f0f0f0; --muted: #888; --accent: #b8ff57;
       --night: #7b6fff; --pink: #ff7eb3; --warn: #ff9f43;
       --glass: rgba(255,255,255,0.03);
+
+      /* Per-area accent colors */
+      --accent-home:     #f0f0f0;
+      --accent-checkin:  #c4b5fd;
+      --accent-body:     #b8ff57;
+      --accent-money:    #f5c542;
+      --accent-life:     #ff8c69;
+      --accent-projects: #7dd3fc;
+      --accent-goals:    #fbbf24;
+      --accent-journal:  #fbbf24;
+      --accent-chat:     #f0f0f0;
+
+      /* Active area accent — set dynamically by showTab() */
+      --area-accent: #f0f0f0;
+      --area-accent-rgb: 240,240,240;
     }
 
     *, *::before, *::after {
@@ -153,7 +168,69 @@
       box-shadow: 0 0 10px rgba(var(--tab-accent-rgb, 184, 255, 87), 0.15);
     }
 
-    /* ── Today tab ── */
+    /* ── Home header ── */
+    .home-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      padding: 20px 0 16px;
+      gap: 12px;
+    }
+
+    .home-header-left {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .home-logo {
+      font-family: 'Syne', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--muted);
+      line-height: 1;
+    }
+
+    .home-logo .logo-dot {
+      color: var(--area-accent);
+      transition: color 0.3s;
+    }
+
+    .home-greeting {
+      font-family: 'Syne', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      color: var(--text);
+      line-height: 1.2;
+    }
+
+    .home-date {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 1px;
+    }
+
+    .home-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--surface2);
+      border: 1.5px solid rgba(var(--area-accent-rgb, 240,240,240), 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Syne', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--area-accent);
+      flex-shrink: 0;
+      transition: border-color 0.3s, color 0.3s;
+    }
+
+    /* ── Today tab (legacy, kept for other tabs that use today-header) ── */
     .today-header {
       padding: 20px 0 8px;
     }
@@ -176,7 +253,8 @@
       font-weight: 700;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: var(--muted);
+      color: var(--area-accent, var(--muted));
+      opacity: 0.7;
       margin-bottom: 12px;
     }
 
@@ -414,7 +492,7 @@
       font-weight: 600;
       letter-spacing: 0.06em;
       text-transform: uppercase;
-      color: var(--accent);
+      color: var(--area-accent, var(--accent));
       margin-bottom: 8px;
     }
 
@@ -681,11 +759,11 @@
     .progress-fill {
       height: 100%;
       border-radius: 3px;
-      background: var(--pink);
+      background: var(--area-accent, var(--pink));
       transition: width 0.35s;
       width: 0%;
     }
-    .progress-fill.protein { background: var(--accent); }
+    .progress-fill.protein { background: var(--area-accent, var(--accent)); }
     .total-remaining {
       font-size: 11px;
       color: var(--muted);
@@ -1164,9 +1242,13 @@
     <div id="tab-today" class="tab-panel active">
 
       <!-- Header -->
-      <div class="today-header">
-        <h1 id="today-greeting">Good morning</h1>
-        <p id="today-date"></p>
+      <div class="home-header">
+        <div class="home-header-left">
+          <span class="home-logo">Life<span class="logo-dot">.</span>Coach</span>
+          <h1 class="home-greeting" id="today-greeting">Good morning, Sprite</h1>
+          <p class="home-date" id="today-date"></p>
+        </div>
+        <div class="home-avatar">S</div>
       </div>
 
       <!-- AI Focus Card -->
@@ -1676,17 +1758,23 @@
       const tabs = document.querySelectorAll('.nav-tab');
       const panels = document.querySelectorAll('.tab-panel');
 
+      const app = document.getElementById('app');
+
       function showTab(id) {
+        let activeAccent = '#f0f0f0', activeRgb = '240,240,240';
         tabs.forEach(t => {
           const active = t.dataset.tab === id;
           t.classList.toggle('active', active);
           if (active) {
-            const accent = t.dataset.accent || '#b8ff57';
-            const rgb = t.dataset.accentRgb || '184,255,87';
-            t.style.setProperty('--tab-accent', accent);
-            t.style.setProperty('--tab-accent-rgb', rgb);
+            activeAccent = t.dataset.accent || '#b8ff57';
+            activeRgb    = t.dataset.accentRgb || '184,255,87';
+            t.style.setProperty('--tab-accent', activeAccent);
+            t.style.setProperty('--tab-accent-rgb', activeRgb);
           }
         });
+        // Propagate area accent to the app container so all child elements inherit
+        app.style.setProperty('--area-accent', activeAccent);
+        app.style.setProperty('--area-accent-rgb', activeRgb);
         panels.forEach(p => p.classList.toggle('active', p.id === 'tab-' + id));
         // Scroll active tab into view
         const activeTab = document.querySelector('.nav-tab.active');
@@ -1708,8 +1796,10 @@
       const hour = date.getHours();
 
       // Header
+      const settings = JSON.parse(localStorage.getItem('coach_settings') || '{}');
+      const name = settings.displayName || 'Sprite';
       const greeting = hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : 'Good evening';
-      document.getElementById('today-greeting').textContent = greeting;
+      document.getElementById('today-greeting').textContent = greeting + ', ' + name;
       document.getElementById('today-date').textContent = date.toLocaleDateString('en-US', {
         weekday: 'long', month: 'long', day: 'numeric'
       });
