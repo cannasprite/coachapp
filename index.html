@@ -1209,6 +1209,350 @@
     }
     .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
 
+    /* ── Money tab ── */
+    .money-header {
+      padding: 20px 0 16px;
+    }
+    .money-header h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      color: var(--text);
+    }
+    .money-header p {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+    .money-month-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+    .money-month-label {
+      font-family: 'Syne', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .money-month-btn {
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 5px 10px;
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.15s;
+    }
+    .money-month-btn:hover { border-color: var(--area-accent); color: var(--area-accent); }
+    .budget-total-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .budget-total-label {
+      font-size: 13px;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    .budget-total-input {
+      width: 110px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 8px 12px;
+      color: var(--text);
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      outline: none;
+      transition: border-color 0.15s;
+      -moz-appearance: textfield;
+    }
+    .budget-total-input::-webkit-outer-spin-button,
+    .budget-total-input::-webkit-inner-spin-button { -webkit-appearance: none; }
+    .budget-total-input:focus { border-color: rgba(245,197,66,0.5); }
+    .budget-remaining-badge {
+      margin-left: auto;
+      font-family: 'Syne', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--area-accent);
+    }
+    .cat-row {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .cat-item {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .cat-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+    }
+    .cat-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .cat-amounts {
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .cat-amounts .cat-spent { color: var(--area-accent); font-weight: 700; }
+    .cat-progress {
+      height: 5px;
+      background: var(--surface2);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .cat-progress-fill {
+      height: 100%;
+      border-radius: 3px;
+      background: var(--area-accent, #f5c542);
+      transition: width 0.35s;
+    }
+    .cat-progress-fill.over { background: var(--warn); }
+    .add-expense-form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .money-input-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .money-input {
+      width: 100%;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 12px;
+      color: var(--text);
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.15s;
+      -moz-appearance: textfield;
+    }
+    .money-input::-webkit-outer-spin-button,
+    .money-input::-webkit-inner-spin-button { -webkit-appearance: none; }
+    .money-input:focus { border-color: rgba(245,197,66,0.5); }
+    .money-select {
+      width: 100%;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 12px;
+      color: var(--text);
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 14px;
+      outline: none;
+      cursor: pointer;
+      transition: border-color 0.15s;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+    .money-select:focus { border-color: rgba(245,197,66,0.5); }
+    .expense-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .expense-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .expense-item:last-child { border-bottom: none; }
+    .expense-cat-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--area-accent, #f5c542);
+      flex-shrink: 0;
+    }
+    .expense-info { flex: 1; min-width: 0; }
+    .expense-top {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+    }
+    .expense-amount {
+      font-family: 'Syne', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .expense-cat-label {
+      font-size: 11px;
+      color: var(--area-accent, #f5c542);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .expense-note {
+      font-size: 12px;
+      color: var(--muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .expense-date {
+      font-size: 11px;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    .expense-del-btn {
+      background: none;
+      border: none;
+      color: var(--muted);
+      cursor: pointer;
+      padding: 4px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      transition: color 0.15s;
+      flex-shrink: 0;
+    }
+    .expense-del-btn:hover { color: var(--warn); }
+    .expense-del-btn svg { width: 14px; height: 14px; }
+    /* Loan cards */
+    .loan-card {
+      background: linear-gradient(160deg, #1e1e1e 0%, #181818 100%);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 16px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.05), 0 2px 12px rgba(0,0,0,0.4);
+      margin-bottom: 10px;
+    }
+    .loan-card-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+    .loan-name {
+      font-family: 'Syne', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .loan-balance {
+      font-family: 'Syne', sans-serif;
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--area-accent, #f5c542);
+    }
+    .loan-meta {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px 16px;
+      margin-bottom: 12px;
+    }
+    .loan-meta-item {
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .loan-meta-item span {
+      color: var(--text);
+      font-weight: 600;
+    }
+    .loan-progress {
+      height: 5px;
+      background: var(--surface2);
+      border-radius: 3px;
+      overflow: hidden;
+      margin-bottom: 8px;
+    }
+    .loan-progress-fill {
+      height: 100%;
+      border-radius: 3px;
+      background: var(--area-accent, #f5c542);
+      transition: width 0.5s;
+    }
+    .loan-payoff {
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .loan-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 10px;
+    }
+    .loan-del-btn {
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 4px 10px;
+      color: var(--muted);
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 12px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .loan-del-btn:hover { border-color: var(--warn); color: var(--warn); }
+    .loan-paid-pct {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--area-accent, #f5c542);
+    }
+    .add-loan-form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .money-btn-gold {
+      width: 100%;
+      padding: 13px;
+      border-radius: 12px;
+      border: none;
+      background: #f5c542;
+      color: #0a0a0a;
+      font-family: 'Syne', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: opacity 0.15s, transform 0.1s;
+      margin-top: 2px;
+    }
+    .money-btn-gold:active { opacity: 0.85; transform: scale(0.98); }
+    .projection-input-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+    .projection-input-row input {
+      flex: 1;
+    }
+    .projection-ask-btn {
+      flex-shrink: 0;
+      padding: 10px 16px;
+      border-radius: 10px;
+      border: none;
+      background: #f5c542;
+      color: #0a0a0a;
+      font-family: 'Syne', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: opacity 0.15s;
+    }
+    .projection-ask-btn:disabled { opacity: 0.5; cursor: default; }
+
     /* ── Toast ── */
     #toast {
       position: fixed;
@@ -1660,7 +2004,132 @@
     </div>
 
     <div id="tab-money" class="tab-panel">
-      <div class="today-header"><h1>Money</h1><p>Finance tracking coming soon.</p></div>
+
+      <div class="money-header">
+        <h2>Money</h2>
+        <p id="money-month-subtitle">Track your budget &amp; loans</p>
+      </div>
+
+      <!-- Month navigator -->
+      <div class="money-month-nav">
+        <button class="money-month-btn" onclick="moneyPrevMonth()">&#8592;</button>
+        <span class="money-month-label" id="money-month-label">—</span>
+        <button class="money-month-btn" onclick="moneyNextMonth()">&#8594;</button>
+      </div>
+
+      <!-- ── BUDGET SECTION ── -->
+      <div class="section-label">Budget</div>
+
+      <div class="card" style="margin-bottom:12px;">
+        <div class="budget-total-row">
+          <span class="budget-total-label">Monthly budget</span>
+          <span>$</span>
+          <input type="number" class="budget-total-input" id="money-budget-total" value="900" min="0"
+            onchange="moneyUpdateBudget()" />
+          <span class="budget-remaining-badge" id="money-remaining-badge">$900 left</span>
+        </div>
+
+        <div class="cat-row" id="money-cat-row">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+
+      <!-- Add Expense -->
+      <div class="section-label" style="margin-top:20px;">Add Expense</div>
+      <div class="card" style="margin-bottom:12px;">
+        <div class="add-expense-form">
+          <div class="money-input-row">
+            <div>
+              <div class="field-label">Amount ($)</div>
+              <input type="number" class="money-input" id="exp-amount" placeholder="0.00" min="0" step="0.01" />
+            </div>
+            <div>
+              <div class="field-label">Category</div>
+              <select class="money-select" id="exp-category">
+                <option value="Groceries">Groceries</option>
+                <option value="Supplements">Supplements</option>
+                <option value="Eating Out">Eating Out</option>
+                <option value="Shopping">Shopping</option>
+                <option value="Home">Home</option>
+                <option value="Transport">Transport</option>
+                <option value="Medical">Medical</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+          </div>
+          <div class="money-input-row">
+            <div>
+              <div class="field-label">Note</div>
+              <input type="text" class="money-input" id="exp-note" placeholder="e.g. Trader Joe's" />
+            </div>
+            <div>
+              <div class="field-label">Date</div>
+              <input type="date" class="money-input" id="exp-date" />
+            </div>
+          </div>
+          <button class="money-btn-gold" onclick="moneySaveExpense()">Save Expense</button>
+        </div>
+      </div>
+
+      <!-- Recent Expenses -->
+      <div class="section-label" style="margin-top:20px;">Recent Expenses</div>
+      <div class="card" style="margin-bottom:12px;">
+        <div class="expense-list" id="money-expense-list">
+          <p style="font-size:13px;color:var(--muted);text-align:center;padding:12px 0;">No expenses yet this month.</p>
+        </div>
+      </div>
+
+      <!-- ── LOANS SECTION ── -->
+      <div class="section-label" style="margin-top:20px;">Loans</div>
+
+      <div id="money-loans-list">
+        <!-- Rendered by JS -->
+      </div>
+
+      <!-- Add Loan -->
+      <div class="card" style="margin-bottom:12px;">
+        <div class="section-label" style="margin-bottom:12px;">Add Loan</div>
+        <div class="add-loan-form">
+          <div class="money-input-row">
+            <div>
+              <div class="field-label">Loan Name</div>
+              <input type="text" class="money-input" id="loan-name" placeholder="e.g. Car Loan" />
+            </div>
+            <div>
+              <div class="field-label">Total Amount ($)</div>
+              <input type="number" class="money-input" id="loan-total" placeholder="10000" min="0" />
+            </div>
+          </div>
+          <div class="money-input-row">
+            <div>
+              <div class="field-label">Current Balance ($)</div>
+              <input type="number" class="money-input" id="loan-balance" placeholder="7500" min="0" />
+            </div>
+            <div>
+              <div class="field-label">APR (%)</div>
+              <input type="number" class="money-input" id="loan-apr" placeholder="6.5" min="0" step="0.01" />
+            </div>
+          </div>
+          <div>
+            <div class="field-label">Min Monthly Payment ($)</div>
+            <input type="number" class="money-input" id="loan-payment" placeholder="200" min="0" />
+          </div>
+          <button class="money-btn-gold" onclick="moneyAddLoan()">Add Loan</button>
+        </div>
+      </div>
+
+      <!-- ── AI PROJECTION ── -->
+      <div class="section-label" style="margin-top:20px;">AI Projection</div>
+      <div class="card" style="margin-bottom:24px;">
+        <div class="ai-card-label">&#128200; What if I...</div>
+        <div class="projection-input-row">
+          <input type="text" class="money-input" id="projection-input"
+            placeholder="paid an extra $200/month toward my car loan" />
+          <button class="projection-ask-btn" id="projection-btn" onclick="moneyRunProjection()">Ask</button>
+        </div>
+        <div id="projection-result" style="font-size:14px;color:var(--muted);line-height:1.6;min-height:32px;"></div>
+      </div>
+
     </div>
 
     <div id="tab-life" class="tab-panel">
@@ -3006,6 +3475,343 @@ Write Sprite's weekly performance report with sections: Nutrition, Training, Rec
       if (toastTimer) clearTimeout(toastTimer);
       toastTimer = setTimeout(() => toast.classList.remove('show'), 3000);
     }
+
+    // ── Money tab ──────────────────────────────────────────────────────────────
+
+    const MONEY_CATS = ['Groceries', 'Supplements', 'Eating Out', 'Shopping', 'Home', 'Transport', 'Medical', 'Other'];
+
+    // Default category caps (sum = 900)
+    const DEFAULT_CAT_CAPS = {
+      Groceries: 200, Supplements: 60, 'Eating Out': 80, Shopping: 100,
+      Home: 150, Transport: 120, Medical: 100, Other: 90
+    };
+
+    let moneyViewMonth = ''; // 'YYYY-MM'
+
+    function moneyMonthKey() { return moneyViewMonth || moneyCurrentYM(); }
+    function moneyCurrentYM() {
+      const d = new Date();
+      return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0');
+    }
+
+    function moneyGetBudget() {
+      const key = 'anchor_budget_' + moneyMonthKey();
+      const stored = localStorage.getItem(key);
+      if (stored) return JSON.parse(stored);
+      return { total: 900, caps: { ...DEFAULT_CAT_CAPS } };
+    }
+
+    function moneySaveBudget(obj) {
+      localStorage.setItem('anchor_budget_' + moneyMonthKey(), JSON.stringify(obj));
+    }
+
+    function moneyGetExpenses() {
+      const key = 'anchor_expenses_' + moneyMonthKey();
+      const stored = localStorage.getItem(key);
+      return stored ? JSON.parse(stored) : [];
+    }
+
+    function moneySaveExpenses(arr) {
+      localStorage.setItem('anchor_expenses_' + moneyMonthKey(), JSON.stringify(arr));
+    }
+
+    function moneyGetLoans() {
+      const stored = localStorage.getItem('anchor_loans');
+      return stored ? JSON.parse(stored) : [];
+    }
+
+    function moneySaveLoans(arr) {
+      localStorage.setItem('anchor_loans', JSON.stringify(arr));
+    }
+
+    function moneyPrevMonth() {
+      const [y, m] = moneyMonthKey().split('-').map(Number);
+      const d = new Date(y, m - 2, 1);
+      moneyViewMonth = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0');
+      moneyRender();
+    }
+
+    function moneyNextMonth() {
+      const [y, m] = moneyMonthKey().split('-').map(Number);
+      const d = new Date(y, m, 1);
+      const next = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0');
+      if (next > moneyCurrentYM()) return; // don't go into future
+      moneyViewMonth = next;
+      moneyRender();
+    }
+
+    function moneyUpdateBudget() {
+      const total = parseFloat(document.getElementById('money-budget-total').value) || 0;
+      const budget = moneyGetBudget();
+      budget.total = total;
+      moneySaveBudget(budget);
+      moneyRenderCategories();
+    }
+
+    function moneyRenderMonthLabel() {
+      const [y, m] = moneyMonthKey().split('-').map(Number);
+      const label = new Date(y, m - 1, 1).toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+      document.getElementById('money-month-label').textContent = label;
+      const isCurrent = moneyMonthKey() === moneyCurrentYM();
+      document.getElementById('money-month-subtitle').textContent = isCurrent ? 'Track your budget & loans' : label;
+    }
+
+    function moneyRenderCategories() {
+      const budget = moneyGetBudget();
+      const expenses = moneyGetExpenses();
+      const totalEl = document.getElementById('money-budget-total');
+      if (totalEl) totalEl.value = budget.total;
+
+      // Sum spent per category
+      const spent = {};
+      MONEY_CATS.forEach(c => spent[c] = 0);
+      expenses.forEach(e => { if (spent[e.category] !== undefined) spent[e.category] += e.amount; });
+
+      const totalSpent = Object.values(spent).reduce((a, b) => a + b, 0);
+      const remaining = budget.total - totalSpent;
+      const remEl = document.getElementById('money-remaining-badge');
+      if (remEl) {
+        remEl.textContent = (remaining >= 0 ? '$' + remaining.toFixed(0) + ' left' : '-$' + Math.abs(remaining).toFixed(0) + ' over');
+        remEl.style.color = remaining < 0 ? 'var(--warn)' : 'var(--area-accent)';
+      }
+
+      const container = document.getElementById('money-cat-row');
+      if (!container) return;
+      container.innerHTML = MONEY_CATS.map(cat => {
+        const cap = budget.caps[cat] || DEFAULT_CAT_CAPS[cat] || 100;
+        const s = spent[cat] || 0;
+        const pct = Math.min(100, cap > 0 ? (s / cap) * 100 : 0);
+        const over = s > cap;
+        return `
+          <div class="cat-item">
+            <div class="cat-header">
+              <span class="cat-name">${cat}</span>
+              <span class="cat-amounts"><span class="cat-spent">$${s.toFixed(0)}</span> / $${cap}</span>
+            </div>
+            <div class="cat-progress">
+              <div class="cat-progress-fill${over ? ' over' : ''}" style="width:${pct}%"></div>
+            </div>
+          </div>`;
+      }).join('');
+    }
+
+    function moneyRenderExpenses() {
+      const expenses = moneyGetExpenses();
+      const container = document.getElementById('money-expense-list');
+      if (!container) return;
+      if (!expenses.length) {
+        container.innerHTML = '<p style="font-size:13px;color:var(--muted);text-align:center;padding:12px 0;">No expenses yet this month.</p>';
+        return;
+      }
+      // Show newest first
+      const sorted = [...expenses].sort((a, b) => b.date.localeCompare(a.date));
+      container.innerHTML = sorted.map((e, sortedIdx) => {
+        const origIdx = expenses.indexOf(expenses.find(x => x.id === e.id));
+        const d = new Date(e.date + 'T12:00:00');
+        const dateStr = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+        return `
+          <div class="expense-item">
+            <div class="expense-cat-dot"></div>
+            <div class="expense-info">
+              <div class="expense-top">
+                <span class="expense-amount">$${e.amount.toFixed(2)}</span>
+                <span class="expense-cat-label">${e.category}</span>
+              </div>
+              ${e.note ? `<div class="expense-note">${e.note}</div>` : ''}
+            </div>
+            <span class="expense-date">${dateStr}</span>
+            <button class="expense-del-btn" onclick="moneyDeleteExpense('${e.id}')" title="Delete">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/>
+              </svg>
+            </button>
+          </div>`;
+      }).join('');
+    }
+
+    function moneyDeleteExpense(id) {
+      const expenses = moneyGetExpenses().filter(e => e.id !== id);
+      moneySaveExpenses(expenses);
+      moneyRenderCategories();
+      moneyRenderExpenses();
+    }
+
+    function moneySaveExpense() {
+      const amountEl = document.getElementById('exp-amount');
+      const catEl    = document.getElementById('exp-category');
+      const noteEl   = document.getElementById('exp-note');
+      const dateEl   = document.getElementById('exp-date');
+      const amount   = parseFloat(amountEl.value);
+      if (!amount || amount <= 0) { amountEl.style.borderColor = 'var(--warn)'; return; }
+      amountEl.style.borderColor = '';
+      const entry = {
+        id: Date.now().toString(),
+        amount,
+        category: catEl.value,
+        note: noteEl.value.trim(),
+        date: dateEl.value || moneyCurrentYM() + '-' + String(new Date().getDate()).padStart(2, '0')
+      };
+      const expenses = moneyGetExpenses();
+      expenses.push(entry);
+      moneySaveExpenses(expenses);
+      amountEl.value = '';
+      noteEl.value = '';
+      moneyRenderCategories();
+      moneyRenderExpenses();
+      showBadgeToast('Expense saved');
+    }
+
+    /* ── Loans ── */
+
+    function moneyEstimatePayoff(balance, apr, monthlyPayment) {
+      if (!monthlyPayment || monthlyPayment <= 0) return 'N/A';
+      const monthlyRate = apr / 100 / 12;
+      let bal = balance;
+      let months = 0;
+      const MAX = 600; // cap at 50 years
+      while (bal > 0 && months < MAX) {
+        const interest = bal * monthlyRate;
+        bal = bal + interest - monthlyPayment;
+        months++;
+      }
+      if (months >= MAX) return '50+ years';
+      const d = new Date();
+      d.setMonth(d.getMonth() + months);
+      return d.toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) + ' (' + (months < 12 ? months + 'mo' : Math.round(months / 12 * 10) / 10 + 'yr') + ')';
+    }
+
+    function moneyRenderLoans() {
+      const loans = moneyGetLoans();
+      const container = document.getElementById('money-loans-list');
+      if (!container) return;
+      if (!loans.length) {
+        container.innerHTML = '<p style="font-size:13px;color:var(--muted);margin-bottom:12px;">No loans added yet.</p>';
+        return;
+      }
+      container.innerHTML = loans.map((loan, i) => {
+        const paidPct = loan.total > 0 ? Math.min(100, ((loan.total - loan.balance) / loan.total) * 100) : 0;
+        const payoff  = moneyEstimatePayoff(loan.balance, loan.apr, loan.payment);
+        return `
+          <div class="loan-card">
+            <div class="loan-card-header">
+              <span class="loan-name">${loan.name}</span>
+              <span class="loan-balance">$${Number(loan.balance).toLocaleString()}</span>
+            </div>
+            <div class="loan-meta">
+              <div class="loan-meta-item">Original <span>$${Number(loan.total).toLocaleString()}</span></div>
+              <div class="loan-meta-item">APR <span>${loan.apr}%</span></div>
+              <div class="loan-meta-item">Min payment <span>$${loan.payment}/mo</span></div>
+              <div class="loan-meta-item">Payoff est. <span>${payoff}</span></div>
+            </div>
+            <div class="loan-progress">
+              <div class="loan-progress-fill" style="width:${paidPct.toFixed(1)}%"></div>
+            </div>
+            <div class="loan-footer">
+              <span class="loan-paid-pct">${paidPct.toFixed(0)}% paid off</span>
+              <button class="loan-del-btn" onclick="moneyDeleteLoan(${i})">Delete</button>
+            </div>
+          </div>`;
+      }).join('');
+    }
+
+    function moneyAddLoan() {
+      const name    = document.getElementById('loan-name').value.trim();
+      const total   = parseFloat(document.getElementById('loan-total').value);
+      const balance = parseFloat(document.getElementById('loan-balance').value);
+      const apr     = parseFloat(document.getElementById('loan-apr').value) || 0;
+      const payment = parseFloat(document.getElementById('loan-payment').value) || 0;
+      if (!name || !total || !balance) {
+        showBadgeToast('Fill in loan name, total, and balance');
+        return;
+      }
+      const loans = moneyGetLoans();
+      loans.push({ name, total, balance, apr, payment });
+      moneySaveLoans(loans);
+      document.getElementById('loan-name').value    = '';
+      document.getElementById('loan-total').value   = '';
+      document.getElementById('loan-balance').value = '';
+      document.getElementById('loan-apr').value     = '';
+      document.getElementById('loan-payment').value = '';
+      moneyRenderLoans();
+      showBadgeToast('Loan added');
+    }
+
+    function moneyDeleteLoan(idx) {
+      const loans = moneyGetLoans();
+      loans.splice(idx, 1);
+      moneySaveLoans(loans);
+      moneyRenderLoans();
+    }
+
+    /* ── AI Projection ── */
+
+    async function moneyRunProjection() {
+      const settings = JSON.parse(localStorage.getItem('coach_settings') || '{}');
+      const resultEl = document.getElementById('projection-result');
+      const btn      = document.getElementById('projection-btn');
+      const scenario = document.getElementById('projection-input').value.trim();
+      if (!scenario) return;
+
+      if (!settings.apiKey) {
+        resultEl.textContent = 'Add your API key in Settings to unlock projections.';
+        resultEl.style.color = 'var(--muted)';
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = '...';
+      resultEl.textContent = 'Calculating...';
+      resultEl.style.color = 'var(--muted)';
+
+      const loans    = moneyGetLoans();
+      const budget   = moneyGetBudget();
+      const expenses = moneyGetExpenses();
+      const totalSpent = expenses.reduce((a, e) => a + e.amount, 0);
+
+      const loanSummary = loans.length
+        ? loans.map(l => `${l.name}: $${l.balance} remaining of $${l.total}, ${l.apr}% APR, $${l.payment}/mo min`).join('; ')
+        : 'No loans';
+      const budgetSummary = `Monthly budget $${budget.total}, spent $${totalSpent.toFixed(0)} so far this month`;
+
+      const userMsg = `Scenario: "${scenario}"\n\nFinancials:\n- ${budgetSummary}\n- Loans: ${loanSummary}`;
+
+      try {
+        const text = await claudeCall(
+          'claude-haiku-4-5-20251001',
+          'You are a no-nonsense financial coach for Sprite. She wants honest, specific projections based on her real numbers. Be direct and concrete. Under 80 words.',
+          userMsg
+        );
+        resultEl.textContent = text;
+        resultEl.style.color = 'var(--area-accent)';
+      } catch (err) {
+        resultEl.textContent = err.message === 'no-key' ? 'Add your API key in Settings to unlock projections.' : 'Error: ' + err.message;
+        resultEl.style.color = 'var(--warn)';
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Ask';
+      }
+    }
+
+    /* ── Money init + full render ── */
+
+    function moneyRender() {
+      moneyViewMonth = moneyViewMonth || moneyCurrentYM();
+      moneyRenderMonthLabel();
+      moneyRenderCategories();
+      moneyRenderExpenses();
+      moneyRenderLoans();
+    }
+
+    // Initialize date input default and render on tab switch
+    (function () {
+      const dateEl = document.getElementById('exp-date');
+      if (dateEl) dateEl.value = new Date().toISOString().split('T')[0];
+    })();
+
+    document.querySelector('.nav-tab[data-tab="money"]').addEventListener('click', function () {
+      moneyViewMonth = moneyViewMonth || moneyCurrentYM();
+      setTimeout(moneyRender, 50);
+    });
 
     // ── Service Worker (cache-first offline support) ───────────────────────────
     if ('serviceWorker' in navigator) {
