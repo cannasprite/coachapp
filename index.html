@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Life.Coach</title>
-  <meta name="theme-color" content="#b8ff57" />
+  <meta name="theme-color" content="#c4b5fd" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Life.Coach" />
@@ -13,7 +13,7 @@
       var icon = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='36' fill='%230a0a0a'/%3E%3Ctext x='96' y='132' font-size='110' font-weight='800' font-family='sans-serif' text-anchor='middle' fill='%23b8ff57'%3EC%3C/text%3E%3C/svg%3E";
       var manifest = JSON.stringify({
         name: 'Life.Coach', short_name: 'Life.Coach', display: 'standalone',
-        background_color: '#0a0a0a', theme_color: '#b8ff57', start_url: '.',
+        background_color: '#0a0a0a', theme_color: '#c4b5fd', start_url: '.',
         icons: [
           { src: icon, sizes: '192x192', type: 'image/svg+xml' },
           { src: icon, sizes: '512x512', type: 'image/svg+xml' }
@@ -1343,6 +1343,64 @@
       margin-top: 0;
     }
     .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+    .btn-danger {
+      width: 100%; padding: 12px; border-radius: 12px;
+      border: 1px solid rgba(255,80,60,0.35); background: rgba(255,80,60,0.07);
+      color: #ff5a3c; font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 600;
+      cursor: pointer; transition: all 0.15s;
+    }
+    .btn-danger:hover { border-color: #ff5a3c; background: rgba(255,80,60,0.14); }
+
+    /* Reminder rows */
+    .reminder-row {
+      display: flex; align-items: center; gap: 10px;
+      padding: 11px 0; border-bottom: 1px solid var(--border);
+    }
+    .reminder-row:last-child { border-bottom: none; }
+    .reminder-info { flex: 1; min-width: 0; }
+    .reminder-name { font-size: 13px; color: var(--text); font-weight: 500; }
+    .reminder-sub  { font-size: 11px; color: var(--muted); margin-top: 2px; }
+    .reminder-time {
+      background: var(--surface2); border: 1px solid var(--border); border-radius: 8px;
+      color: var(--text); font-family: 'Instrument Sans', sans-serif;
+      font-size: 12px; padding: 5px 7px; width: 82px; outline: none;
+      color-scheme: dark;
+    }
+    .reminder-time:disabled { opacity: 0.3; pointer-events: none; }
+
+    /* Toggle switch */
+    .toggle-wrap { position: relative; width: 40px; height: 22px; flex-shrink: 0; }
+    .toggle-wrap input { opacity: 0; width: 0; height: 0; position: absolute; }
+    .toggle-track {
+      position: absolute; cursor: pointer; inset: 0;
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 22px; transition: background 0.2s, border-color 0.2s;
+    }
+    .toggle-track::before {
+      content: ''; position: absolute;
+      height: 14px; width: 14px; left: 3px; top: 3px;
+      background: var(--muted); border-radius: 50%; transition: transform 0.2s, background 0.2s;
+    }
+    .toggle-wrap input:checked ~ .toggle-track { background: var(--area-accent); border-color: var(--area-accent); }
+    .toggle-wrap input:checked ~ .toggle-track::before { transform: translateX(18px); background: #0a0a0a; }
+
+    /* Notification permission overlay */
+    .notif-overlay {
+      display: none; position: fixed; inset: 0; z-index: 9999;
+      background: rgba(0,0,0,0.75); align-items: flex-end; justify-content: center;
+    }
+    .notif-overlay.visible { display: flex; }
+    .notif-sheet {
+      background: #1e1e1e; border-radius: 20px 20px 0 0;
+      padding: 28px 24px 40px; max-width: 480px; width: 100%;
+      border-top: 1px solid rgba(196,181,253,0.25);
+    }
+    .notif-sheet h3 { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 700; margin-bottom: 10px; }
+    .notif-sheet p  { font-size: 14px; color: var(--muted); line-height: 1.55; margin-bottom: 20px; }
+    .notif-btns { display: flex; gap: 10px; }
+    .notif-yes   { flex:1; padding:13px; background:#c4b5fd; color:#000; font-weight:700; border:none; border-radius:12px; cursor:pointer; font-size:14px; font-family:'Instrument Sans',sans-serif; }
+    .notif-later { flex:1; padding:13px; background:var(--surface2); color:var(--muted); border:none; border-radius:12px; cursor:pointer; font-size:14px; font-family:'Instrument Sans',sans-serif; }
 
     /* ── Money tab ── */
     .money-header {
@@ -3179,12 +3237,12 @@
       <div class="section-label">Settings</div>
       <div class="card">
         <div class="settings-field">
-          <label for="setting-apikey">Anthropic API Key</label>
-          <input type="password" class="settings-input" id="setting-apikey" placeholder="sk-ant-…" autocomplete="off" />
-        </div>
-        <div class="settings-field">
           <label for="setting-name">Display Name</label>
           <input type="text" class="settings-input" id="setting-name" placeholder="Sprite" />
+        </div>
+        <div class="settings-field">
+          <label for="setting-apikey">Anthropic API Key</label>
+          <input type="password" class="settings-input" id="setting-apikey" placeholder="sk-ant-…" autocomplete="off" />
         </div>
         <div class="settings-field">
           <label for="setting-goalweight">Goal Weight (lbs)</label>
@@ -3194,11 +3252,91 @@
           <label for="setting-caltarget">Calorie Target</label>
           <input type="number" class="settings-input" id="setting-caltarget" placeholder="1250" min="0" />
         </div>
-        <div class="settings-field" style="margin-bottom:0;">
+        <div class="settings-field">
           <label for="setting-prottarget">Protein Target (g)</label>
           <input type="number" class="settings-input" id="setting-prottarget" placeholder="130" min="0" />
         </div>
+        <div class="settings-field" style="margin-bottom:0;">
+          <label for="setting-budgetcap">Monthly Budget Cap ($)</label>
+          <input type="number" class="settings-input" id="setting-budgetcap" placeholder="900" min="0" />
+        </div>
         <button class="btn-primary" style="margin-top:14px;" onclick="saveSettings()">Save Settings</button>
+      </div>
+
+      <div class="section-label" style="margin-top:16px;">Reminders</div>
+      <div class="card">
+        <!-- Morning -->
+        <div class="reminder-row">
+          <label class="toggle-wrap">
+            <input type="checkbox" id="rem-morning-on" onchange="toggleReminderTime('morning')" />
+            <span class="toggle-track"></span>
+          </label>
+          <div class="reminder-info">
+            <div class="reminder-name">Morning Check-in</div>
+            <div class="reminder-sub">Log mood, energy &amp; sleep</div>
+          </div>
+          <input type="time" class="reminder-time" id="rem-morning-time" value="07:00" disabled />
+        </div>
+        <!-- Night -->
+        <div class="reminder-row">
+          <label class="toggle-wrap">
+            <input type="checkbox" id="rem-night-on" onchange="toggleReminderTime('night')" />
+            <span class="toggle-track"></span>
+          </label>
+          <div class="reminder-info">
+            <div class="reminder-name">Night Check-in</div>
+            <div class="reminder-sub">Close out the day</div>
+          </div>
+          <input type="time" class="reminder-time" id="rem-night-time" value="21:30" disabled />
+        </div>
+        <!-- Water -->
+        <div class="reminder-row">
+          <label class="toggle-wrap">
+            <input type="checkbox" id="rem-water-on" onchange="toggleReminderTime('water')" />
+            <span class="toggle-track"></span>
+          </label>
+          <div class="reminder-info">
+            <div class="reminder-name">Water Reminder</div>
+            <div class="reminder-sub">Fires if &lt;8 cups logged</div>
+          </div>
+          <input type="time" class="reminder-time" id="rem-water-time" value="12:00" disabled />
+        </div>
+        <!-- Supplements -->
+        <div class="reminder-row">
+          <label class="toggle-wrap">
+            <input type="checkbox" id="rem-supps-on" onchange="toggleReminderTime('supps')" />
+            <span class="toggle-track"></span>
+          </label>
+          <div class="reminder-info">
+            <div class="reminder-name">Supplement Reminder</div>
+            <div class="reminder-sub">Daily stack reminder</div>
+          </div>
+          <input type="time" class="reminder-time" id="rem-supps-time" value="08:00" disabled />
+        </div>
+        <!-- Weekly report -->
+        <div class="reminder-row">
+          <label class="toggle-wrap">
+            <input type="checkbox" id="rem-report-on" onchange="toggleReminderTime('report')" />
+            <span class="toggle-track"></span>
+          </label>
+          <div class="reminder-info">
+            <div class="reminder-name">Weekly Report Ready</div>
+            <div class="reminder-sub">Sundays only</div>
+          </div>
+          <input type="time" class="reminder-time" id="rem-report-time" value="18:00" disabled />
+        </div>
+        <!-- Birthday -->
+        <div class="reminder-row">
+          <label class="toggle-wrap">
+            <input type="checkbox" id="rem-bday-on" />
+            <span class="toggle-track"></span>
+          </label>
+          <div class="reminder-info">
+            <div class="reminder-name">Birthday Reminders</div>
+            <div class="reminder-sub">3 days before saved birthdays</div>
+          </div>
+        </div>
+        <button class="btn-secondary" style="margin-top:14px;" onclick="saveReminders()">Save Reminders</button>
       </div>
 
       <div class="section-label" style="margin-top:16px;">Recipes</div>
@@ -3219,6 +3357,13 @@
         <button class="btn-secondary" onclick="generateCoachReport()">Generate Weekly Report</button>
         <button class="btn-secondary" onclick="exportData()">Export Data (JSON)</button>
       </div>
+
+      <div class="section-label" style="margin-top:16px;">Danger Zone</div>
+      <div class="card" style="display:flex;flex-direction:column;gap:8px;">
+        <button class="btn-danger" onclick="clearData()">Clear All Data</button>
+      </div>
+
+      <div style="height:20px;"></div>
     </div>
 
     <!-- New tab panels -->
@@ -5065,10 +5210,12 @@
     function saveSettings() {
       const settings = {
         apiKey:     document.getElementById('setting-apikey').value.trim(),
-        name:       document.getElementById('setting-name').value.trim(),
-        goalWeight: document.getElementById('setting-goalweight').value,
-        calTarget:  document.getElementById('setting-caltarget').value,
-        protTarget: document.getElementById('setting-prottarget').value,
+        displayName: document.getElementById('setting-name').value.trim(),
+        name:        document.getElementById('setting-name').value.trim(),
+        goalWeight:  document.getElementById('setting-goalweight').value,
+        calTarget:   document.getElementById('setting-caltarget').value,
+        protTarget:  document.getElementById('setting-prottarget').value,
+        budgetCap:   document.getElementById('setting-budgetcap').value,
       };
       localStorage.setItem('coach_settings', JSON.stringify(settings));
       showBadgeToast('Settings saved!');
@@ -5076,11 +5223,145 @@
 
     function loadSettings() {
       const s = JSON.parse(localStorage.getItem('coach_settings') || '{}');
+      const nameVal = s.displayName || s.name || '';
+      if (nameVal)      document.getElementById('setting-name').value       = nameVal;
       if (s.apiKey)     document.getElementById('setting-apikey').value     = s.apiKey;
-      if (s.name)       document.getElementById('setting-name').value       = s.name;
       if (s.goalWeight) document.getElementById('setting-goalweight').value = s.goalWeight;
       if (s.calTarget)  document.getElementById('setting-caltarget').value  = s.calTarget;
       if (s.protTarget) document.getElementById('setting-prottarget').value = s.protTarget;
+      if (s.budgetCap)  document.getElementById('setting-budgetcap').value  = s.budgetCap;
+    }
+
+    // ── Reminders ─────────────────────────────────────────────────────────────
+
+    const REMINDER_IDS = ['morning','night','water','supps','report'];
+
+    function toggleReminderTime(id) {
+      const on  = document.getElementById('rem-' + id + '-on');
+      const tm  = document.getElementById('rem-' + id + '-time');
+      if (tm) tm.disabled = !(on && on.checked);
+    }
+
+    function saveReminders() {
+      const rem = {};
+      REMINDER_IDS.forEach(id => {
+        const on   = document.getElementById('rem-' + id + '-on');
+        const time = document.getElementById('rem-' + id + '-time');
+        rem[id] = { on: !!(on && on.checked), time: time ? time.value : '' };
+      });
+      const bdayOn = document.getElementById('rem-bday-on');
+      rem.birthday = { on: !!(bdayOn && bdayOn.checked) };
+      localStorage.setItem('anchor_reminders', JSON.stringify(rem));
+      scheduleReminders();
+      showBadgeToast('Reminders saved!');
+    }
+
+    function loadReminders() {
+      const rem = JSON.parse(localStorage.getItem('anchor_reminders') || '{}');
+      REMINDER_IDS.forEach(id => {
+        const on   = document.getElementById('rem-' + id + '-on');
+        const time = document.getElementById('rem-' + id + '-time');
+        if (on)   on.checked   = !!(rem[id] && rem[id].on);
+        if (time) { if (rem[id] && rem[id].time) time.value = rem[id].time; time.disabled = !(rem[id] && rem[id].on); }
+      });
+      const bdayOn = document.getElementById('rem-bday-on');
+      if (bdayOn) bdayOn.checked = !!(rem.birthday && rem.birthday.on);
+    }
+
+    const _remTimers = [];
+    function scheduleReminders() {
+      _remTimers.forEach(t => clearTimeout(t)); _remTimers.length = 0;
+      if (!('Notification' in window) || Notification.permission !== 'granted') return;
+      const rem = JSON.parse(localStorage.getItem('anchor_reminders') || '{}');
+      const now = new Date();
+
+      function at(timeStr, fn) {
+        if (!timeStr) return;
+        const [h, m] = timeStr.split(':').map(Number);
+        const t = new Date(now); t.setHours(h, m, 0, 0);
+        const ms = t - now;
+        if (ms > 0 && ms < 86400000) _remTimers.push(setTimeout(fn, ms));
+      }
+
+      if (rem.morning && rem.morning.on) {
+        at(rem.morning.time || '07:00', () => {
+          if (!localStorage.getItem('coach_morning_' + todayKey()))
+            notify('Morning Check-in', 'Start your day with intention. Log mood, energy and sleep.', 'morning', () => homeGoCheckin('morning'));
+        });
+      }
+      if (rem.night && rem.night.on) {
+        at(rem.night.time || '21:30', () => {
+          if (!localStorage.getItem('coach_night_' + todayKey()))
+            notify('Night Check-in', 'Close out the day \u2014 log your wins and habits.', 'night', () => homeGoCheckin('night'));
+        });
+      }
+      if (rem.water && rem.water.on) {
+        at(rem.water.time || '12:00', () => {
+          const cups = JSON.parse(localStorage.getItem('coach_water_' + todayKey()) || '[]').filter(Boolean).length;
+          if (cups < 8) notify('Hydration Check', 'Only ' + cups + ' cups so far \u2014 hit those 16!', 'water', () => homeNav('body'));
+        });
+      }
+      if (rem.supps && rem.supps.on) {
+        at(rem.supps.time || '08:00', () => {
+          notify('Supplement Time', "Don't forget your stack!", 'supps', null);
+        });
+      }
+      if (rem.report && rem.report.on && now.getDay() === 0) {
+        at(rem.report.time || '18:00', () => {
+          notify('Weekly Report Ready', 'Your weekly coach report is ready to generate.', 'report', () => homeNav('more'));
+        });
+      }
+      if (rem.birthday && rem.birthday.on) {
+        const people = JSON.parse(localStorage.getItem('anchor_people') || '[]');
+        people.forEach(p => {
+          if (!p.bday) return;
+          const days = lifeDaysUntilBirthday(p.bday);
+          if (days === 3) notify("Upcoming Birthday", p.name + "'s birthday is in 3 days!", 'bday', () => homeNav('life'));
+        });
+      }
+    }
+
+    function notify(title, body, tag, navFn) {
+      if (!('Notification' in window) || Notification.permission !== 'granted') return;
+      const n = new Notification(title, { body, tag, icon: '' });
+      if (navFn) n.onclick = () => { window.focus(); navFn(); };
+    }
+
+    // ── Notification permission prompt ────────────────────────────────────────
+
+    function showNotifPrompt() {
+      const el = document.getElementById('notif-overlay');
+      if (el) el.classList.add('visible');
+    }
+
+    function grantNotifications() {
+      const el = document.getElementById('notif-overlay');
+      if (el) el.classList.remove('visible');
+      localStorage.setItem('anchor_notif_asked', '1');
+      if ('Notification' in window) {
+        Notification.requestPermission().then(perm => {
+          if (perm === 'granted') { scheduleReminders(); showBadgeToast('Reminders enabled!'); }
+        });
+      }
+    }
+
+    function dismissNotifications() {
+      const el = document.getElementById('notif-overlay');
+      if (el) el.classList.remove('visible');
+      localStorage.setItem('anchor_notif_asked', '1');
+    }
+
+    // ── Data management ───────────────────────────────────────────────────────
+
+    function clearData() {
+      if (!confirm('This will delete everything. Are you sure?')) return;
+      const keys = [];
+      for (let i = 0; i < localStorage.length; i++) {
+        const k = localStorage.key(i);
+        if (k && (k.startsWith('coach_') || k.startsWith('anchor_'))) keys.push(k);
+      }
+      keys.forEach(k => localStorage.removeItem(k));
+      location.reload();
     }
 
     function renderRecipeMgmt() {
@@ -5209,7 +5490,7 @@ Write Sprite's weekly performance report with sections: Nutrition, Training, Rec
       const out = {};
       for (let i = 0; i < localStorage.length; i++) {
         const k = localStorage.key(i);
-        if (k.startsWith('coach_')) {
+        if (k && (k.startsWith('coach_') || k.startsWith('anchor_'))) {
           try { out[k] = JSON.parse(localStorage.getItem(k)); }
           catch { out[k] = localStorage.getItem(k); }
         }
@@ -5218,17 +5499,18 @@ Write Sprite's weekly performance report with sections: Nutrition, Training, Rec
       const url  = URL.createObjectURL(blob);
       const a    = document.createElement('a');
       a.href     = url;
-      a.download = 'coach-data-' + todayKey() + '.json';
+      a.download = 'lifecoach-data-' + todayKey() + '.json';
       a.click();
       URL.revokeObjectURL(url);
     }
 
     document.getElementById('bottom-nav').addEventListener('click', function (e) {
-      if (e.target.closest('[data-tab="more"]')) { loadSettings(); renderRecipeMgmt(); }
+      if (e.target.closest('[data-tab="more"]')) { loadSettings(); loadReminders(); renderRecipeMgmt(); }
     });
 
     (function initMore() {
       loadSettings();
+      loadReminders();
       renderRecipeMgmt();
     })();
 
@@ -7006,10 +7288,26 @@ Write Sprite's weekly performance report with sections: Nutrition, Training, Rec
       }
     }
 
-    // ── Service Worker (cache-first offline support) ───────────────────────────
+    // ── Notification permission overlay ───────────────────────────────────────
+    (function injectNotifOverlay() {
+      const el = document.createElement('div');
+      el.id = 'notif-overlay'; el.className = 'notif-overlay';
+      el.innerHTML = `
+        <div class="notif-sheet">
+          <h3>Enable Reminders</h3>
+          <p>Life.Coach can remind you to check in each morning and night. Want to enable reminders?</p>
+          <div class="notif-btns">
+            <button class="notif-yes"   onclick="grantNotifications()">Yes please</button>
+            <button class="notif-later" onclick="dismissNotifications()">Maybe later</button>
+          </div>
+        </div>`;
+      document.body.appendChild(el);
+    })();
+
+    // ── Service Worker (cache-first offline + notification click) ─────────────
     if ('serviceWorker' in navigator) {
       const swSrc = `
-        const CACHE = 'coach-v1';
+        const CACHE = 'lifecoach-v2';
         self.addEventListener('install',  () => self.skipWaiting());
         self.addEventListener('activate', e  => e.waitUntil(clients.claim()));
         self.addEventListener('fetch', e => {
@@ -7020,18 +7318,75 @@ Write Sprite's weekly performance report with sections: Nutrition, Training, Rec
                 const network = fetch(e.request).then(resp => {
                   cache.put(e.request, resp.clone());
                   return resp;
-                });
+                }).catch(() => cached);
                 return cached || network;
               })
             )
           );
         });
+        self.addEventListener('notificationclick', e => {
+          e.notification.close();
+          const tag = e.notification.tag || '';
+          e.waitUntil(
+            clients.matchAll({ type: 'window', includeUncontrolled: true }).then(list => {
+              const c = list.find(w => w.visibilityState === 'visible') || list[0];
+              if (c) { c.focus(); c.postMessage({ type: 'notif-nav', tag }); }
+              else   { clients.openWindow('/?notif=' + tag); }
+            })
+          );
+        });
       `;
       try {
-        const blob  = new Blob([swSrc], { type: 'text/javascript' });
+        const blob = new Blob([swSrc], { type: 'text/javascript' });
         navigator.serviceWorker.register(URL.createObjectURL(blob)).catch(() => {});
+        navigator.serviceWorker.addEventListener('message', e => {
+          if (!e.data || e.data.type !== 'notif-nav') return;
+          const tag = e.data.tag || '';
+          if      (tag === 'morning') homeGoCheckin('morning');
+          else if (tag === 'night')   homeGoCheckin('night');
+          else if (tag === 'water')   homeNav('body');
+          else if (tag === 'report')  homeNav('more');
+          else if (tag === 'bday')    homeNav('life');
+        });
       } catch (_) {}
     }
+
+    // ── App startup: pre-load samples + notification prompt ───────────────────
+    (function appStartup() {
+      // Pre-load sample recipes if none saved
+      if (!localStorage.getItem('coach_recipes')) {
+        localStorage.setItem('coach_recipes', JSON.stringify([
+          { name: 'Greek Yogurt + Berries', cal: 180, protein: 20, carbs: 22, fat: 2 },
+          { name: 'Protein Shake', cal: 160, protein: 30, carbs: 8, fat: 3 },
+          { name: 'Chicken + Rice Bowl', cal: 450, protein: 40, carbs: 45, fat: 8 },
+          { name: 'Eggs + Avocado Toast', cal: 380, protein: 18, carbs: 28, fat: 22 },
+        ]));
+      }
+      // Goals and Projects seed themselves via goalsGet() / projGetProjects() on first call
+      // Handle ?notif= URL param (from SW notification click on closed app)
+      const notifParam = new URLSearchParams(location.search).get('notif');
+      if (notifParam) {
+        history.replaceState({}, '', location.pathname);
+        setTimeout(() => {
+          if      (notifParam === 'morning') homeGoCheckin('morning');
+          else if (notifParam === 'night')   homeGoCheckin('night');
+          else if (notifParam === 'water')   homeNav('body');
+          else if (notifParam === 'report')  homeNav('more');
+          else if (notifParam === 'bday')    homeNav('life');
+        }, 300);
+      }
+      // Show notification permission prompt if not yet asked
+      if ('Notification' in window && !localStorage.getItem('anchor_notif_asked')) {
+        if (Notification.permission === 'default') {
+          setTimeout(showNotifPrompt, 2000);
+        } else {
+          localStorage.setItem('anchor_notif_asked', '1');
+          if (Notification.permission === 'granted') scheduleReminders();
+        }
+      } else if ('Notification' in window && Notification.permission === 'granted') {
+        scheduleReminders();
+      }
+    })();
   </script>
 </body>
 </html>
