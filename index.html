@@ -2592,6 +2592,75 @@
     }
     .proj-btn-blue:active { opacity: 0.85; transform: scale(0.98); }
 
+    /* ── Home dashboard glance grid ── */
+    .glance-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .glance-card {
+      background: linear-gradient(160deg, #1e1e1e 0%, #181818 100%);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px;
+      cursor: pointer;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+      transition: border-color 0.15s, transform 0.1s;
+      -webkit-tap-highlight-color: transparent;
+      position: relative;
+      overflow: hidden;
+    }
+    .glance-card:active { transform: scale(0.97); }
+    .glance-card-accent {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      border-radius: 14px 14px 0 0;
+    }
+    .glance-card-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .glance-card-main {
+      font-family: 'Syne', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.3;
+      margin-bottom: 3px;
+    }
+    .glance-card-sub {
+      font-size: 11px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+    /* Daily focus card — lavender border */
+    .daily-focus-card {
+      background: linear-gradient(160deg, #1e1e1e 0%, #181818 100%);
+      border: 1px solid rgba(196,181,253,0.2);
+      border-radius: 16px;
+      padding: 18px;
+      margin-bottom: 14px;
+      box-shadow: 0 0 20px rgba(196,181,253,0.05);
+    }
+    .daily-focus-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: #c4b5fd;
+      margin-bottom: 8px;
+    }
+    .daily-focus-text {
+      font-size: 14px;
+      color: var(--text);
+      line-height: 1.65;
+    }
+
     /* ── Check-in tab ── */
     .checkin-section-nav {
       display: flex;
@@ -2776,14 +2845,71 @@
         <div class="home-avatar">S</div>
       </div>
 
-      <!-- AI Focus Card -->
-      <div class="card ai-card" style="margin-bottom:12px;">
-        <div class="ai-card-label">&#10024; Today's Focus</div>
-        <div class="ai-card-text">AI focus note will appear here.</div>
+      <!-- Birthday banner -->
+      <div id="home-bday-banner" class="bday-banner" style="display:none;margin-bottom:12px;"></div>
+
+      <!-- Life At A Glance grid -->
+      <div class="section-label" style="margin-bottom:10px;">Life at a Glance</div>
+      <div class="glance-grid">
+
+        <!-- Body -->
+        <div class="glance-card" onclick="homeNav('body')">
+          <div class="glance-card-accent" style="background:#b8ff57;"></div>
+          <div class="glance-card-label" style="color:#b8ff57;">Body</div>
+          <div class="glance-card-main" id="glance-body-main">—</div>
+          <div class="glance-card-sub" id="glance-body-sub">Loading…</div>
+        </div>
+
+        <!-- Money -->
+        <div class="glance-card" onclick="homeNav('money')">
+          <div class="glance-card-accent" style="background:#f5c542;"></div>
+          <div class="glance-card-label" style="color:#f5c542;">Money</div>
+          <div class="glance-card-main" id="glance-money-main">—</div>
+          <div class="glance-card-sub" id="glance-money-sub">Loading…</div>
+        </div>
+
+        <!-- Life -->
+        <div class="glance-card" onclick="homeNav('life')">
+          <div class="glance-card-accent" style="background:#ff8c69;"></div>
+          <div class="glance-card-label" style="color:#ff8c69;">Life</div>
+          <div class="glance-card-main" id="glance-life-main">—</div>
+          <div class="glance-card-sub" id="glance-life-sub">Loading…</div>
+        </div>
+
+        <!-- Projects -->
+        <div class="glance-card" onclick="homeNav('projects')">
+          <div class="glance-card-accent" style="background:#7dd3fc;"></div>
+          <div class="glance-card-label" style="color:#7dd3fc;">Projects</div>
+          <div class="glance-card-main" id="glance-projects-main">—</div>
+          <div class="glance-card-sub" id="glance-projects-sub">Loading…</div>
+        </div>
+
+        <!-- Goals -->
+        <div class="glance-card" onclick="homeNav('goals')">
+          <div class="glance-card-accent" style="background:#fbbf24;"></div>
+          <div class="glance-card-label" style="color:#fbbf24;">Goals</div>
+          <div class="glance-card-main" id="glance-goals-main">—</div>
+          <div class="glance-card-sub" id="glance-goals-sub">Loading…</div>
+        </div>
+
+        <!-- Check-in -->
+        <div class="glance-card" onclick="homeGoCheckin('morning')">
+          <div class="glance-card-accent" style="background:#c4b5fd;"></div>
+          <div class="glance-card-label" style="color:#c4b5fd;">Check-in</div>
+          <div class="glance-card-main" id="glance-checkin-main">—</div>
+          <div class="glance-card-sub" id="glance-checkin-sub">Loading…</div>
+        </div>
+
       </div>
 
-      <!-- Check-in status summary cards -->
-      <div class="section-label">Today's Check-ins</div>
+      <!-- Daily Focus AI card -->
+      <div class="daily-focus-card">
+        <div class="daily-focus-label">&#10024; Daily Focus</div>
+        <div class="daily-focus-text" id="home-focus-text">Generating your focus for today…</div>
+      </div>
+
+      <!-- Check-in status row (compact) -->
+      <div class="section-label" style="margin-bottom:10px;">Today's Check-ins</div>
 
       <div id="home-morning-card" class="checkin-status-card" onclick="homeGoCheckin('morning')">
         <div class="checkin-status-icon">☀️</div>
@@ -2803,7 +2929,7 @@
         <span class="checkin-status-badge ready" id="home-night-badge">Tap →</span>
       </div>
 
-      <div id="home-physical-card" class="checkin-status-card" onclick="homeGoCheckin('physical')">
+      <div id="home-physical-card" class="checkin-status-card" style="margin-bottom:20px;" onclick="homeGoCheckin('physical')">
         <div class="checkin-status-icon">⚖️</div>
         <div class="checkin-status-info">
           <div class="checkin-status-title">Physical</div>
@@ -2811,9 +2937,6 @@
         </div>
         <span class="checkin-status-badge ready" id="home-physical-badge">Tap →</span>
       </div>
-
-      <!-- Birthday banner (surfaced from Life tab) -->
-      <div id="home-bday-banner" class="bday-banner" style="display:none;margin-top:4px;"></div>
 
     </div>
     <div id="tab-train" class="tab-panel">
@@ -3865,6 +3988,8 @@
       });
 
       homeUpdateCheckinStatus();
+      homePopulateGlance();
+      generateDailyFocus();
     })();
 
     function homeUpdateCheckinStatus() {
@@ -3906,6 +4031,9 @@
         if (pBadge) { pBadge.textContent = 'Tap →'; pBadge.className = 'checkin-status-badge ready'; }
         if (pSub)   pSub.textContent = 'Weight, body feel & photo';
       }
+
+      // Keep glance grid in sync
+      homePopulateGlance();
     }
 
     function homeGoCheckin(section) {
@@ -3915,6 +4043,108 @@
         const pill = document.querySelector(`.checkin-section-pill[data-csec="${section}"]`);
         if (pill) pill.click();
       }, 60);
+    }
+
+    function homeNav(tabId) {
+      const tab = document.querySelector('.nav-tab[data-tab="' + tabId + '"]');
+      if (tab) tab.click(); else showTab(tabId);
+    }
+
+    function homePopulateGlance() {
+      const key  = todayKey();
+      const now  = new Date();
+
+      // ── Body ──
+      const food     = JSON.parse(localStorage.getItem('coach_food_' + key) || '[]');
+      const totalCal = food.reduce((s, e) => s + (e.cal     || 0), 0);
+      const totalPro = food.reduce((s, e) => s + (e.protein || 0), 0);
+      let latestWeight = null;
+      for (let i = 0; i < 30; i++) {
+        const d = new Date(now); d.setDate(now.getDate() - i);
+        const ds = d.toISOString().split('T')[0];
+        const phys = localStorage.getItem('anchor_checkin_physical_' + ds);
+        if (phys) { const pw = parseFloat(JSON.parse(phys).weight); if (pw > 0) { latestWeight = pw; break; } }
+        const night = localStorage.getItem('coach_night_' + ds);
+        if (night) { const pw = parseFloat(JSON.parse(night)?.body?.weight); if (pw > 0) { latestWeight = pw; break; } }
+      }
+      const dayK = ['sun','mon','tue','wed','thu','fri','sat'][now.getDay()];
+      const wLabel = (WORKOUT_PLAN[dayK] || {}).label || 'Rest';
+      const bodyMain = document.getElementById('glance-body-main');
+      const bodySub  = document.getElementById('glance-body-sub');
+      if (bodyMain) bodyMain.textContent = latestWeight ? latestWeight + ' lbs · ' + wLabel : wLabel;
+      if (bodySub)  bodySub.textContent  = totalCal + ' / 1250 cal · ' + totalPro + 'g / 130g protein';
+
+      // ── Money ──
+      const monthKey    = now.toISOString().slice(0, 7);
+      const budget      = JSON.parse(localStorage.getItem('anchor_budget_'   + monthKey) || '{}');
+      const expenses    = JSON.parse(localStorage.getItem('anchor_expenses_' + monthKey) || '[]');
+      const totalBudget = Object.values(budget).reduce((s, v) => s + (parseFloat(v) || 0), 0);
+      const totalSpent  = expenses.reduce((s, e) => s + (parseFloat(e.amount) || 0), 0);
+      const daysInMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
+      const daysLeft    = daysInMonth - now.getDate();
+      const moneyMain   = document.getElementById('glance-money-main');
+      const moneySub    = document.getElementById('glance-money-sub');
+      if (moneyMain) moneyMain.textContent = totalBudget > 0 ? '$' + Math.round(totalSpent) + ' of $' + Math.round(totalBudget) : expenses.length ? '$' + Math.round(totalSpent) + ' spent' : 'No budget set';
+      if (moneySub)  moneySub.textContent  = daysLeft + ' days left this month';
+
+      // ── Life ──
+      const people  = JSON.parse(localStorage.getItem('anchor_people') || '[]');
+      const events  = JSON.parse(localStorage.getItem('anchor_events') || '[]');
+      const weekEnd = new Date(now); weekEnd.setDate(now.getDate() + 7);
+      const upcomingEvts = events.filter(ev => { const d = new Date(ev.date); return d >= now && d <= weekEnd; });
+      const bdayAlert    = people.find(p => p.bday && lifeDaysUntilBirthday(p.bday) <= 7);
+      const lifeMain     = document.getElementById('glance-life-main');
+      const lifeSub      = document.getElementById('glance-life-sub');
+      if (lifeMain) {
+        if (bdayAlert) {
+          const days = lifeDaysUntilBirthday(bdayAlert.bday);
+          lifeMain.textContent = days === 0 ? bdayAlert.name + '\'s birthday!' : bdayAlert.name + '\'s bday in ' + days + 'd';
+        } else {
+          lifeMain.textContent = upcomingEvts.length + ' event' + (upcomingEvts.length !== 1 ? 's' : '') + ' this week';
+        }
+      }
+      if (lifeSub) lifeSub.textContent = people.length + ' people · ' + events.length + ' events';
+
+      // ── Projects ──
+      const projects       = JSON.parse(localStorage.getItem('anchor_projects') || '[]');
+      const activeProjects = projects.filter(p => p.status !== 'done');
+      let tasksDue = 0;
+      activeProjects.forEach(p => {
+        (p.tasks || []).forEach(t => {
+          if (!t.done && t.due) { const d = new Date(t.due); if (d >= now && d <= weekEnd) tasksDue++; }
+        });
+      });
+      const projMain = document.getElementById('glance-projects-main');
+      const projSub  = document.getElementById('glance-projects-sub');
+      if (projMain) projMain.textContent = activeProjects.length + ' active project' + (activeProjects.length !== 1 ? 's' : '');
+      if (projSub)  projSub.textContent  = tasksDue > 0 ? tasksDue + ' task' + (tasksDue !== 1 ? 's' : '') + ' due this week' : 'No tasks due this week';
+
+      // ── Goals ──
+      const goals       = JSON.parse(localStorage.getItem('anchor_goals') || '[]');
+      const activeGoals = goals.filter(g => !g.done);
+      let urgentGoal = activeGoals[0] || null;
+      activeGoals.forEach(g => {
+        if (g.deadline && urgentGoal && (!urgentGoal.deadline || new Date(g.deadline) < new Date(urgentGoal.deadline))) urgentGoal = g;
+      });
+      const goalsMain = document.getElementById('glance-goals-main');
+      const goalsSub  = document.getElementById('glance-goals-sub');
+      if (goalsMain) goalsMain.textContent = urgentGoal ? urgentGoal.name : (goals.length ? 'All done!' : 'No goals yet');
+      if (goalsSub)  goalsSub.textContent  = urgentGoal ? (urgentGoal.progress || 0) + '% · ' + activeGoals.length + ' active' : goals.length + ' goal' + (goals.length !== 1 ? 's' : '');
+
+      // ── Check-in ──
+      const mData = localStorage.getItem('coach_morning_' + key);
+      const nData = localStorage.getItem('coach_night_'   + key);
+      const pData = localStorage.getItem('anchor_checkin_physical_' + key);
+      const done  = [mData, nData, pData].filter(Boolean).length;
+      const ciMain = document.getElementById('glance-checkin-main');
+      const ciSub  = document.getElementById('glance-checkin-sub');
+      if (ciMain) {
+        if (done === 3)     ciMain.textContent = 'All done ✓';
+        else if (!mData)    ciMain.textContent = 'Morning →';
+        else if (!nData)    ciMain.textContent = 'Night →';
+        else                ciMain.textContent = 'Physical →';
+      }
+      if (ciSub) ciSub.textContent = done + '/3 check-ins today';
     }
 
     // ── Body check-in collapsible ──────────────────────────────────────────────
@@ -5004,7 +5234,7 @@ Write Sprite's weekly performance report with sections: Nutrition, Training, Rec
 
     // ── API Integration ───────────────────────────────────────────────────────
 
-    function buildTodayContext() {
+    function buildLifeContext() {
       const key      = todayKey();
       const date     = new Date();
       const dayNames = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
@@ -5013,32 +5243,68 @@ Write Sprite's weekly performance report with sections: Nutrition, Training, Rec
       const plan     = WORKOUT_PLAN[dayKey];
       let ctx = `Today: ${key} (${dayNames[dayIdx]})\nPlanned workout: ${plan.label}\n`;
 
+      // Morning check-in
       const morning = localStorage.getItem('coach_morning_' + key);
       if (morning) {
         const m = JSON.parse(morning);
         ctx += `Morning — Mood: ${m.mood || '?'}/5, Energy: ${m.energy || '?'}/5, Sleep quality: ${m.sleep || '?'}/5\n`;
       }
 
+      // Nutrition
       const food     = JSON.parse(localStorage.getItem('coach_food_' + key) || '[]');
       const totalCal = food.reduce((s, e) => s + (e.cal     || 0), 0);
       const totalPro = food.reduce((s, e) => s + (e.protein || 0), 0);
       ctx += `Nutrition today: ${totalCal} cal / ${totalPro}g protein (targets: 1250 cal / 130g protein)\n`;
 
+      // Water
       const water = JSON.parse(localStorage.getItem('coach_water_' + key) || '[]');
       ctx += `Water: ${water.filter(Boolean).length}/16 cups\n`;
 
+      // Weight — check physical check-in first, then old night check-in
       for (let i = 0; i < 30; i++) {
-        const d = new Date(date);
-        d.setDate(date.getDate() - i);
-        const night = localStorage.getItem('coach_night_' + d.toISOString().split('T')[0]);
-        if (night) {
-          const w = parseFloat(JSON.parse(night)?.body?.weight);
-          if (w > 0) { ctx += `Latest weight: ${w} lbs\n`; break; }
-        }
+        const d  = new Date(date); d.setDate(date.getDate() - i);
+        const ds = d.toISOString().split('T')[0];
+        const phys = localStorage.getItem('anchor_checkin_physical_' + ds);
+        if (phys) { const pw = parseFloat(JSON.parse(phys).weight); if (pw > 0) { ctx += `Current weight: ${pw} lbs\n`; break; } }
+        const night = localStorage.getItem('coach_night_' + ds);
+        if (night) { const pw = parseFloat(JSON.parse(night)?.body?.weight); if (pw > 0) { ctx += `Current weight: ${pw} lbs\n`; break; } }
+      }
+
+      // Money
+      const monthKey    = date.toISOString().slice(0, 7);
+      const budget      = JSON.parse(localStorage.getItem('anchor_budget_'   + monthKey) || '{}');
+      const expenses    = JSON.parse(localStorage.getItem('anchor_expenses_' + monthKey) || '[]');
+      const totalBudget = Object.values(budget).reduce((s, v) => s + (parseFloat(v) || 0), 0);
+      const totalSpent  = expenses.reduce((s, e) => s + (parseFloat(e.amount) || 0), 0);
+      if (totalBudget > 0)    ctx += `Money: $${Math.round(totalSpent)} spent of $${Math.round(totalBudget)} budget this month\n`;
+      else if (expenses.length) ctx += `Money: $${Math.round(totalSpent)} spent this month\n`;
+
+      // Loans
+      const loans = JSON.parse(localStorage.getItem('anchor_loans') || '[]');
+      if (loans.length) {
+        const totalDebt = loans.reduce((s, l) => s + (parseFloat(l.balance) || 0), 0);
+        ctx += `Loans: $${Math.round(totalDebt)} total remaining\n`;
+      }
+
+      // Active goals
+      const goals       = JSON.parse(localStorage.getItem('anchor_goals') || '[]');
+      const activeGoals = goals.filter(g => !g.done);
+      if (activeGoals.length) {
+        ctx += `Active goals (${activeGoals.length}): ` + activeGoals.slice(0, 3).map(g => `${g.name} ${g.progress || 0}%`).join(', ') + '\n';
+      }
+
+      // Active projects
+      const projects       = JSON.parse(localStorage.getItem('anchor_projects') || '[]');
+      const activeProjects = projects.filter(p => p.status !== 'done');
+      if (activeProjects.length) {
+        ctx += `Active projects (${activeProjects.length}): ` + activeProjects.slice(0, 3).map(p => p.title || p.name).join(', ') + '\n';
       }
 
       return ctx.trim();
     }
+
+    // Backward-compat alias (used by generateMorningFocus, generateWorkoutNote, etc.)
+    function buildTodayContext() { return buildLifeContext(); }
 
     async function claudeCall(model, system, userMsg) {
       const settings = JSON.parse(localStorage.getItem('coach_settings') || '{}');
@@ -5067,14 +5333,35 @@ Write Sprite's weekly performance report with sections: Nutrition, Training, Rec
     }
 
     function focusCardSetText(text) {
-      // Update both home AI card and check-in focus card
-      const homeCard = document.querySelector('#tab-today .ai-card .ai-card-text');
+      // Update home daily focus card
+      const homeCard = document.getElementById('home-focus-text');
       if (homeCard) homeCard.textContent = text;
+      // Also update check-in tab focus card
       const ciCard = document.getElementById('ci-focus-text');
       if (ciCard) {
         ciCard.textContent = text;
         const ciWrapper = document.getElementById('ci-focus-card');
         if (ciWrapper) ciWrapper.style.display = 'block';
+      }
+    }
+
+    async function generateDailyFocus() {
+      const key      = todayKey();
+      const cacheKey = 'anchor_daily_focus_' + key;
+      const cached   = localStorage.getItem(cacheKey);
+      const el       = document.getElementById('home-focus-text');
+      if (cached) { if (el) el.textContent = cached; return; }
+      if (el) el.textContent = 'Generating your focus for today…';
+      try {
+        const text = await claudeCall(
+          'claude-sonnet-4-20250514',
+          'You are Life.Coach, a personal AI sidekick for Sprite, a 34-year-old wellness competitor. You see her full life — fitness, money, goals, relationships, projects. Be honest, warm, specific, and grounded. No toxic positivity. No fluff. Talk to her like a trusted coach who actually knows her life.',
+          buildLifeContext() + '\n\nGenerate today\'s focus note. Connect the dots across her life areas. Surface the one thing that matters most today. Under 80 words.'
+        );
+        localStorage.setItem(cacheKey, text);
+        if (el) el.textContent = text;
+      } catch (e) {
+        if (el) el.textContent = e.message === 'no-key' ? 'Add your API key in Settings to get your daily focus.' : 'Could not load focus — tap to retry.';
       }
     }
 
