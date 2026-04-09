@@ -7261,8 +7261,8 @@ Write Sprite's weekly performance report with sections: Nutrition, Training, Rec
         const pill = e.target.closest('.checkin-section-pill');
         if (!pill) return;
         const sec = pill.dataset.csec;
-        document.querySelectorAll('.checkin-section-pill').forEach(p => p.classList.toggle('active', p === pill));
-        document.querySelectorAll('.checkin-section').forEach(s => s.classList.toggle('active', s.id === 'checkin-' + sec));
+        document.querySelectorAll('#tab-checkin .checkin-section-pill').forEach(p => p.classList.toggle('active', p === pill));
+        document.querySelectorAll('#tab-checkin .checkin-section').forEach(s => s.classList.toggle('active', s.id === 'checkin-' + sec));
       });
 
       // Date sub-header
