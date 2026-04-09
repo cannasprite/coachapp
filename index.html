@@ -1865,6 +1865,305 @@
       border-color: rgba(var(--area-accent-rgb, 251,191,36), 0.35);
     }
 
+    /* ── Life tab ── */
+    .life-section-nav {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+    .life-section-pill {
+      flex: 1;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--muted);
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.15s;
+      white-space: nowrap;
+    }
+    .life-section-pill.active {
+      color: var(--area-accent, #ff8c69);
+      background: rgba(var(--area-accent-rgb, 255,140,105), 0.1);
+      border-color: rgba(var(--area-accent-rgb, 255,140,105), 0.35);
+    }
+    .life-section { display: none; }
+    .life-section.active { display: block; }
+    /* Birthday banner */
+    .bday-banner {
+      background: rgba(255,140,105,0.12);
+      border: 1px solid rgba(255,140,105,0.3);
+      border-radius: 12px;
+      padding: 12px 16px;
+      font-size: 13px;
+      color: #ff8c69;
+      margin-bottom: 14px;
+      line-height: 1.5;
+    }
+    /* Person cards */
+    .person-card {
+      background: linear-gradient(160deg, #1e1e1e 0%, #181818 100%);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 10px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.05), 0 2px 12px rgba(0,0,0,0.4);
+    }
+    .person-card-top {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+    .person-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255,140,105,0.15);
+      border: 1.5px solid rgba(255,140,105,0.35);
+      color: #ff8c69;
+      font-family: 'Syne', sans-serif;
+      font-size: 16px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      text-transform: uppercase;
+    }
+    .person-info { flex: 1; min-width: 0; }
+    .person-name {
+      font-family: 'Syne', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .person-rel {
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 600;
+    }
+    .person-nudge {
+      font-size: 11px;
+      font-weight: 700;
+      color: #ff8c69;
+      margin-top: 2px;
+    }
+    .person-bday-alert {
+      font-size: 11px;
+      font-weight: 700;
+      color: #ff8c69;
+      margin-top: 2px;
+    }
+    .person-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-bottom: 10px;
+    }
+    .person-meta-item {
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .person-meta-item span { color: var(--text); }
+    .person-notes {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.5;
+      margin-bottom: 10px;
+    }
+    .person-actions {
+      display: flex;
+      gap: 8px;
+    }
+    .person-contact-btn {
+      flex: 1;
+      padding: 8px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,140,105,0.3);
+      background: rgba(255,140,105,0.08);
+      color: #ff8c69;
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.15s;
+      text-align: center;
+    }
+    .person-contact-btn:hover { opacity: 0.75; }
+    .person-del-btn {
+      padding: 8px 12px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: none;
+      color: var(--muted);
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .person-del-btn:hover { border-color: var(--warn); color: var(--warn); }
+    /* Events */
+    .event-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .event-item:last-child { border-bottom: none; }
+    .event-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #ff8c69;
+      flex-shrink: 0;
+      margin-top: 5px;
+    }
+    .event-dot.past { background: var(--muted); }
+    .event-info { flex: 1; min-width: 0; }
+    .event-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .event-name.past { color: var(--muted); }
+    .event-when {
+      font-size: 12px;
+      color: #ff8c69;
+      margin-top: 2px;
+    }
+    .event-when.past { color: var(--muted); }
+    .event-notes {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 2px;
+      line-height: 1.4;
+    }
+    .event-recur-badge {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 2px 7px;
+      white-space: nowrap;
+      align-self: center;
+    }
+    .event-del-btn {
+      background: none;
+      border: none;
+      color: var(--muted);
+      cursor: pointer;
+      padding: 4px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      transition: color 0.15s;
+      flex-shrink: 0;
+    }
+    .event-del-btn:hover { color: var(--warn); }
+    .event-del-btn svg { width: 14px; height: 14px; }
+    .past-events-toggle {
+      font-size: 12px;
+      color: var(--muted);
+      cursor: pointer;
+      text-align: center;
+      padding: 8px;
+      display: block;
+      background: none;
+      border: none;
+      width: 100%;
+      font-family: 'Instrument Sans', sans-serif;
+    }
+    .past-events-toggle:hover { color: var(--text); }
+    /* Moments (bucket list) */
+    .moment-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 11px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .moment-item:last-child { border-bottom: none; }
+    .moment-cat-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #ff8c69;
+      flex-shrink: 0;
+    }
+    .moment-cat-dot.done { background: var(--muted); }
+    .moment-text {
+      flex: 1;
+      font-size: 14px;
+      color: var(--text);
+    }
+    .moment-text.done { color: var(--muted); text-decoration: line-through; }
+    .moment-cat-badge {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .moment-done-btn {
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 4px 10px;
+      color: var(--muted);
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+      white-space: nowrap;
+    }
+    .moment-done-btn:hover { border-color: #ff8c69; color: #ff8c69; }
+    .moment-done-btn.done-state { border-color: var(--border); color: var(--muted); opacity: 0.5; }
+    .moment-del-btn {
+      background: none;
+      border: none;
+      color: var(--muted);
+      cursor: pointer;
+      padding: 4px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      transition: color 0.15s;
+    }
+    .moment-del-btn:hover { color: var(--warn); }
+    .moment-del-btn svg { width: 14px; height: 14px; }
+    .life-add-form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .life-btn-coral {
+      width: 100%;
+      padding: 13px;
+      border-radius: 12px;
+      border: none;
+      background: #ff8c69;
+      color: #fff;
+      font-family: 'Syne', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: opacity 0.15s, transform 0.1s;
+    }
+    .life-btn-coral:active { opacity: 0.85; transform: scale(0.98); }
+
     /* ── Toast ── */
     #toast {
       position: fixed;
@@ -2445,7 +2744,148 @@
     </div>
 
     <div id="tab-life" class="tab-panel">
-      <div class="today-header"><h1>Life</h1><p>Life tracking coming soon.</p></div>
+
+      <div class="money-header">
+        <h2>Life</h2>
+        <p>People, events &amp; moments</p>
+      </div>
+
+      <!-- Birthday banner (shown by JS if needed) -->
+      <div id="life-bday-banner" class="bday-banner" style="display:none;"></div>
+
+      <!-- Section nav -->
+      <div class="life-section-nav">
+        <button class="life-section-pill active" data-section="people">People</button>
+        <button class="life-section-pill" data-section="events">Events</button>
+        <button class="life-section-pill" data-section="moments">Moments</button>
+      </div>
+
+      <!-- ── PEOPLE ── -->
+      <div class="life-section active" id="life-people">
+
+        <div id="people-list"><!-- rendered by JS --></div>
+
+        <div class="section-label" style="margin-top:12px;">Add Person</div>
+        <div class="card" style="margin-bottom:16px;">
+          <div class="life-add-form">
+            <div class="money-input-row">
+              <div>
+                <div class="field-label">Name</div>
+                <input type="text" class="money-input" id="person-name" placeholder="Name" />
+              </div>
+              <div>
+                <div class="field-label">Relationship</div>
+                <select class="money-select" id="person-rel">
+                  <option>Family</option>
+                  <option>Friend</option>
+                  <option>Partner</option>
+                  <option>Coach</option>
+                  <option>Colleague</option>
+                  <option>Other</option>
+                </select>
+              </div>
+            </div>
+            <div class="money-input-row">
+              <div>
+                <div class="field-label">Birthday</div>
+                <input type="date" class="money-input" id="person-bday" />
+              </div>
+              <div>
+                <div class="field-label">Phone</div>
+                <input type="tel" class="money-input" id="person-phone" placeholder="555-0100" />
+              </div>
+            </div>
+            <div>
+              <div class="field-label">Address</div>
+              <input type="text" class="money-input" id="person-address" placeholder="Optional" />
+            </div>
+            <div>
+              <div class="field-label">Notes</div>
+              <textarea class="text-input" id="person-notes" rows="2"
+                placeholder="Anything to remember..." style="margin-bottom:0;"></textarea>
+            </div>
+            <button class="life-btn-coral" onclick="lifeSavePerson()">Save Person</button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ── EVENTS ── -->
+      <div class="life-section" id="life-events">
+
+        <div class="card" style="margin-bottom:12px;">
+          <div id="events-upcoming-list"><!-- rendered by JS --></div>
+          <button class="past-events-toggle" id="past-events-toggle" onclick="lifeTogglePastEvents()" style="display:none;">
+            Show past events
+          </button>
+          <div id="events-past-list" style="display:none;"></div>
+        </div>
+
+        <div class="section-label" style="margin-top:12px;">Add Event</div>
+        <div class="card" style="margin-bottom:16px;">
+          <div class="life-add-form">
+            <div>
+              <div class="field-label">Event Name</div>
+              <input type="text" class="money-input" id="event-name" placeholder="e.g. Mom's Birthday" />
+            </div>
+            <div class="money-input-row">
+              <div>
+                <div class="field-label">Date</div>
+                <input type="date" class="money-input" id="event-date" />
+              </div>
+              <div>
+                <div class="field-label">Time (optional)</div>
+                <input type="time" class="money-input" id="event-time" />
+              </div>
+            </div>
+            <div>
+              <div class="field-label">Notes</div>
+              <input type="text" class="money-input" id="event-notes" placeholder="Optional" />
+            </div>
+            <div>
+              <div class="field-label" style="margin-bottom:8px;">Recurring</div>
+              <select class="money-select" id="event-recur">
+                <option value="none">None</option>
+                <option value="weekly">Weekly</option>
+                <option value="monthly">Monthly</option>
+                <option value="yearly">Yearly</option>
+              </select>
+            </div>
+            <button class="life-btn-coral" onclick="lifeSaveEvent()">Save Event</button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ── MOMENTS ── -->
+      <div class="life-section" id="life-moments">
+
+        <div class="card" style="margin-bottom:12px;">
+          <div id="moments-list"><!-- rendered by JS --></div>
+        </div>
+
+        <div class="section-label" style="margin-top:12px;">Add Moment</div>
+        <div class="card" style="margin-bottom:16px;">
+          <div class="life-add-form">
+            <div>
+              <div class="field-label">Description</div>
+              <input type="text" class="money-input" id="moment-desc" placeholder="e.g. See the northern lights" />
+            </div>
+            <div>
+              <div class="field-label" style="margin-bottom:8px;">Category</div>
+              <select class="money-select" id="moment-cat">
+                <option>Travel</option>
+                <option>Experience</option>
+                <option>Personal</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <button class="life-btn-coral" onclick="lifeAddMoment()">+ Add Moment</button>
+          </div>
+        </div>
+
+      </div>
+
     </div>
 
     <div id="tab-projects" class="tab-panel">
@@ -4469,6 +4909,338 @@ Write Sprite's weekly performance report with sections: Nutrition, Training, Rec
     document.querySelector('.nav-tab[data-tab="goals"]').addEventListener('click', function () {
       setTimeout(goalsRender, 50);
     });
+
+    // ── Life tab ───────────────────────────────────────────────────────────────
+
+    /* ── People ── */
+
+    function lifeGetPeople() {
+      const s = localStorage.getItem('anchor_people');
+      return s ? JSON.parse(s) : [];
+    }
+    function lifeSavePeople(arr) { localStorage.setItem('anchor_people', JSON.stringify(arr)); }
+
+    function lifeDaysUntilBirthday(bdayStr) {
+      if (!bdayStr) return null;
+      const today = new Date();
+      const bday  = new Date(bdayStr + 'T12:00:00');
+      let next = new Date(today.getFullYear(), bday.getMonth(), bday.getDate());
+      if (next < today) next.setFullYear(today.getFullYear() + 1);
+      return Math.round((next - today) / 86400000);
+    }
+
+    function lifeDaysSinceContacted(dateStr) {
+      if (!dateStr) return null;
+      const d = new Date(dateStr + 'T12:00:00');
+      return Math.round((Date.now() - d) / 86400000);
+    }
+
+    function lifeRenderPeople() {
+      const people = lifeGetPeople();
+      const container = document.getElementById('people-list');
+      if (!container) return;
+      if (!people.length) {
+        container.innerHTML = '<p style="font-size:13px;color:var(--muted);margin-bottom:12px;">No people added yet.</p>';
+        return;
+      }
+      container.innerHTML = people.map((p, i) => {
+        const daysB  = lifeDaysUntilBirthday(p.birthday);
+        const daysC  = lifeDaysSinceContacted(p.lastContacted);
+        const nudge  = daysC !== null && daysC > 21
+          ? `<div class="person-nudge">&#128338; Due for a check-in (${daysC}d ago)</div>` : '';
+        const bdayAlert = daysB !== null && daysB <= 7
+          ? `<div class="person-bday-alert">&#127874; Birthday in ${daysB} day${daysB !== 1 ? 's' : ''}!</div>` : '';
+        const metaItems = [
+          p.birthday ? `<div class="person-meta-item">Birthday <span>${new Date(p.birthday + 'T12:00:00').toLocaleDateString('en-US', {month:'long', day:'numeric'})}</span></div>` : '',
+          p.phone    ? `<div class="person-meta-item">Phone <span>${p.phone}</span></div>` : '',
+          p.address  ? `<div class="person-meta-item">Address <span>${p.address}</span></div>` : '',
+          p.lastContacted ? `<div class="person-meta-item">Last contacted <span>${new Date(p.lastContacted + 'T12:00:00').toLocaleDateString('en-US', {month:'short', day:'numeric'})}</span></div>` : '',
+        ].filter(Boolean).join('');
+        return `
+          <div class="person-card">
+            <div class="person-card-top">
+              <div class="person-avatar">${(p.name || '?')[0]}</div>
+              <div class="person-info">
+                <div class="person-name">${p.name}</div>
+                <div class="person-rel">${p.relationship}</div>
+                ${nudge}${bdayAlert}
+              </div>
+            </div>
+            ${metaItems ? `<div class="person-meta">${metaItems}</div>` : ''}
+            ${p.notes ? `<div class="person-notes">${p.notes}</div>` : ''}
+            <div class="person-actions">
+              <button class="person-contact-btn" onclick="lifeMarkContacted(${i})">&#9993; Mark Contacted</button>
+              <button class="person-del-btn" onclick="lifeDeletePerson(${i})">Delete</button>
+            </div>
+          </div>`;
+      }).join('');
+    }
+
+    function lifeSavePerson() {
+      const name = (document.getElementById('person-name').value || '').trim();
+      if (!name) { document.getElementById('person-name').style.borderColor = 'var(--warn)'; return; }
+      document.getElementById('person-name').style.borderColor = '';
+      const person = {
+        name,
+        relationship: document.getElementById('person-rel').value,
+        birthday:     document.getElementById('person-bday').value || '',
+        phone:        document.getElementById('person-phone').value.trim(),
+        address:      document.getElementById('person-address').value.trim(),
+        notes:        document.getElementById('person-notes').value.trim(),
+        lastContacted: ''
+      };
+      const people = lifeGetPeople();
+      people.push(person);
+      lifeSavePeople(people);
+      ['person-name','person-phone','person-address','person-notes'].forEach(id => document.getElementById(id).value = '');
+      document.getElementById('person-bday').value = '';
+      lifeRenderPeople();
+      lifeCheckBirthdays();
+      showBadgeToast('Person saved');
+    }
+
+    function lifeMarkContacted(idx) {
+      const people = lifeGetPeople();
+      if (people[idx]) {
+        people[idx].lastContacted = new Date().toISOString().split('T')[0];
+        lifeSavePeople(people);
+        lifeRenderPeople();
+      }
+    }
+
+    function lifeDeletePerson(idx) {
+      const people = lifeGetPeople();
+      people.splice(idx, 1);
+      lifeSavePeople(people);
+      lifeRenderPeople();
+      lifeCheckBirthdays();
+    }
+
+    /* ── Events ── */
+
+    function lifeGetEvents() {
+      const s = localStorage.getItem('anchor_events');
+      return s ? JSON.parse(s) : [];
+    }
+    function lifeSaveEvents(arr) { localStorage.setItem('anchor_events', JSON.stringify(arr)); }
+
+    let lifeShowingPast = false;
+
+    function lifeRenderEvents() {
+      const events  = lifeGetEvents();
+      const today   = new Date().toISOString().split('T')[0];
+      const upcoming = events.filter(e => e.date >= today).sort((a, b) => a.date.localeCompare(b.date));
+      const past     = events.filter(e => e.date < today).sort((a, b) => b.date.localeCompare(a.date));
+
+      const upEl   = document.getElementById('events-upcoming-list');
+      const pastEl = document.getElementById('events-past-list');
+      const togEl  = document.getElementById('past-events-toggle');
+      if (!upEl) return;
+
+      if (!upcoming.length && !past.length) {
+        upEl.innerHTML = '<p style="font-size:13px;color:var(--muted);padding:8px 0;">No events yet.</p>';
+      } else {
+        upEl.innerHTML = upcoming.map(e => lifeEventHTML(e, false)).join('') ||
+          '<p style="font-size:13px;color:var(--muted);padding:8px 0;">No upcoming events.</p>';
+      }
+
+      if (past.length) {
+        togEl.style.display = 'block';
+        togEl.textContent   = lifeShowingPast ? 'Hide past events' : `Show ${past.length} past event${past.length !== 1 ? 's' : ''}`;
+        pastEl.style.display = lifeShowingPast ? 'block' : 'none';
+        pastEl.innerHTML     = past.map(e => lifeEventHTML(e, true)).join('');
+      } else {
+        togEl.style.display = 'none';
+      }
+    }
+
+    function lifeEventHTML(e, isPast) {
+      const d = new Date(e.date + 'T12:00:00');
+      const dateStr = d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+      const timeStr = e.time ? ' · ' + e.time : '';
+      const recur   = e.recur !== 'none' && e.recur ? `<span class="event-recur-badge">${e.recur}</span>` : '';
+      return `
+        <div class="event-item">
+          <div class="event-dot${isPast ? ' past' : ''}"></div>
+          <div class="event-info">
+            <div class="event-name${isPast ? ' past' : ''}">${e.name}</div>
+            <div class="event-when${isPast ? ' past' : ''}">${dateStr}${timeStr}</div>
+            ${e.notes ? `<div class="event-notes">${e.notes}</div>` : ''}
+          </div>
+          ${recur}
+          <button class="event-del-btn" onclick="lifeDeleteEvent('${e.id}')" title="Delete">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/>
+            </svg>
+          </button>
+        </div>`;
+    }
+
+    function lifeTogglePastEvents() {
+      lifeShowingPast = !lifeShowingPast;
+      lifeRenderEvents();
+    }
+
+    function lifeSaveEvent() {
+      const name = (document.getElementById('event-name').value || '').trim();
+      const date = document.getElementById('event-date').value;
+      if (!name || !date) {
+        if (!name) document.getElementById('event-name').style.borderColor = 'var(--warn)';
+        if (!date) document.getElementById('event-date').style.borderColor = 'var(--warn)';
+        return;
+      }
+      document.getElementById('event-name').style.borderColor = '';
+      document.getElementById('event-date').style.borderColor = '';
+      const evt = {
+        id:    Date.now().toString(),
+        name, date,
+        time:  document.getElementById('event-time').value,
+        notes: document.getElementById('event-notes').value.trim(),
+        recur: document.getElementById('event-recur').value
+      };
+      const events = lifeGetEvents();
+      events.push(evt);
+      lifeSaveEvents(events);
+      ['event-name','event-notes'].forEach(id => document.getElementById(id).value = '');
+      document.getElementById('event-date').value = '';
+      document.getElementById('event-time').value = '';
+      document.getElementById('event-recur').value = 'none';
+      lifeRenderEvents();
+      showBadgeToast('Event saved');
+    }
+
+    function lifeDeleteEvent(id) {
+      lifeSaveEvents(lifeGetEvents().filter(e => e.id !== id));
+      lifeRenderEvents();
+    }
+
+    /* ── Moments ── */
+
+    const DEFAULT_MOMENTS = [
+      { id: 'm1', text: 'Take a trip somewhere warm', category: 'Travel', done: false },
+      { id: 'm2', text: 'See a live concert', category: 'Experience', done: false }
+    ];
+
+    function lifeGetMoments() {
+      const s = localStorage.getItem('anchor_moments');
+      if (s) return JSON.parse(s);
+      localStorage.setItem('anchor_moments', JSON.stringify(DEFAULT_MOMENTS));
+      return DEFAULT_MOMENTS;
+    }
+    function lifeSaveMoments(arr) { localStorage.setItem('anchor_moments', JSON.stringify(arr)); }
+
+    function lifeRenderMoments() {
+      const moments = lifeGetMoments();
+      const container = document.getElementById('moments-list');
+      if (!container) return;
+      if (!moments.length) {
+        container.innerHTML = '<p style="font-size:13px;color:var(--muted);padding:8px 0;">No moments yet. Add something to look forward to.</p>';
+        return;
+      }
+      const active = moments.filter(m => !m.done);
+      const done   = moments.filter(m => m.done);
+      const all    = [...active, ...done];
+      container.innerHTML = all.map(m => `
+        <div class="moment-item">
+          <div class="moment-cat-dot${m.done ? ' done' : ''}"></div>
+          <span class="moment-text${m.done ? ' done' : ''}">${m.text}</span>
+          <span class="moment-cat-badge">${m.category}</span>
+          ${!m.done
+            ? `<button class="moment-done-btn" onclick="lifeMomentDone('${m.id}')">Done ✓</button>`
+            : `<button class="moment-done-btn done-state" onclick="lifeMomentUndone('${m.id}')">Undo</button>`}
+          <button class="moment-del-btn" onclick="lifeDeleteMoment('${m.id}')" title="Delete">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/>
+            </svg>
+          </button>
+        </div>`).join('');
+    }
+
+    function lifeMomentDone(id) {
+      const m = lifeGetMoments();
+      const item = m.find(x => x.id === id);
+      if (item) { item.done = true; lifeSaveMoments(m); lifeRenderMoments(); }
+    }
+    function lifeMomentUndone(id) {
+      const m = lifeGetMoments();
+      const item = m.find(x => x.id === id);
+      if (item) { item.done = false; lifeSaveMoments(m); lifeRenderMoments(); }
+    }
+    function lifeDeleteMoment(id) {
+      lifeSaveMoments(lifeGetMoments().filter(x => x.id !== id));
+      lifeRenderMoments();
+    }
+    function lifeAddMoment() {
+      const text = (document.getElementById('moment-desc').value || '').trim();
+      if (!text) { document.getElementById('moment-desc').style.borderColor = 'var(--warn)'; return; }
+      document.getElementById('moment-desc').style.borderColor = '';
+      const moments = lifeGetMoments();
+      moments.unshift({ id: 'm' + Date.now(), text, category: document.getElementById('moment-cat').value, done: false });
+      lifeSaveMoments(moments);
+      document.getElementById('moment-desc').value = '';
+      lifeRenderMoments();
+    }
+
+    /* ── Birthday check (runs on load + on Life tab open) ── */
+
+    function lifeCheckBirthdays() {
+      const people = lifeGetPeople();
+      const soon   = people.filter(p => {
+        const d = lifeDaysUntilBirthday(p.birthday);
+        return d !== null && d <= 7;
+      });
+      const banner = document.getElementById('life-bday-banner');
+      if (banner) {
+        if (soon.length) {
+          banner.textContent = '🎂 Upcoming birthdays: ' + soon.map(p => {
+            const d = lifeDaysUntilBirthday(p.birthday);
+            return `${p.name} (${d === 0 ? 'today!' : 'in ' + d + 'd'})`;
+          }).join(', ');
+          banner.style.display = 'block';
+        } else {
+          banner.style.display = 'none';
+        }
+      }
+      // Surface on home tab if any upcoming
+      const homeBanner = document.getElementById('home-bday-banner');
+      if (homeBanner) {
+        if (soon.length) {
+          homeBanner.textContent = '🎂 ' + soon.map(p => {
+            const d = lifeDaysUntilBirthday(p.birthday);
+            return `${p.name}'s birthday ${d === 0 ? 'is today!' : 'in ' + d + 'd'}`;
+          }).join(' · ');
+          homeBanner.style.display = 'block';
+        } else {
+          homeBanner.style.display = 'none';
+        }
+      }
+    }
+
+    /* ── Life section nav + init ── */
+
+    (function lifeInit() {
+      document.getElementById('life-section-nav') && void 0; // noop guard
+
+      document.querySelector('#tab-life .life-section-nav').addEventListener('click', function(e) {
+        const pill = e.target.closest('.life-section-pill');
+        if (!pill) return;
+        const sec = pill.dataset.section;
+        document.querySelectorAll('.life-section-pill').forEach(p => p.classList.toggle('active', p === pill));
+        document.querySelectorAll('.life-section').forEach(s => s.classList.toggle('active', s.id === 'life-' + sec));
+      });
+    })();
+
+    document.querySelector('.nav-tab[data-tab="life"]').addEventListener('click', function () {
+      setTimeout(() => {
+        lifeRenderPeople();
+        lifeRenderEvents();
+        lifeRenderMoments();
+        lifeCheckBirthdays();
+      }, 50);
+    });
+
+    // Run birthday check on app load too
+    lifeCheckBirthdays();
 
     // ── Service Worker (cache-first offline support) ───────────────────────────
     if ('serviceWorker' in navigator) {
