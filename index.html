@@ -43,6 +43,7 @@
       --accent-money:    #f5c542;
       --accent-life:     #ff8c69;
       --accent-projects: #7dd3fc;
+      --accent-progress: #38bdf8;
       --accent-goals:    #fbbf24;
       --accent-journal:  #fbbf24;
       --accent-chat:     #f0f0f0;
@@ -2058,602 +2059,11 @@
       border-color: rgba(var(--area-accent-rgb, 251,191,36), 0.35);
     }
 
-    /* ── Life tab ── */
-    .life-section-nav {
-      display: flex;
-      gap: 6px;
-      margin-bottom: 16px;
-    }
-    .life-section-pill {
-      flex: 1;
-      padding: 8px 10px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: var(--surface);
-      color: var(--muted);
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: 12px;
-      font-weight: 700;
-      cursor: pointer;
-      text-align: center;
-      transition: all 0.15s;
-      white-space: nowrap;
-    }
-    .life-section-pill.active {
-      color: var(--area-accent, #ff8c69);
-      background: rgba(var(--area-accent-rgb, 255,140,105), 0.1);
-      border-color: rgba(var(--area-accent-rgb, 255,140,105), 0.35);
-    }
-    .life-section { display: none; }
-    .life-section.active { display: block; }
-    /* Birthday banner */
-    .bday-banner {
-      background: rgba(255,140,105,0.12);
-      border: 1px solid rgba(255,140,105,0.3);
-      border-radius: 12px;
-      padding: 12px 16px;
-      font-size: 13px;
-      color: #ff8c69;
-      margin-bottom: 14px;
-      line-height: 1.5;
-    }
-    /* Person cards */
-    .person-card {
-      background: linear-gradient(160deg, #1e1e1e 0%, #181818 100%);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 16px;
-      margin-bottom: 10px;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.05), 0 2px 12px rgba(0,0,0,0.4);
-    }
-    .person-card-top {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 10px;
-    }
-    .person-avatar {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: rgba(255,140,105,0.15);
-      border: 1.5px solid rgba(255,140,105,0.35);
-      color: #ff8c69;
-      font-family: 'Syne', sans-serif;
-      font-size: 16px;
-      font-weight: 800;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      text-transform: uppercase;
-    }
-    .person-info { flex: 1; min-width: 0; }
-    .person-name {
-      font-family: 'Syne', sans-serif;
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--text);
-    }
-    .person-rel {
-      font-size: 11px;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      font-weight: 600;
-    }
-    .person-nudge {
-      font-size: 11px;
-      font-weight: 700;
-      color: #ff8c69;
-      margin-top: 2px;
-    }
-    .person-bday-alert {
-      font-size: 11px;
-      font-weight: 700;
-      color: #ff8c69;
-      margin-top: 2px;
-    }
-    .person-meta {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      margin-bottom: 10px;
-    }
-    .person-meta-item {
-      font-size: 12px;
-      color: var(--muted);
-    }
-    .person-meta-item span { color: var(--text); }
-    .person-notes {
-      font-size: 13px;
-      color: var(--muted);
-      line-height: 1.5;
-      margin-bottom: 10px;
-    }
-    .person-actions {
-      display: flex;
-      gap: 8px;
-    }
-    .person-contact-btn {
-      flex: 1;
-      padding: 8px;
-      border-radius: 10px;
-      border: 1px solid rgba(255,140,105,0.3);
-      background: rgba(255,140,105,0.08);
-      color: #ff8c69;
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: 12px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: opacity 0.15s;
-      text-align: center;
-    }
-    .person-contact-btn:hover { opacity: 0.75; }
-    .person-del-btn {
-      padding: 8px 12px;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      background: none;
-      color: var(--muted);
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: 12px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.15s;
-    }
-    .person-del-btn:hover { border-color: var(--warn); color: var(--warn); }
-    /* Events */
-    .event-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      padding: 12px 0;
-      border-bottom: 1px solid var(--border);
-    }
-    .event-item:last-child { border-bottom: none; }
-    .event-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #ff8c69;
-      flex-shrink: 0;
-      margin-top: 5px;
-    }
-    .event-dot.past { background: var(--muted); }
-    .event-info { flex: 1; min-width: 0; }
-    .event-name {
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--text);
-    }
-    .event-name.past { color: var(--muted); }
-    .event-when {
-      font-size: 12px;
-      color: #ff8c69;
-      margin-top: 2px;
-    }
-    .event-when.past { color: var(--muted); }
-    .event-notes {
-      font-size: 12px;
-      color: var(--muted);
-      margin-top: 2px;
-      line-height: 1.4;
-    }
-    .event-recur-badge {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      color: var(--muted);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 2px 7px;
-      white-space: nowrap;
-      align-self: center;
-    }
-    .event-del-btn {
-      background: none;
-      border: none;
-      color: var(--muted);
-      cursor: pointer;
-      padding: 4px;
-      border-radius: 6px;
-      display: flex;
-      align-items: center;
-      transition: color 0.15s;
-      flex-shrink: 0;
-    }
-    .event-del-btn:hover { color: var(--warn); }
-    .event-del-btn svg { width: 14px; height: 14px; }
-    .past-events-toggle {
-      font-size: 12px;
-      color: var(--muted);
-      cursor: pointer;
-      text-align: center;
-      padding: 8px;
-      display: block;
-      background: none;
-      border: none;
-      width: 100%;
-      font-family: 'Instrument Sans', sans-serif;
-    }
-    .past-events-toggle:hover { color: var(--text); }
-    /* Moments (bucket list) */
-    .moment-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 11px 0;
-      border-bottom: 1px solid var(--border);
-    }
-    .moment-item:last-child { border-bottom: none; }
-    .moment-cat-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: #ff8c69;
-      flex-shrink: 0;
-    }
-    .moment-cat-dot.done { background: var(--muted); }
-    .moment-text {
-      flex: 1;
-      font-size: 14px;
-      color: var(--text);
-    }
-    .moment-text.done { color: var(--muted); text-decoration: line-through; }
-    .moment-cat-badge {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-    .moment-done-btn {
-      background: none;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 4px 10px;
-      color: var(--muted);
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: 11px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.15s;
-      white-space: nowrap;
-    }
-    .moment-done-btn:hover { border-color: #ff8c69; color: #ff8c69; }
-    .moment-done-btn.done-state { border-color: var(--border); color: var(--muted); opacity: 0.5; }
-    .moment-del-btn {
-      background: none;
-      border: none;
-      color: var(--muted);
-      cursor: pointer;
-      padding: 4px;
-      border-radius: 6px;
-      display: flex;
-      align-items: center;
-      transition: color 0.15s;
-    }
-    .moment-del-btn:hover { color: var(--warn); }
-    .moment-del-btn svg { width: 14px; height: 14px; }
-    .life-add-form {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .life-btn-coral {
-      width: 100%;
-      padding: 13px;
-      border-radius: 12px;
-      border: none;
-      background: #ff8c69;
-      color: #fff;
-      font-family: 'Syne', sans-serif;
-      font-size: 15px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: opacity 0.15s, transform 0.1s;
-    }
-    .life-btn-coral:active { opacity: 0.85; transform: scale(0.98); }
-
-    /* ── Projects tab ── */
-    .proj-section-nav {
-      display: flex;
-      gap: 6px;
-      margin-bottom: 16px;
-    }
-    .proj-section-pill {
-      flex: 1;
-      padding: 8px 10px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: var(--surface);
-      color: var(--muted);
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: 12px;
-      font-weight: 700;
-      cursor: pointer;
-      text-align: center;
-      transition: all 0.15s;
-    }
-    .proj-section-pill.active {
-      color: var(--area-accent, #7dd3fc);
-      background: rgba(var(--area-accent-rgb, 125,211,252), 0.1);
-      border-color: rgba(var(--area-accent-rgb, 125,211,252), 0.35);
-    }
-    .proj-section { display: none; }
-    .proj-section.active { display: block; }
-    .project-card {
-      background: linear-gradient(160deg, #1e1e1e 0%, #181818 100%);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 16px;
-      margin-bottom: 12px;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.05), 0 2px 12px rgba(0,0,0,0.4);
-    }
-    .proj-card-top {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 8px;
-      margin-bottom: 10px;
-    }
-    .proj-name {
-      font-family: 'Syne', sans-serif;
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--text);
-      flex: 1;
-    }
-    .proj-status-badge {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      padding: 3px 9px;
-      border-radius: 999px;
-      border: 1px solid;
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
-    .proj-status-badge.inprogress { color: #7dd3fc; border-color: rgba(125,211,252,0.3); background: rgba(125,211,252,0.08); }
-    .proj-status-badge.paused     { color: var(--warn); border-color: rgba(255,159,67,0.3); background: rgba(255,159,67,0.08); }
-    .proj-status-badge.complete   { color: var(--accent); border-color: rgba(184,255,87,0.3); background: rgba(184,255,87,0.08); }
-    .proj-meta-row {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-bottom: 10px;
-    }
-    .proj-meta-item {
-      font-size: 12px;
-      color: var(--muted);
-    }
-    .proj-meta-item span { color: var(--text); font-weight: 600; }
-    .proj-progress-label {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      margin-bottom: 5px;
-    }
-    .proj-progress-text {
-      font-size: 11px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: var(--muted);
-    }
-    .proj-progress-pct {
-      font-family: 'Syne', sans-serif;
-      font-size: 12px;
-      font-weight: 800;
-      color: #7dd3fc;
-    }
-    .proj-progress-bar {
-      height: 5px;
-      background: var(--surface2);
-      border-radius: 3px;
-      overflow: hidden;
-      margin-bottom: 12px;
-    }
-    .proj-progress-fill {
-      height: 100%;
-      border-radius: 3px;
-      background: #7dd3fc;
-      transition: width 0.4s;
-    }
-    .proj-tasks {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      margin-bottom: 12px;
-    }
-    .proj-task {
-      display: flex;
-      align-items: center;
-      gap: 9px;
-      font-size: 13px;
-    }
-    .proj-task input[type="checkbox"] {
-      appearance: none;
-      -webkit-appearance: none;
-      width: 17px;
-      height: 17px;
-      border-radius: 5px;
-      border: 1.5px solid var(--border);
-      background: var(--surface2);
-      flex-shrink: 0;
-      cursor: pointer;
-      transition: border-color 0.15s, background 0.15s;
-      position: relative;
-    }
-    .proj-task input[type="checkbox"]:checked {
-      background: #7dd3fc;
-      border-color: #7dd3fc;
-    }
-    .proj-task input[type="checkbox"]:checked::after {
-      content: '';
-      position: absolute;
-      left: 4px;
-      top: 1px;
-      width: 5px;
-      height: 9px;
-      border: 2px solid #0a0a0a;
-      border-top: none;
-      border-left: none;
-      transform: rotate(45deg);
-    }
-    .proj-task-text { flex: 1; color: var(--text); }
-    .proj-task-text.done { color: var(--muted); text-decoration: line-through; }
-    .proj-task-deadline {
-      font-size: 11px;
-      color: var(--muted);
-      white-space: nowrap;
-    }
-    .proj-task-deadline.overdue { color: var(--warn); }
-    .proj-task-del {
-      background: none;
-      border: none;
-      color: var(--muted);
-      cursor: pointer;
-      padding: 2px 4px;
-      border-radius: 5px;
-      display: flex;
-      align-items: center;
-      transition: color 0.15s;
-      flex-shrink: 0;
-    }
-    .proj-task-del:hover { color: var(--warn); }
-    .proj-task-del svg { width: 12px; height: 12px; }
-    .proj-add-task-form {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 10px;
-      flex-wrap: wrap;
-    }
-    .proj-add-task-form input[type="text"] { flex: 1; min-width: 120px; }
-    .proj-add-task-form input[type="date"] { width: 140px; }
-    .proj-task-add-btn {
-      padding: 8px 14px;
-      border-radius: 10px;
-      border: 1px solid rgba(125,211,252,0.3);
-      background: rgba(125,211,252,0.08);
-      color: #7dd3fc;
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: 12px;
-      font-weight: 700;
-      cursor: pointer;
-      white-space: nowrap;
-      transition: opacity 0.15s;
-    }
-    .proj-task-add-btn:hover { opacity: 0.8; }
-    .proj-card-footer {
-      display: flex;
-      gap: 8px;
-      align-items: center;
-      flex-wrap: wrap;
-      margin-top: 4px;
-    }
-    .proj-status-select {
-      flex: 1;
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 7px 10px;
-      color: var(--text);
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: 12px;
-      outline: none;
-      cursor: pointer;
-      -webkit-appearance: none;
-      appearance: none;
-    }
-    .proj-del-btn {
-      padding: 7px 12px;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      background: none;
-      color: var(--muted);
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: 12px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.15s;
-    }
-    .proj-del-btn:hover { border-color: var(--warn); color: var(--warn); }
-    /* Ideas */
-    .idea-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      padding: 12px 0;
-      border-bottom: 1px solid var(--border);
-    }
-    .idea-item:last-child { border-bottom: none; }
-    .idea-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: #7dd3fc;
-      flex-shrink: 0;
-      margin-top: 5px;
-    }
-    .idea-info { flex: 1; min-width: 0; }
-    .idea-text { font-size: 14px; color: var(--text); line-height: 1.4; }
-    .idea-cat { font-size: 11px; color: var(--muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; margin-top: 2px; }
-    .idea-actions {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      flex-shrink: 0;
-    }
-    .idea-promote-btn {
-      padding: 4px 10px;
-      border-radius: 8px;
-      border: 1px solid rgba(125,211,252,0.3);
-      background: rgba(125,211,252,0.08);
-      color: #7dd3fc;
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: 11px;
-      font-weight: 700;
-      cursor: pointer;
-      white-space: nowrap;
-      transition: opacity 0.15s;
-    }
-    .idea-promote-btn:hover { opacity: 0.8; }
-    .idea-del-btn {
-      background: none;
-      border: none;
-      color: var(--muted);
-      cursor: pointer;
-      font-size: 11px;
-      padding: 2px 6px;
-      border-radius: 6px;
-      font-family: 'Instrument Sans', sans-serif;
-      transition: color 0.15s;
-      text-align: center;
-    }
-    .idea-del-btn:hover { color: var(--warn); }
-    .proj-btn-blue {
-      width: 100%;
-      padding: 13px;
-      border-radius: 12px;
-      border: none;
-      background: #7dd3fc;
-      color: #0a0a0a;
-      font-family: 'Syne', sans-serif;
-      font-size: 15px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: opacity 0.15s, transform 0.1s;
-    }
-    .proj-btn-blue:active { opacity: 0.85; transform: scale(0.98); }
 
     /* ── Home dashboard glance grid ── */
     .glance-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
       gap: 10px;
       margin-bottom: 14px;
     }
@@ -2887,6 +2297,45 @@
       opacity: 1;
       transform: translateX(-50%) translateY(0);
     }
+
+    /* ── Check-in icon row ── */
+    .checkin-icon-row { display: flex; gap: 10px; margin-bottom: 20px; }
+    .checkin-icon-btn {
+      flex: 1; display: flex; flex-direction: column; align-items: center; gap: 5px;
+      padding: 14px 8px; border-radius: 14px;
+      background: linear-gradient(160deg, #1e1e1e 0%, #181818 100%);
+      border: 1px solid var(--border); cursor: pointer; position: relative;
+    }
+    .ci-emoji { font-size: 24px; }
+    .ci-label { font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+    .ci-dot { width: 8px; height: 8px; border-radius: 50%; border: 1.5px solid var(--muted); background: transparent; transition: all 0.2s; }
+    .ci-dot.done { background: var(--accent); border-color: var(--accent); }
+
+    /* ── Inline journal drop-down ── */
+    .ci-journal-toggle { background: none; border: none; color: var(--muted); padding: 14px 0 8px; font-size: 13px; cursor: pointer; display: flex; align-items: center; gap: 6px; width: 100%; }
+    .ci-journal-toggle .chevron { transition: transform 0.2s; display: inline-block; font-size: 11px; }
+    .ci-journal-toggle.open { color: var(--area-accent); }
+    .ci-journal-toggle.open .chevron { transform: rotate(180deg); }
+    .ci-journal-drop { display: none; padding: 14px 16px 16px; }
+    .ci-journal-drop.open { display: block; }
+    .ci-journal-saved { font-size: 11px; color: var(--accent); margin-top: 8px; min-height: 14px; letter-spacing: 0.04em; }
+
+    /* ── Progress tab ── */
+    .streak-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 16px; }
+    .streak-item { background: linear-gradient(160deg, #1e1e1e 0%, #181818 100%); border: 1px solid var(--border); border-radius: 14px; padding: 14px; text-align: center; }
+    .streak-val { font-size: 28px; font-weight: 800; color: var(--accent-progress); font-family: 'Syne', sans-serif; }
+    .streak-lbl { font-size: 11px; color: var(--muted); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.06em; }
+    .chart-legend { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 8px; }
+    .legend-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-right: 4px; }
+    .chart-legend span { font-size: 12px; color: var(--muted); display: flex; align-items: center; }
+
+    /* ── Cardio scan button ── */
+    .cardio-scan-btn {
+      background: none; border: 1px solid var(--border); border-radius: 8px;
+      padding: 4px 10px; cursor: pointer; font-size: 16px; color: var(--muted);
+      transition: border-color 0.15s, color 0.15s; line-height: 1;
+    }
+    .cardio-scan-btn:hover { border-color: var(--accent); color: var(--accent); }
   </style>
 </head>
 <body>
@@ -2918,22 +2367,6 @@
           <div class="glance-card-sub" id="glance-body-sub">Loading…</div>
         </div>
 
-        <!-- Life -->
-        <div class="glance-card" onclick="homeNav('life')">
-          <div class="glance-card-accent" style="background:#ff8c69;"></div>
-          <div class="glance-card-label" style="color:#ff8c69;">Life</div>
-          <div class="glance-card-main" id="glance-life-main">—</div>
-          <div class="glance-card-sub" id="glance-life-sub">Loading…</div>
-        </div>
-
-        <!-- Projects -->
-        <div class="glance-card" onclick="homeNav('projects')">
-          <div class="glance-card-accent" style="background:#7dd3fc;"></div>
-          <div class="glance-card-label" style="color:#7dd3fc;">Projects</div>
-          <div class="glance-card-main" id="glance-projects-main">—</div>
-          <div class="glance-card-sub" id="glance-projects-sub">Loading…</div>
-        </div>
-
         <!-- Goals -->
         <div class="glance-card" onclick="homeNav('goals')">
           <div class="glance-card-accent" style="background:#fbbf24;"></div>
@@ -2958,34 +2391,24 @@
         <div class="daily-focus-text" id="home-focus-text">Generating your focus for today…</div>
       </div>
 
-      <!-- Check-in status row (compact) -->
+      <!-- Check-in icon row -->
       <div class="section-label" style="margin-bottom:10px;">Today's Check-ins</div>
-
-      <div id="home-morning-card" class="checkin-status-card" onclick="homeGoCheckin('morning')">
-        <div class="checkin-status-icon">☀️</div>
-        <div class="checkin-status-info">
-          <div class="checkin-status-title">Morning Check-in</div>
-          <div class="checkin-status-sub" id="home-morning-sub">Log mood, energy &amp; sleep</div>
-        </div>
-        <span class="checkin-status-badge ready" id="home-morning-badge">Tap →</span>
-      </div>
-
-      <div id="home-night-card" class="checkin-status-card" onclick="homeGoCheckin('night')">
-        <div class="checkin-status-icon">🌙</div>
-        <div class="checkin-status-info">
-          <div class="checkin-status-title">Night Close-out</div>
-          <div class="checkin-status-sub" id="home-night-sub">Log your win &amp; habits</div>
-        </div>
-        <span class="checkin-status-badge ready" id="home-night-badge">Tap →</span>
-      </div>
-
-      <div id="home-physical-card" class="checkin-status-card" style="margin-bottom:20px;" onclick="homeGoCheckin('physical')">
-        <div class="checkin-status-icon">⚖️</div>
-        <div class="checkin-status-info">
-          <div class="checkin-status-title">Physical</div>
-          <div class="checkin-status-sub" id="home-physical-sub">Weight, body feel &amp; photo</div>
-        </div>
-        <span class="checkin-status-badge ready" id="home-physical-badge">Tap →</span>
+      <div class="checkin-icon-row">
+        <button class="checkin-icon-btn" onclick="homeGoCheckin('morning')">
+          <span class="ci-emoji">☀️</span>
+          <span class="ci-label">Morning</span>
+          <span class="ci-dot" id="ci-dot-morning"></span>
+        </button>
+        <button class="checkin-icon-btn" onclick="homeGoCheckin('night')">
+          <span class="ci-emoji">🌙</span>
+          <span class="ci-label">Night</span>
+          <span class="ci-dot" id="ci-dot-night"></span>
+        </button>
+        <button class="checkin-icon-btn" onclick="homeGoCheckin('physical')">
+          <span class="ci-emoji">⚖️</span>
+          <span class="ci-label">Body</span>
+          <span class="ci-dot" id="ci-dot-physical"></span>
+        </button>
       </div>
 
     </div>
@@ -2998,7 +2421,6 @@
       <div class="checkin-section-nav" id="body-section-nav">
         <button class="checkin-section-pill active" data-bsec="train" onclick="showBodySection('train')">Train</button>
         <button class="checkin-section-pill" data-bsec="eat"   onclick="showBodySection('eat')">Eat</button>
-        <button class="checkin-section-pill" data-bsec="stats" onclick="showBodySection('stats')">Stats</button>
       </div>
 
       <!-- ── TRAIN ── -->
@@ -3017,6 +2439,7 @@
           <button class="day-pill" data-day="sun" onclick="selectDay('sun')">Sun</button>
         </div>
         <div id="workout-content"></div>
+        <input type="file" id="cardio-photo-input" accept="image/*" capture="environment" style="display:none;" />
       </div>
 
       <!-- ── EAT ── -->
@@ -3140,46 +2563,6 @@
       <div id="recipes-list"></div>
       </div><!-- end body-section-eat -->
 
-      <!-- ── STATS ── -->
-      <div class="checkin-section" id="body-section-stats">
-        <div class="today-header">
-          <h2 style="font-size:22px;font-weight:700;letter-spacing:-0.3px;">Stats</h2>
-        </div>
-
-        <!-- Weight trend -->
-        <div class="section-label">Weight Trend</div>
-        <div class="card" style="padding:16px;">
-          <canvas id="weight-chart"></canvas>
-          <p id="weight-chart-empty" style="text-align:center;color:var(--muted);font-size:13px;padding:20px 0;">No weight data yet — log your weight in the Physical check-in.</p>
-        </div>
-
-        <!-- This week -->
-        <div class="section-label" style="margin-top:16px;">This Week</div>
-        <div class="card"><div class="week-grid" id="week-grid"></div></div>
-
-        <!-- Current plan -->
-        <div class="section-label" style="margin-top:16px;">Current Plan</div>
-        <div class="card">
-          <div class="plan-grid">
-            <div class="plan-item"><span class="plan-val">125</span><span class="plan-lbl">Goal lbs</span></div>
-            <div class="plan-item"><span class="plan-val">1,250</span><span class="plan-lbl">Calories</span></div>
-            <div class="plan-item"><span class="plan-val">130g</span><span class="plan-lbl">Protein</span></div>
-            <div class="plan-item"><span class="plan-val">6</span><span class="plan-lbl">Days / wk</span></div>
-          </div>
-        </div>
-
-        <!-- Personal records -->
-        <div class="section-label" style="margin-top:16px;">Personal Records</div>
-        <div class="card" id="pr-card">
-          <p style="color:var(--muted);font-size:13px;">No PRs yet. Save a workout to start tracking.</p>
-        </div>
-
-        <!-- Cardio history -->
-        <div class="section-label" style="margin-top:16px;">Cardio History</div>
-        <div class="card" id="cardio-history-card">
-          <p style="color:var(--muted);font-size:13px;">No cardio logged yet.</p>
-        </div>
-      </div><!-- end body-section-stats -->
 
     </div><!-- end tab-body -->
 
@@ -3200,42 +2583,84 @@
       </div>
     </div>
 
-    <div id="tab-journal" class="tab-panel">
-      <div class="today-header">
-        <h2 style="font-size:22px;font-weight:700;letter-spacing:-0.3px;">Journal</h2>
-        <p style="font-size:13px;color:var(--muted);margin-top:2px;" id="journal-date"></p>
+    <div id="tab-progress" class="tab-panel">
+      <div class="money-header">
+        <h2>Progress</h2>
+        <p>Your trends &amp; records</p>
       </div>
 
+      <!-- Personal Records -->
+      <div class="section-label">Personal Records</div>
+      <div class="card" id="pr-card">
+        <p style="color:var(--muted);font-size:13px;">No PRs yet. Save a workout to start tracking.</p>
+      </div>
+
+      <!-- Weight Trend -->
+      <div class="section-label" style="margin-top:16px;">Weight Trend</div>
+      <div class="card" style="padding:16px;">
+        <canvas id="weight-chart"></canvas>
+        <p id="weight-chart-empty" style="text-align:center;color:var(--muted);font-size:13px;padding:20px 0;">No weight data yet — log your weight in the Physical check-in.</p>
+      </div>
+
+      <!-- This Week -->
+      <div class="section-label" style="margin-top:16px;">This Week</div>
+      <div class="card"><div class="week-grid" id="week-grid"></div></div>
+
+      <!-- Workout Volume -->
+      <div class="section-label" style="margin-top:16px;">Workout Volume (8 weeks)</div>
+      <div class="card" style="padding:16px;">
+        <canvas id="volume-chart"></canvas>
+        <p id="volume-chart-empty" style="text-align:center;color:var(--muted);font-size:13px;padding:20px 0;">Log workouts to see volume trend.</p>
+      </div>
+
+      <!-- Training Streak -->
+      <div class="section-label" style="margin-top:16px;">Training Streak</div>
       <div class="card">
-        <div class="field-label">Mood</div>
-        <div class="emoji-scale">
-          <input type="radio" name="journal-mood" id="jmood-1" value="1" /><label for="jmood-1">😞</label>
-          <input type="radio" name="journal-mood" id="jmood-2" value="2" /><label for="jmood-2">😕</label>
-          <input type="radio" name="journal-mood" id="jmood-3" value="3" /><label for="jmood-3">😐</label>
-          <input type="radio" name="journal-mood" id="jmood-4" value="4" /><label for="jmood-4">🙂</label>
-          <input type="radio" name="journal-mood" id="jmood-5" value="5" /><label for="jmood-5">😄</label>
+        <div class="streak-grid">
+          <div class="streak-item"><span class="streak-val" id="streak-current">0</span><span class="streak-lbl">Current</span></div>
+          <div class="streak-item"><span class="streak-val" id="streak-longest">0</span><span class="streak-lbl">Longest</span></div>
+          <div class="streak-item"><span class="streak-val" id="streak-month">0</span><span class="streak-lbl">This month</span></div>
         </div>
-
-        <div class="field-label">Tags</div>
-        <div class="tag-pills" id="journal-tags">
-          <button class="tag-pill" data-tag="energy"   onclick="toggleTag(this)">energy</button>
-          <button class="tag-pill" data-tag="food"     onclick="toggleTag(this)">food</button>
-          <button class="tag-pill" data-tag="training" onclick="toggleTag(this)">training</button>
-          <button class="tag-pill" data-tag="body"     onclick="toggleTag(this)">body</button>
-          <button class="tag-pill" data-tag="mental"   onclick="toggleTag(this)">mental</button>
-        </div>
-
-        <div class="field-label">Entry</div>
-        <textarea class="text-input" id="journal-text" rows="4" placeholder="What's on your mind today?"></textarea>
-
-        <div class="field-label">Today's Win</div>
-        <textarea class="text-input" id="journal-win" rows="2" placeholder="One thing you're proud of…"></textarea>
-
-        <button class="btn-primary" onclick="saveJournalEntry()">Save Entry</button>
       </div>
 
-      <div class="section-label" style="margin-top:16px;">Past Entries</div>
-      <div id="journal-entries-list"></div>
+      <!-- Calories & Protein -->
+      <div class="section-label" style="margin-top:16px;">Calories &amp; Protein (30 days)</div>
+      <div class="card" style="padding:16px;">
+        <canvas id="calprotein-chart"></canvas>
+        <div class="chart-legend">
+          <span><span class="legend-dot" style="background:#b8ff57;"></span>Calories vs 1250</span>
+          <span><span class="legend-dot" style="background:#c4b5fd;"></span>Protein vs 130g</span>
+        </div>
+        <p id="calprotein-empty" style="text-align:center;color:var(--muted);font-size:13px;padding:20px 0;">Log food to see trends.</p>
+      </div>
+
+      <!-- Sleep & Mood Trend -->
+      <div class="section-label" style="margin-top:16px;">Sleep &amp; Mood (14 days)</div>
+      <div class="card" style="padding:16px;">
+        <canvas id="moodsleep-chart"></canvas>
+        <div class="chart-legend">
+          <span><span class="legend-dot" style="background:#ff7eb3;"></span>Mood</span>
+          <span><span class="legend-dot" style="background:#7b6fff;"></span>Sleep</span>
+        </div>
+        <p id="moodsleep-empty" style="text-align:center;color:var(--muted);font-size:13px;padding:20px 0;">Log morning check-ins to see trends.</p>
+      </div>
+
+      <!-- Cardio History -->
+      <div class="section-label" style="margin-top:16px;">Cardio History</div>
+      <div class="card" id="cardio-history-card">
+        <p style="color:var(--muted);font-size:13px;">No cardio logged yet.</p>
+      </div>
+
+      <!-- Current Plan -->
+      <div class="section-label" style="margin-top:16px;">Current Plan</div>
+      <div class="card" style="margin-bottom:24px;">
+        <div class="plan-grid">
+          <div class="plan-item"><span class="plan-val">125</span><span class="plan-lbl">Goal lbs</span></div>
+          <div class="plan-item"><span class="plan-val">1,250</span><span class="plan-lbl">Calories</span></div>
+          <div class="plan-item"><span class="plan-val">130g</span><span class="plan-lbl">Protein</span></div>
+          <div class="plan-item"><span class="plan-val">6</span><span class="plan-lbl">Days / wk</span></div>
+        </div>
+      </div>
     </div>
 
     <div id="tab-more" class="tab-panel">
@@ -3434,6 +2859,19 @@
               <label class="check-item"><input type="checkbox" id="check-meal"  /> Ate pre-workout meal</label>
             </div>
             <button class="btn-primary" onclick="saveMorning()">Save Morning</button>
+            <button type="button" class="ci-journal-toggle" onclick="ciToggleJournal('morning')">&#128211; Add journal note <span class="chevron">&#9662;</span></button>
+            <div class="ci-journal-drop card" id="ci-journal-drop-morning" style="margin-top:0;">
+              <div class="tag-pills" id="ci-journal-tags-morning">
+                <button type="button" class="tag-pill" data-tag="energy" onclick="ciToggleJournalTag(this)">energy</button>
+                <button type="button" class="tag-pill" data-tag="food" onclick="ciToggleJournalTag(this)">food</button>
+                <button type="button" class="tag-pill" data-tag="training" onclick="ciToggleJournalTag(this)">training</button>
+                <button type="button" class="tag-pill" data-tag="body" onclick="ciToggleJournalTag(this)">body</button>
+                <button type="button" class="tag-pill" data-tag="mental" onclick="ciToggleJournalTag(this)">mental</button>
+              </div>
+              <textarea class="text-input" id="ci-journal-text-morning" rows="3" placeholder="What's on your mind?" style="margin-top:10px;"></textarea>
+              <button class="btn-secondary" style="margin-top:8px;" onclick="ciSaveJournal('morning')">Save Note</button>
+              <div class="ci-journal-saved" id="ci-journal-saved-morning"></div>
+            </div>
           </div>
 
           <!-- AI Focus card (shown after save) -->
@@ -3506,6 +2944,19 @@
               </div>
             </div>
             <button class="btn-primary night" style="margin-top:16px;" onclick="saveNight()">Close Out Day</button>
+            <button type="button" class="ci-journal-toggle" onclick="ciToggleJournal('night')">&#128211; Add journal note <span class="chevron">&#9662;</span></button>
+            <div class="ci-journal-drop card" id="ci-journal-drop-night" style="margin-top:0;">
+              <div class="tag-pills" id="ci-journal-tags-night">
+                <button type="button" class="tag-pill" data-tag="energy" onclick="ciToggleJournalTag(this)">energy</button>
+                <button type="button" class="tag-pill" data-tag="food" onclick="ciToggleJournalTag(this)">food</button>
+                <button type="button" class="tag-pill" data-tag="training" onclick="ciToggleJournalTag(this)">training</button>
+                <button type="button" class="tag-pill" data-tag="body" onclick="ciToggleJournalTag(this)">body</button>
+                <button type="button" class="tag-pill" data-tag="mental" onclick="ciToggleJournalTag(this)">mental</button>
+              </div>
+              <textarea class="text-input" id="ci-journal-text-night" rows="3" placeholder="What's on your mind?" style="margin-top:10px;"></textarea>
+              <button class="btn-secondary" style="margin-top:8px;" onclick="ciSaveJournal('night')">Save Note</button>
+              <div class="ci-journal-saved" id="ci-journal-saved-night"></div>
+            </div>
           </div>
           <!-- Goodnight Card -->
           <div class="card ai-card hidden" id="goodnight-card" style="margin-top:12px;">
@@ -3562,6 +3013,19 @@
             <div id="phys-photo-preview"></div>
 
             <button class="btn-primary" style="margin-top:16px;" onclick="savePhysical()">Save Physical</button>
+            <button type="button" class="ci-journal-toggle" onclick="ciToggleJournal('physical')">&#128211; Add journal note <span class="chevron">&#9662;</span></button>
+            <div class="ci-journal-drop card" id="ci-journal-drop-physical" style="margin-top:0;">
+              <div class="tag-pills" id="ci-journal-tags-physical">
+                <button type="button" class="tag-pill" data-tag="energy" onclick="ciToggleJournalTag(this)">energy</button>
+                <button type="button" class="tag-pill" data-tag="food" onclick="ciToggleJournalTag(this)">food</button>
+                <button type="button" class="tag-pill" data-tag="training" onclick="ciToggleJournalTag(this)">training</button>
+                <button type="button" class="tag-pill" data-tag="body" onclick="ciToggleJournalTag(this)">body</button>
+                <button type="button" class="tag-pill" data-tag="mental" onclick="ciToggleJournalTag(this)">mental</button>
+              </div>
+              <textarea class="text-input" id="ci-journal-text-physical" rows="3" placeholder="What's on your mind?" style="margin-top:10px;"></textarea>
+              <button class="btn-secondary" style="margin-top:8px;" onclick="ciSaveJournal('physical')">Save Note</button>
+              <div class="ci-journal-saved" id="ci-journal-saved-physical"></div>
+            </div>
           </div>
 
           <!-- Photo comparison -->
@@ -3587,233 +3051,6 @@
     </div>
 
 
-    <div id="tab-life" class="tab-panel">
-
-      <div class="money-header">
-        <h2>Life</h2>
-        <p>People, events &amp; moments</p>
-      </div>
-
-      <!-- Birthday banner (shown by JS if needed) -->
-      <div id="life-bday-banner" class="bday-banner" style="display:none;"></div>
-
-      <!-- Section nav -->
-      <div class="life-section-nav">
-        <button class="life-section-pill active" data-section="people">People</button>
-        <button class="life-section-pill" data-section="events">Events</button>
-        <button class="life-section-pill" data-section="moments">Moments</button>
-      </div>
-
-      <!-- ── PEOPLE ── -->
-      <div class="life-section active" id="life-people">
-
-        <div id="people-list"><!-- rendered by JS --></div>
-
-        <div class="section-label" style="margin-top:12px;">Add Person</div>
-        <div class="card" style="margin-bottom:16px;">
-          <div class="life-add-form">
-            <div class="money-input-row">
-              <div>
-                <div class="field-label">Name</div>
-                <input type="text" class="money-input" id="person-name" placeholder="Name" />
-              </div>
-              <div>
-                <div class="field-label">Relationship</div>
-                <select class="money-select" id="person-rel">
-                  <option>Family</option>
-                  <option>Friend</option>
-                  <option>Partner</option>
-                  <option>Coach</option>
-                  <option>Colleague</option>
-                  <option>Other</option>
-                </select>
-              </div>
-            </div>
-            <div class="money-input-row">
-              <div>
-                <div class="field-label">Birthday</div>
-                <input type="date" class="money-input" id="person-bday" />
-              </div>
-              <div>
-                <div class="field-label">Phone</div>
-                <input type="tel" class="money-input" id="person-phone" placeholder="555-0100" />
-              </div>
-            </div>
-            <div>
-              <div class="field-label">Address</div>
-              <input type="text" class="money-input" id="person-address" placeholder="Optional" />
-            </div>
-            <div>
-              <div class="field-label">Notes</div>
-              <textarea class="text-input" id="person-notes" rows="2"
-                placeholder="Anything to remember..." style="margin-bottom:0;"></textarea>
-            </div>
-            <button class="life-btn-coral" onclick="lifeSavePerson()">Save Person</button>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- ── EVENTS ── -->
-      <div class="life-section" id="life-events">
-
-        <div class="card" style="margin-bottom:12px;">
-          <div id="events-upcoming-list"><!-- rendered by JS --></div>
-          <button class="past-events-toggle" id="past-events-toggle" onclick="lifeTogglePastEvents()" style="display:none;">
-            Show past events
-          </button>
-          <div id="events-past-list" style="display:none;"></div>
-        </div>
-
-        <div class="section-label" style="margin-top:12px;">Add Event</div>
-        <div class="card" style="margin-bottom:16px;">
-          <div class="life-add-form">
-            <div>
-              <div class="field-label">Event Name</div>
-              <input type="text" class="money-input" id="event-name" placeholder="e.g. Mom's Birthday" />
-            </div>
-            <div class="money-input-row">
-              <div>
-                <div class="field-label">Date</div>
-                <input type="date" class="money-input" id="event-date" />
-              </div>
-              <div>
-                <div class="field-label">Time (optional)</div>
-                <input type="time" class="money-input" id="event-time" />
-              </div>
-            </div>
-            <div>
-              <div class="field-label">Notes</div>
-              <input type="text" class="money-input" id="event-notes" placeholder="Optional" />
-            </div>
-            <div>
-              <div class="field-label" style="margin-bottom:8px;">Recurring</div>
-              <select class="money-select" id="event-recur">
-                <option value="none">None</option>
-                <option value="weekly">Weekly</option>
-                <option value="monthly">Monthly</option>
-                <option value="yearly">Yearly</option>
-              </select>
-            </div>
-            <button class="life-btn-coral" onclick="lifeSaveEvent()">Save Event</button>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- ── MOMENTS ── -->
-      <div class="life-section" id="life-moments">
-
-        <div class="card" style="margin-bottom:12px;">
-          <div id="moments-list"><!-- rendered by JS --></div>
-        </div>
-
-        <div class="section-label" style="margin-top:12px;">Add Moment</div>
-        <div class="card" style="margin-bottom:16px;">
-          <div class="life-add-form">
-            <div>
-              <div class="field-label">Description</div>
-              <input type="text" class="money-input" id="moment-desc" placeholder="e.g. See the northern lights" />
-            </div>
-            <div>
-              <div class="field-label" style="margin-bottom:8px;">Category</div>
-              <select class="money-select" id="moment-cat">
-                <option>Travel</option>
-                <option>Experience</option>
-                <option>Personal</option>
-                <option>Other</option>
-              </select>
-            </div>
-            <button class="life-btn-coral" onclick="lifeAddMoment()">+ Add Moment</button>
-          </div>
-        </div>
-
-      </div>
-
-    </div>
-
-    <div id="tab-projects" class="tab-panel">
-
-      <div class="money-header">
-        <h2>Projects</h2>
-        <p>Active projects &amp; ideas</p>
-      </div>
-
-      <div class="proj-section-nav">
-        <button class="proj-section-pill active" data-psec="active">Active</button>
-        <button class="proj-section-pill" data-psec="ideas">Ideas</button>
-      </div>
-
-      <!-- ── ACTIVE PROJECTS ── -->
-      <div class="proj-section active" id="proj-active">
-
-        <div id="projects-list"><!-- rendered by JS --></div>
-
-        <div class="section-label" style="margin-top:8px;">Add Project</div>
-        <div class="card" style="margin-bottom:16px;">
-          <div style="display:flex;flex-direction:column;gap:10px;">
-            <div>
-              <div class="field-label">Project Name</div>
-              <input type="text" class="money-input" id="proj-name-input" placeholder="e.g. Bedroom reset" />
-            </div>
-            <div>
-              <div class="field-label" style="margin-bottom:8px;">Deadline</div>
-              <div style="display:flex;gap:8px;align-items:center;">
-                <label style="display:flex;align-items:center;gap:6px;font-size:13px;color:var(--muted);cursor:pointer;">
-                  <input type="checkbox" id="proj-deadline-toggle" onchange="projToggleDeadline()" style="accent-color:#7dd3fc;" />
-                  Has deadline
-                </label>
-                <input type="date" class="money-input" id="proj-deadline-date" style="display:none;flex:1;" />
-              </div>
-            </div>
-            <div>
-              <div class="field-label" style="margin-bottom:8px;">Budget</div>
-              <div style="display:flex;gap:8px;align-items:center;">
-                <label style="display:flex;align-items:center;gap:6px;font-size:13px;color:var(--muted);cursor:pointer;">
-                  <input type="checkbox" id="proj-budget-toggle" onchange="projToggleBudget()" style="accent-color:#7dd3fc;" />
-                  Has budget
-                </label>
-                <input type="number" class="money-input" id="proj-budget-amount" placeholder="$0" min="0"
-                  style="display:none;flex:1;" />
-              </div>
-            </div>
-            <button class="proj-btn-blue" onclick="projSaveProject()">Save Project</button>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- ── IDEAS ── -->
-      <div class="proj-section" id="proj-ideas">
-
-        <div class="card" style="margin-bottom:12px;">
-          <div id="ideas-list"><!-- rendered by JS --></div>
-        </div>
-
-        <div class="section-label" style="margin-top:8px;">Add Idea</div>
-        <div class="card" style="margin-bottom:16px;">
-          <div style="display:flex;flex-direction:column;gap:10px;">
-            <div>
-              <div class="field-label">Idea</div>
-              <input type="text" class="money-input" id="idea-text-input" placeholder="What are you thinking about?" />
-            </div>
-            <div>
-              <div class="field-label" style="margin-bottom:8px;">Category</div>
-              <select class="money-select" id="idea-cat-input">
-                <option>Travel</option>
-                <option>Home</option>
-                <option>Business</option>
-                <option>Personal</option>
-                <option>Other</option>
-              </select>
-            </div>
-            <button class="proj-btn-blue" onclick="projAddIdea()">+ Add Idea</button>
-          </div>
-        </div>
-
-      </div>
-
-    </div>
 
     <div id="tab-goals" class="tab-panel">
 
@@ -3900,29 +3137,17 @@
           </svg>
           Body
         </button>
-        <button class="nav-tab" data-tab="life" data-accent="#ff8c69" data-accent-rgb="255,140,105">
+        <button class="nav-tab" data-tab="progress" data-accent="#38bdf8" data-accent-rgb="56,189,248">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
           </svg>
-          Life
-        </button>
-        <button class="nav-tab" data-tab="projects" data-accent="#7dd3fc" data-accent-rgb="125,211,252">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/>
-          </svg>
-          Projects
+          Progress
         </button>
         <button class="nav-tab" data-tab="goals" data-accent="#fbbf24" data-accent-rgb="251,191,36">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>
           </svg>
           Goals
-        </button>
-        <button class="nav-tab" data-tab="journal" data-accent="#fbbf24" data-accent-rgb="251,191,36">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
-          </svg>
-          Journal
         </button>
         <button class="nav-tab" data-tab="chat" data-accent="#f0f0f0" data-accent-rgb="240,240,240">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -3950,6 +3175,32 @@
     function getHour() {
       return new Date().getHours();
     }
+
+    function daysUntilBirthday(bdayStr) {
+      if (!bdayStr) return null;
+      const today = new Date();
+      const bday  = new Date(bdayStr);
+      const next  = new Date(today.getFullYear(), bday.getMonth(), bday.getDate());
+      if (next < today) next.setFullYear(today.getFullYear() + 1);
+      return Math.round((next - today) / 86400000);
+    }
+
+    function checkHomeBirthdays() {
+      const people = JSON.parse(localStorage.getItem('anchor_people') || '[]');
+      const soon   = people.filter(p => { const d = daysUntilBirthday(p.birthday); return d !== null && d <= 7; });
+      const banner = document.getElementById('home-bday-banner');
+      if (!banner) return;
+      if (soon.length) {
+        banner.textContent = '🎂 ' + soon.map(p => {
+          const d = daysUntilBirthday(p.birthday);
+          return d === 0 ? p.name + '\'s birthday today!' : p.name + '\'s bday in ' + d + 'd';
+        }).join(' · ');
+        banner.style.display = 'block';
+      } else {
+        banner.style.display = 'none';
+      }
+    }
+    checkHomeBirthdays();
 
     // ── Tab navigation ─────────────────────────────────────────────────────────
 
@@ -4023,44 +3274,17 @@
     })();
 
     function homeUpdateCheckinStatus() {
-      const key = todayKey();
-      const mData = localStorage.getItem('coach_morning_' + key);
-      const nData = localStorage.getItem('coach_night_' + key);
-      const pData = localStorage.getItem('anchor_checkin_physical_' + key);
+      const key   = todayKey();
+      const mDone = !!localStorage.getItem('coach_morning_' + key);
+      const nDone = !!localStorage.getItem('coach_night_' + key);
+      const pDone = !!localStorage.getItem('anchor_checkin_physical_' + key);
 
-      const mBadge = document.getElementById('home-morning-badge');
-      const mSub   = document.getElementById('home-morning-sub');
-      if (mData) {
-        const d = JSON.parse(mData);
-        const moodMap = ['','😞','😕','😐','🙂','😄'];
-        if (mBadge) { mBadge.textContent = 'Done ✓'; mBadge.className = 'checkin-status-badge done'; }
-        if (mSub)   mSub.textContent = 'Mood ' + (moodMap[d.mood] || '—') + '  Energy ' + (moodMap[d.energy] || '—');
-      } else {
-        if (mBadge) { mBadge.textContent = 'Tap →'; mBadge.className = 'checkin-status-badge ready'; }
-        if (mSub)   mSub.textContent = 'Log mood, energy & sleep';
-      }
-
-      const nBadge = document.getElementById('home-night-badge');
-      const nSub   = document.getElementById('home-night-sub');
-      if (nData) {
-        const d = JSON.parse(nData);
-        if (nBadge) { nBadge.textContent = 'Done ✓'; nBadge.className = 'checkin-status-badge done'; }
-        if (nSub)   nSub.textContent = d.win ? '"' + d.win.slice(0, 40) + (d.win.length > 40 ? '…' : '') + '"' : 'Logged';
-      } else {
-        if (nBadge) { nBadge.textContent = 'Tap →'; nBadge.className = 'checkin-status-badge ready'; }
-        if (nSub)   nSub.textContent = 'Log your win & habits';
-      }
-
-      const pBadge = document.getElementById('home-physical-badge');
-      const pSub   = document.getElementById('home-physical-sub');
-      if (pData) {
-        const d = JSON.parse(pData);
-        if (pBadge) { pBadge.textContent = 'Done ✓'; pBadge.className = 'checkin-status-badge done'; }
-        if (pSub)   pSub.textContent = d.weight ? d.weight + ' lbs logged' : 'Physical logged';
-      } else {
-        if (pBadge) { pBadge.textContent = 'Tap →'; pBadge.className = 'checkin-status-badge ready'; }
-        if (pSub)   pSub.textContent = 'Weight, body feel & photo';
-      }
+      const dotM = document.getElementById('ci-dot-morning');
+      const dotN = document.getElementById('ci-dot-night');
+      const dotP = document.getElementById('ci-dot-physical');
+      if (dotM) dotM.classList.toggle('done', mDone);
+      if (dotN) dotN.classList.toggle('done', nDone);
+      if (dotP) dotP.classList.toggle('done', pDone);
 
       // Keep glance grid in sync
       homePopulateGlance();
@@ -4083,7 +3307,6 @@
     function showBodySection(sec) {
       document.querySelectorAll('#body-section-nav .checkin-section-pill').forEach(p => p.classList.toggle('active', p.dataset.bsec === sec));
       document.querySelectorAll('#tab-body .checkin-section').forEach(s => s.classList.toggle('active', s.id === 'body-section-' + sec));
-      if (sec === 'stats') initStats();
     }
 
     function homePopulateGlance() {
@@ -4109,38 +3332,6 @@
       const bodySub  = document.getElementById('glance-body-sub');
       if (bodyMain) bodyMain.textContent = latestWeight ? latestWeight + ' lbs · ' + wLabel : wLabel;
       if (bodySub)  bodySub.textContent  = totalCal + ' / 1250 cal · ' + totalPro + 'g / 130g protein';
-
-      // ── Life ──
-      const people  = JSON.parse(localStorage.getItem('anchor_people') || '[]');
-      const events  = JSON.parse(localStorage.getItem('anchor_events') || '[]');
-      const weekEnd = new Date(now); weekEnd.setDate(now.getDate() + 7);
-      const upcomingEvts = events.filter(ev => { const d = new Date(ev.date); return d >= now && d <= weekEnd; });
-      const bdayAlert    = people.find(p => p.birthday && lifeDaysUntilBirthday(p.birthday) <= 7);
-      const lifeMain     = document.getElementById('glance-life-main');
-      const lifeSub      = document.getElementById('glance-life-sub');
-      if (lifeMain) {
-        if (bdayAlert) {
-          const days = lifeDaysUntilBirthday(bdayAlert.birthday);
-          lifeMain.textContent = days === 0 ? bdayAlert.name + '\'s birthday!' : bdayAlert.name + '\'s bday in ' + days + 'd';
-        } else {
-          lifeMain.textContent = upcomingEvts.length + ' event' + (upcomingEvts.length !== 1 ? 's' : '') + ' this week';
-        }
-      }
-      if (lifeSub) lifeSub.textContent = people.length + ' people · ' + events.length + ' events';
-
-      // ── Projects ──
-      const projects       = JSON.parse(localStorage.getItem('anchor_projects') || '[]');
-      const activeProjects = projects.filter(p => p.status !== 'done');
-      let tasksDue = 0;
-      activeProjects.forEach(p => {
-        (p.tasks || []).forEach(t => {
-          if (!t.done && t.due) { const d = new Date(t.due); if (d >= now && d <= weekEnd) tasksDue++; }
-        });
-      });
-      const projMain = document.getElementById('glance-projects-main');
-      const projSub  = document.getElementById('glance-projects-sub');
-      if (projMain) projMain.textContent = activeProjects.length + ' active project' + (activeProjects.length !== 1 ? 's' : '');
-      if (projSub)  projSub.textContent  = tasksDue > 0 ? tasksDue + ' task' + (tasksDue !== 1 ? 's' : '') + ' due this week' : 'No tasks due this week';
 
       // ── Goals ──
       const goals       = JSON.parse(localStorage.getItem('anchor_goals') || '[]');
@@ -4285,6 +3476,7 @@
       return `<div class="exercise-card" id="ex-${slug}">
         <div class="exercise-header">
           <span class="exercise-name">${name}</span>
+          <button type="button" class="cardio-scan-btn" onclick="cardioScanPhoto('${name}')" title="Scan machine screen">📷</button>
         </div>
         <div class="cardio-row">
           <div class="cardio-field">
@@ -4738,14 +3930,20 @@
       renderWater();
     })();
 
-    // ── Stats tab ─────────────────────────────────────────────────────────────
+    // ── Progress tab ──────────────────────────────────────────────────────────
 
-    function initStats() {
+    function renderProgress() {
       renderWeekGrid();
       renderWeightChart();
       renderPRs();
       renderCardioHistory();
+      renderVolumeChart();
+      renderTrainingStreak();
+      renderCalProteinChart();
+      renderMoodSleepChart();
     }
+
+    function initStats() { renderProgress(); }
 
     function renderWeekGrid() {
       const grid = document.getElementById('week-grid');
@@ -4779,11 +3977,12 @@
         const d = new Date(today);
         d.setDate(today.getDate() - i);
         const key   = d.toISOString().split('T')[0];
+        const phys  = localStorage.getItem('anchor_checkin_physical_' + key);
         const night = localStorage.getItem('coach_night_' + key);
-        if (night) {
-          const w = parseFloat(JSON.parse(night)?.body?.weight);
-          if (w > 0) points.push({ label: key.slice(5), weight: w });
-        }
+        let w = null;
+        if (phys) w = parseFloat(JSON.parse(phys)?.weight);
+        if (!(w > 0) && night) w = parseFloat(JSON.parse(night)?.body?.weight);
+        if (w > 0) points.push({ label: key.slice(5), weight: w });
       }
 
       if (points.length < 2) {
@@ -4862,8 +4061,27 @@
         card.innerHTML = '<p style="color:var(--muted);font-size:13px;">No PRs yet. Save a workout to start tracking.</p>';
         return;
       }
+      // Compute oldest weight in last 30 days per exercise
+      const today = new Date();
+      const oldest30 = {};
+      for (let i = 30; i >= 1; i--) {
+        const d = new Date(today); d.setDate(today.getDate() - i);
+        const data = localStorage.getItem('coach_workout_' + d.toISOString().split('T')[0]);
+        if (!data) continue;
+        const wd = JSON.parse(data);
+        Object.entries(wd.exercises || {}).forEach(([name, ex]) => {
+          const maxW = Math.max(...(ex.sets || []).map(s => parseFloat(s.weight) || 0));
+          if (maxW > 0 && !(name in oldest30)) oldest30[name] = maxW;
+        });
+      }
       card.innerHTML = `<table class="pr-table">
-        ${keys.map(k => `<tr><td>${k}</td><td>${prs[k]} lbs</td></tr>`).join('')}
+        ${keys.map(k => {
+          const delta = oldest30[k] ? prs[k] - oldest30[k] : null;
+          const deltaHtml = delta !== null && delta !== 0
+            ? `<span style="font-size:11px;color:${delta > 0 ? 'var(--accent)' : 'var(--warn)'};">&nbsp;${delta > 0 ? '↑' : '↓'}${Math.abs(delta)}lb 30d</span>`
+            : '';
+          return `<tr><td>${k}</td><td>${prs[k]} lbs${deltaHtml}</td></tr>`;
+        }).join('')}
       </table>`;
     }
 
@@ -4872,16 +4090,18 @@
       if (!card) return;
       const sessions = [];
       const today    = new Date();
-      for (let i = 0; i < 60 && sessions.length < 10; i++) {
-        const d = new Date(today);
-        d.setDate(today.getDate() - i);
+      let totalMins30 = 0;
+      for (let i = 0; i < 60; i++) {
+        const d = new Date(today); d.setDate(today.getDate() - i);
         const data = localStorage.getItem('coach_workout_' + d.toISOString().split('T')[0]);
         if (data) {
           const w = JSON.parse(data);
           if (w.cardio) {
             Object.entries(w.cardio).forEach(([name, c]) => {
-              if (c.duration && sessions.length < 10) {
-                sessions.push({ date: w.date, name, duration: c.duration, intensity: c.intensity });
+              if (c.duration) {
+                const mins = parseFloat(c.duration) || 0;
+                if (sessions.length < 10) sessions.push({ date: w.date, name, duration: c.duration, intensity: c.intensity });
+                if (i < 30) totalMins30 += mins;
               }
             });
           }
@@ -4891,7 +4111,9 @@
         card.innerHTML = '<p style="color:var(--muted);font-size:13px;">No cardio logged yet.</p>';
         return;
       }
-      card.innerHTML = sessions.map(s => `
+      const count30 = sessions.filter(s => Math.floor((today - new Date(s.date)) / 86400000) < 30).length;
+      const summary = `<div style="font-size:12px;color:var(--muted);margin-bottom:12px;">${count30} session${count30 !== 1 ? 's' : ''} in 30 days &middot; ${Math.round(totalMins30)} total minutes</div>`;
+      card.innerHTML = summary + sessions.map(s => `
         <div class="cardio-hist-item">
           <div>
             <div style="font-weight:500;">${s.name}</div>
@@ -4904,9 +4126,171 @@
         </div>`).join('');
     }
 
-    // Re-render body sub-sections when the Body tab is opened
+    function renderVolumeChart() {
+      const canvas = document.getElementById('volume-chart');
+      const empty  = document.getElementById('volume-chart-empty');
+      if (!canvas) return;
+      const today = new Date();
+      const weeks = [];
+      for (let w = 7; w >= 0; w--) {
+        let vol = 0;
+        for (let d = 0; d < 7; d++) {
+          const day = new Date(today); day.setDate(today.getDate() - w * 7 - d);
+          const data = localStorage.getItem('coach_workout_' + day.toISOString().split('T')[0]);
+          if (data) {
+            const wd = JSON.parse(data);
+            Object.values(wd.exercises || {}).forEach(ex => {
+              (ex.sets || []).forEach(s => { vol += (parseFloat(s.reps) || 0) * (parseFloat(s.weight) || 0); });
+            });
+          }
+        }
+        const ws = new Date(today); ws.setDate(today.getDate() - w * 7 - 6);
+        weeks.push({ label: (ws.getMonth() + 1) + '/' + ws.getDate(), vol });
+      }
+      const hasData = weeks.some(w => w.vol > 0);
+      if (!hasData) { canvas.style.display = 'none'; empty.style.display = 'block'; return; }
+      canvas.style.display = 'block'; empty.style.display = 'none';
+      const W = canvas.parentElement.clientWidth - 32 || 400, H = 140;
+      canvas.width = W; canvas.height = H;
+      const ctx = canvas.getContext('2d');
+      const maxV = Math.max(...weeks.map(w => w.vol)) || 1;
+      const pad = { t: 8, r: 8, b: 24, l: 8 };
+      const gap = (W - pad.l - pad.r) / weeks.length;
+      const barW = gap * 0.6;
+      weeks.forEach((wk, i) => {
+        const x = pad.l + i * gap + gap * 0.2;
+        const h = (wk.vol / maxV) * (H - pad.t - pad.b);
+        const y = H - pad.b - h;
+        ctx.fillStyle = 'rgba(56,189,248,0.7)';
+        if (ctx.roundRect) { ctx.beginPath(); ctx.roundRect(x, y, barW, h, [4,4,0,0]); ctx.fill(); }
+        else { ctx.fillRect(x, y, barW, h); }
+        ctx.fillStyle = 'rgba(136,136,136,0.7)'; ctx.font = '9px sans-serif'; ctx.textAlign = 'center';
+        ctx.fillText(wk.label, x + barW / 2, H - pad.b + 12);
+      });
+    }
+
+    function renderTrainingStreak() {
+      const today = new Date();
+      let current = 0, longest = 0, run = 0, monthCount = 0;
+      const monthStart = new Date(today.getFullYear(), today.getMonth(), 1);
+      for (let i = 0; i < 365; i++) {
+        const d = new Date(today); d.setDate(today.getDate() - i);
+        const key  = d.toISOString().split('T')[0];
+        const data = localStorage.getItem('coach_workout_' + key);
+        const hasW = data && JSON.parse(data).label !== 'Rest';
+        if (hasW) {
+          run++;
+          if (i === 0 || current === i) current = run;
+          if (run > longest) longest = run;
+          if (d >= monthStart) monthCount++;
+        } else {
+          if (i > 0) run = 0;
+        }
+      }
+      const curEl = document.getElementById('streak-current');
+      const lonEl = document.getElementById('streak-longest');
+      const monEl = document.getElementById('streak-month');
+      if (curEl) curEl.textContent = current;
+      if (lonEl) lonEl.textContent = longest;
+      if (monEl) monEl.textContent = monthCount;
+    }
+
+    function renderCalProteinChart() {
+      const canvas = document.getElementById('calprotein-chart');
+      const empty  = document.getElementById('calprotein-empty');
+      if (!canvas) return;
+      const today = new Date();
+      const days = [];
+      for (let i = 29; i >= 0; i--) {
+        const d = new Date(today); d.setDate(today.getDate() - i);
+        const key  = d.toISOString().split('T')[0];
+        const food = JSON.parse(localStorage.getItem('coach_food_' + key) || '[]');
+        const cal  = food.reduce((s, f) => s + (parseFloat(f.cal) || 0), 0);
+        const prot = food.reduce((s, f) => s + (parseFloat(f.protein) || 0), 0);
+        days.push({ cal, prot });
+      }
+      const hasData = days.some(d => d.cal > 0);
+      if (!hasData) { canvas.style.display = 'none'; empty.style.display = 'block'; return; }
+      canvas.style.display = 'block'; empty.style.display = 'none';
+      const W = canvas.parentElement.clientWidth - 32 || 400, H = 140;
+      canvas.width = W; canvas.height = H;
+      const ctx = canvas.getContext('2d');
+      const pad = { t: 8, r: 8, b: 20, l: 8 };
+      const maxC = Math.max(1400, ...days.map(d => d.cal));
+      const maxP = Math.max(160, ...days.map(d => d.prot));
+      const gap  = (W - pad.l - pad.r) / days.length;
+      const barW = gap * 0.55;
+      days.forEach((day, i) => {
+        const x = pad.l + i * gap + gap * 0.1;
+        if (day.cal > 0) {
+          const h = (day.cal / maxC) * (H - pad.t - pad.b);
+          const y = H - pad.b - h;
+          ctx.fillStyle = day.cal >= 1150 ? 'rgba(184,255,87,0.75)' : day.cal >= 950 ? 'rgba(251,191,36,0.75)' : 'rgba(255,87,87,0.75)';
+          if (ctx.roundRect) { ctx.beginPath(); ctx.roundRect(x, y, barW, h, [3,3,0,0]); ctx.fill(); }
+          else ctx.fillRect(x, y, barW, h);
+        }
+        if (day.prot > 0) {
+          const pW = Math.max(2, barW * 0.3);
+          const pH = (day.prot / maxP) * (H - pad.t - pad.b);
+          ctx.fillStyle = 'rgba(196,181,253,0.9)';
+          ctx.fillRect(x + barW + 1, H - pad.b - pH, pW, pH);
+        }
+      });
+      ctx.setLineDash([3,3]);
+      ctx.strokeStyle = 'rgba(184,255,87,0.3)'; ctx.lineWidth = 1;
+      const calY = H - pad.b - (1250 / maxC) * (H - pad.t - pad.b);
+      ctx.beginPath(); ctx.moveTo(pad.l, calY); ctx.lineTo(W - pad.r, calY); ctx.stroke();
+      ctx.setLineDash([]);
+    }
+
+    function renderMoodSleepChart() {
+      const canvas = document.getElementById('moodsleep-chart');
+      const empty  = document.getElementById('moodsleep-empty');
+      if (!canvas) return;
+      const today = new Date();
+      const days = [];
+      for (let i = 13; i >= 0; i--) {
+        const d = new Date(today); d.setDate(today.getDate() - i);
+        const key = d.toISOString().split('T')[0];
+        const m   = JSON.parse(localStorage.getItem('coach_morning_' + key) || 'null');
+        days.push({ label: (d.getMonth()+1)+'/'+d.getDate(), mood: m ? parseFloat(m.mood) : null, sleep: m ? parseFloat(m.sleep) : null });
+      }
+      const hasData = days.some(d => d.mood !== null);
+      if (!hasData) { canvas.style.display = 'none'; empty.style.display = 'block'; return; }
+      canvas.style.display = 'block'; empty.style.display = 'none';
+      const W = canvas.parentElement.clientWidth - 32 || 400, H = 140;
+      canvas.width = W; canvas.height = H;
+      const ctx = canvas.getContext('2d');
+      const pad = { t: 12, r: 12, b: 24, l: 28 };
+      const n = days.length;
+      const cx = i => pad.l + (i / (n - 1)) * (W - pad.l - pad.r);
+      const cy = v => pad.t + (1 - (v - 1) / 4) * (H - pad.t - pad.b);
+      ctx.strokeStyle = 'rgba(255,255,255,0.05)'; ctx.lineWidth = 1;
+      [1,2,3,4,5].forEach(v => {
+        const y = cy(v);
+        ctx.beginPath(); ctx.moveTo(pad.l, y); ctx.lineTo(W - pad.r, y); ctx.stroke();
+        ctx.fillStyle = 'rgba(136,136,136,0.6)'; ctx.font = '9px sans-serif'; ctx.textAlign = 'right';
+        ctx.fillText(v, pad.l - 3, y + 3);
+      });
+      function drawLine(color, getValue) {
+        const pts = days.map((d, i) => ({ x: cx(i), y: cy(getValue(d)), v: getValue(d) })).filter(p => p.v !== null);
+        if (pts.length < 2) return;
+        ctx.beginPath(); ctx.moveTo(pts[0].x, pts[0].y);
+        pts.slice(1).forEach(p => ctx.lineTo(p.x, p.y));
+        ctx.strokeStyle = color; ctx.lineWidth = 2; ctx.lineJoin = 'round'; ctx.stroke();
+        pts.forEach(p => { ctx.beginPath(); ctx.arc(p.x, p.y, 3, 0, Math.PI*2); ctx.fillStyle = color; ctx.fill(); });
+      }
+      drawLine('#ff7eb3', d => d.mood);
+      drawLine('#7b6fff', d => d.sleep);
+      days.forEach((d, i) => {
+        if (i % 3 === 0) { ctx.fillStyle = 'rgba(136,136,136,0.7)'; ctx.font = '9px sans-serif'; ctx.textAlign = 'center'; ctx.fillText(d.label, cx(i), H - pad.b + 12); }
+      });
+    }
+
+    // Re-render body/progress sub-sections when their tabs are opened
     document.getElementById('bottom-nav').addEventListener('click', function (e) {
-      if (e.target.closest('[data-tab="body"]')) { initStats(); renderWorkout(); renderFoodLog(); renderRecipes(); renderWater(); }
+      if (e.target.closest('[data-tab="body"]')) { renderWorkout(); renderFoodLog(); renderRecipes(); renderWater(); }
+      if (e.target.closest('[data-tab="progress"]')) { renderProgress(); }
     });
 
     // ── Chat tab ──────────────────────────────────────────────────────────────
@@ -4988,88 +4372,6 @@
     });
 
     renderChatMessages();
-
-    // ── Journal tab ───────────────────────────────────────────────────────────
-
-    let selectedTags = [];
-
-    function toggleTag(el) {
-      const tag = el.dataset.tag;
-      el.classList.toggle('selected');
-      if (selectedTags.includes(tag)) {
-        selectedTags = selectedTags.filter(t => t !== tag);
-      } else {
-        selectedTags.push(tag);
-      }
-    }
-
-    function toggleJournalEntry(el) {
-      const body = el.parentElement.querySelector('.journal-entry-body');
-      if (body) body.style.display = body.style.display === 'none' ? 'block' : 'none';
-    }
-
-    function saveJournalEntry() {
-      const key  = todayKey();
-      const mood = document.querySelector('input[name="journal-mood"]:checked')?.value || null;
-      const text = document.getElementById('journal-text').value.trim();
-      const win  = document.getElementById('journal-win').value.trim();
-      const data = { date: key, mood, tags: [...selectedTags], text, win };
-
-      localStorage.setItem('coach_journal_' + key, JSON.stringify(data));
-
-      document.querySelectorAll('input[name="journal-mood"]').forEach(r => r.checked = false);
-      document.getElementById('journal-text').value = '';
-      document.getElementById('journal-win').value  = '';
-      document.querySelectorAll('#journal-tags .tag-pill').forEach(p => p.classList.remove('selected'));
-      selectedTags = [];
-
-      showBadgeToast('Journal entry saved!');
-      renderJournalEntries();
-    }
-
-    function renderJournalEntries() {
-      const list = document.getElementById('journal-entries-list');
-      if (!list) return;
-      const moodEmoji = ['', '😞','😕','😐','🙂','😄'];
-      const entries   = [];
-      const today     = new Date();
-      for (let i = 0; i < 60; i++) {
-        const d   = new Date(today);
-        d.setDate(today.getDate() - i);
-        const raw = localStorage.getItem('coach_journal_' + d.toISOString().split('T')[0]);
-        if (raw) entries.push(JSON.parse(raw));
-      }
-      if (!entries.length) {
-        list.innerHTML = '<p style="color:var(--muted);font-size:13px;padding:4px 0;">No entries yet.</p>';
-        return;
-      }
-      list.innerHTML = entries.map(e => {
-        const tags = (e.tags || []).map(t => `<span class="journal-tag-chip">${t}</span>`).join('');
-        return `<div class="journal-entry-card">
-          <div class="journal-entry-header" onclick="toggleJournalEntry(this)">
-            <div>
-              <div class="journal-entry-date">${e.date} ${e.mood ? moodEmoji[e.mood] : ''}</div>
-              <div class="journal-entry-tags">${tags}</div>
-            </div>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-          </div>
-          <div class="journal-entry-body">
-            <p>${e.text || '<em style="color:var(--muted)">No entry text.</em>'}</p>
-            ${e.win ? `<div class="journal-win">⭐ ${e.win}</div>` : ''}
-          </div>
-        </div>`;
-      }).join('');
-    }
-
-    document.getElementById('bottom-nav').addEventListener('click', function (e) {
-      if (e.target.closest('[data-tab="journal"]')) renderJournalEntries();
-    });
-
-    (function initJournal() {
-      const el = document.getElementById('journal-date');
-      if (el) el.textContent = new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
-      renderJournalEntries();
-    })();
 
     // ── More tab ──────────────────────────────────────────────────────────────
 
@@ -5181,8 +4483,8 @@
         const people = JSON.parse(localStorage.getItem('anchor_people') || '[]');
         people.forEach(p => {
           if (!p.birthday) return;
-          const days = lifeDaysUntilBirthday(p.birthday);
-          if (days === 3) notify("Upcoming Birthday", p.name + "'s birthday is in 3 days!", 'bday', () => homeNav('life'));
+          const days = daysUntilBirthday(p.birthday);
+          if (days === 3) notify("Upcoming Birthday", p.name + "'s birthday is in 3 days!", 'bday', () => {});
         });
       }
     }
@@ -5425,13 +4727,6 @@ Write Sprite's weekly performance report with sections: Nutrition, Training, Rec
         ctx += `Active goals (${activeGoals.length}): ` + activeGoals.slice(0, 3).map(g => `${g.name} ${g.progress || 0}%`).join(', ') + '\n';
       }
 
-      // Active projects
-      const projects       = JSON.parse(localStorage.getItem('anchor_projects') || '[]');
-      const activeProjects = projects.filter(p => p.status !== 'done');
-      if (activeProjects.length) {
-        ctx += `Active projects (${activeProjects.length}): ` + activeProjects.slice(0, 3).map(p => p.title || p.name).join(', ') + '\n';
-      }
-
       return ctx.trim();
     }
 
@@ -5464,6 +4759,79 @@ Write Sprite's weekly performance report with sections: Nutrition, Training, Rec
       return data.content[0].text;
     }
 
+    async function claudeVisionCall(model, system, userText, base64Data, mediaType) {
+      const settings = JSON.parse(localStorage.getItem('coach_settings') || '{}');
+      if (!settings.apiKey) throw new Error('no-key');
+      const resp = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': settings.apiKey,
+          'anthropic-version': '2023-06-01',
+          'anthropic-dangerous-direct-browser-access': 'true',
+        },
+        body: JSON.stringify({
+          model,
+          max_tokens: 256,
+          system,
+          messages: [{ role: 'user', content: [
+            { type: 'image', source: { type: 'base64', media_type: mediaType, data: base64Data } },
+            { type: 'text', text: userText }
+          ]}],
+        }),
+      });
+      if (!resp.ok) {
+        const err = await resp.json().catch(() => ({}));
+        throw new Error(err.error?.message || 'API error ' + resp.status);
+      }
+      const data = await resp.json();
+      return data.content[0].text;
+    }
+
+    async function cardioScanPhoto(exerciseName) {
+      const fileInput = document.getElementById('cardio-photo-input');
+      if (!fileInput) return;
+      fileInput.value = '';
+      fileInput.onchange = async function () {
+        const file = fileInput.files[0];
+        if (!file) return;
+        showBadgeToast('Reading cardio screen…');
+        const reader = new FileReader();
+        reader.onload = async function (e) {
+          const dataUrl  = e.target.result;
+          const comma    = dataUrl.indexOf(',');
+          const base64   = dataUrl.slice(comma + 1);
+          const mimeType = dataUrl.slice(5, comma).split(';')[0] || 'image/jpeg';
+          const slug     = exSlug(exerciseName);
+          const prompt   = `This is a ${exerciseName} machine screen. Extract: duration (minutes), distance if shown, calories burned if shown, speed/resistance if shown. Return JSON only: {"duration": number_or_null, "calories": number_or_null, "notes": "string summarizing other metrics"}`;
+          try {
+            let raw = await claudeVisionCall(
+              'claude-haiku-4-5-20251001',
+              'You extract cardio machine data from photos. Return only valid JSON with no extra text or markdown.',
+              prompt, base64, mimeType
+            );
+            raw = raw.replace(/```[a-z]*\n?/g, '').replace(/```/g, '').trim();
+            const parsed = JSON.parse(raw);
+            if (parsed.duration != null) {
+              const durEl = document.getElementById('cardio-dur-' + slug);
+              if (durEl) durEl.value = parsed.duration;
+            }
+            if (parsed.notes) {
+              const noteEl = document.getElementById('notes-' + slug);
+              if (noteEl) noteEl.value = parsed.notes;
+            }
+            showBadgeToast('Cardio logged from photo ✓');
+          } catch (err) {
+            showBadgeToast(err.message === 'no-key' ? 'Add API key in Settings' : 'Could not read photo');
+          } finally {
+            fileInput.value = '';
+          }
+        };
+        reader.readAsDataURL(file);
+      };
+      fileInput.click();
+    }
+
     function focusCardSetText(text) {
       // Update home daily focus card
       const homeCard = document.getElementById('home-focus-text');
@@ -5484,11 +4852,51 @@ Write Sprite's weekly performance report with sections: Nutrition, Training, Rec
       const el       = document.getElementById('home-focus-text');
       if (cached) { if (el) el.textContent = cached; return; }
       if (el) el.textContent = 'Generating your focus for today…';
+
+      // Build yesterday's context
+      const yest = new Date(); yest.setDate(yest.getDate() - 1);
+      const yKey = yest.toISOString().split('T')[0];
+      const yMorning = JSON.parse(localStorage.getItem('coach_morning_' + yKey) || 'null');
+      const yWorkout = JSON.parse(localStorage.getItem('coach_workout_' + yKey) || 'null');
+
+      // 7-day nutrition averages
+      let totalCal7 = 0, totalProt7 = 0, nutritionDays = 0;
+      for (let i = 1; i <= 7; i++) {
+        const d = new Date(); d.setDate(d.getDate() - i);
+        const food = JSON.parse(localStorage.getItem('coach_food_' + d.toISOString().split('T')[0]) || '[]');
+        if (food.length) {
+          totalCal7  += food.reduce((s, f) => s + (parseFloat(f.cal) || 0), 0);
+          totalProt7 += food.reduce((s, f) => s + (parseFloat(f.protein) || 0), 0);
+          nutritionDays++;
+        }
+      }
+      const avgCal7  = nutritionDays ? Math.round(totalCal7 / nutritionDays) : null;
+      const avgProt7 = nutritionDays ? Math.round(totalProt7 / nutritionDays) : null;
+
+      const todayDow     = ['sun','mon','tue','wed','thu','fri','sat'][new Date().getDay()];
+      const todayWorkout = (WORKOUT_PLAN[todayDow] || {}).label || 'Rest';
+
+      let dataContext = `Yesterday (${yKey}):\n`;
+      if (yMorning) {
+        dataContext += `- Mood: ${yMorning.mood}/5, Energy: ${yMorning.energy}/5, Sleep: ${yMorning.sleep}/5\n`;
+      } else {
+        dataContext += '- No morning check-in logged\n';
+      }
+      if (yWorkout) {
+        dataContext += `- Workout: ${yWorkout.label} (${Object.keys(yWorkout.exercises || {}).length} exercises)\n`;
+      } else {
+        dataContext += '- No workout logged\n';
+      }
+      if (avgCal7 !== null) {
+        dataContext += `7-day avg nutrition: ${avgCal7} cal/day, ${avgProt7}g protein/day (targets: 1250 cal, 130g protein)\n`;
+      }
+      dataContext += `Today's planned workout: ${todayWorkout}\n`;
+
       try {
         const text = await claudeCall(
-          'claude-sonnet-4-20250514',
-          'You are Life.Coach, a personal AI sidekick for Sprite, a 34-year-old wellness competitor. You see her full life — fitness, money, goals, relationships, projects. Be honest, warm, specific, and grounded. No toxic positivity. No fluff. Talk to her like a trusted coach who actually knows her life.',
-          buildLifeContext() + '\n\nGenerate today\'s focus note. Connect the dots across her life areas. Surface the one thing that matters most today. Under 80 words.'
+          'claude-haiku-4-5-20251001',
+          'You are Life.Coach, a personal AI coach for Sprite, a 34-year-old wellness competitor. Be honest, warm, specific, and data-driven. No toxic positivity. No fluff. If yesterday\'s energy was low (1–2), suggest recovery. If calories averaged under 1100 for days, flag it. If yesterday was heavy training, remind about recovery. Connect her patterns to today\'s recommendations. Under 90 words.',
+          dataContext + '\n\nGenerate today\'s focus note based on this data.'
         );
         localStorage.setItem(cacheKey, text);
         if (el) el.textContent = text;
@@ -5935,637 +5343,49 @@ Write Sprite's weekly performance report with sections: Nutrition, Training, Rec
       setTimeout(goalsRender, 50);
     });
 
-    // ── Life tab ───────────────────────────────────────────────────────────────
 
-    /* ── People ── */
-
-    function lifeGetPeople() {
-      const s = localStorage.getItem('anchor_people');
-      return s ? JSON.parse(s) : [];
-    }
-    function lifeSavePeople(arr) { localStorage.setItem('anchor_people', JSON.stringify(arr)); }
-
-    function lifeDaysUntilBirthday(bdayStr) {
-      if (!bdayStr) return null;
-      const today = new Date();
-      const bday  = new Date(bdayStr + 'T12:00:00');
-      let next = new Date(today.getFullYear(), bday.getMonth(), bday.getDate());
-      if (next < today) next.setFullYear(today.getFullYear() + 1);
-      return Math.round((next - today) / 86400000);
-    }
-
-    function lifeDaysSinceContacted(dateStr) {
-      if (!dateStr) return null;
-      const d = new Date(dateStr + 'T12:00:00');
-      return Math.round((Date.now() - d) / 86400000);
-    }
-
-    function lifeRenderPeople() {
-      const people = lifeGetPeople();
-      const container = document.getElementById('people-list');
-      if (!container) return;
-      if (!people.length) {
-        container.innerHTML = '<p style="font-size:13px;color:var(--muted);margin-bottom:12px;">No people added yet.</p>';
-        return;
-      }
-      container.innerHTML = people.map((p, i) => {
-        const daysB  = lifeDaysUntilBirthday(p.birthday);
-        const daysC  = lifeDaysSinceContacted(p.lastContacted);
-        const nudge  = daysC !== null && daysC > 21
-          ? `<div class="person-nudge">&#128338; Due for a check-in (${daysC}d ago)</div>` : '';
-        const bdayAlert = daysB !== null && daysB <= 7
-          ? `<div class="person-bday-alert">&#127874; Birthday in ${daysB} day${daysB !== 1 ? 's' : ''}!</div>` : '';
-        const metaItems = [
-          p.birthday ? `<div class="person-meta-item">Birthday <span>${new Date(p.birthday + 'T12:00:00').toLocaleDateString('en-US', {month:'long', day:'numeric'})}</span></div>` : '',
-          p.phone    ? `<div class="person-meta-item">Phone <span>${p.phone}</span></div>` : '',
-          p.address  ? `<div class="person-meta-item">Address <span>${p.address}</span></div>` : '',
-          p.lastContacted ? `<div class="person-meta-item">Last contacted <span>${new Date(p.lastContacted + 'T12:00:00').toLocaleDateString('en-US', {month:'short', day:'numeric'})}</span></div>` : '',
-        ].filter(Boolean).join('');
-        return `
-          <div class="person-card">
-            <div class="person-card-top">
-              <div class="person-avatar">${(p.name || '?')[0]}</div>
-              <div class="person-info">
-                <div class="person-name">${p.name}</div>
-                <div class="person-rel">${p.relationship}</div>
-                ${nudge}${bdayAlert}
-              </div>
-            </div>
-            ${metaItems ? `<div class="person-meta">${metaItems}</div>` : ''}
-            ${p.notes ? `<div class="person-notes">${p.notes}</div>` : ''}
-            <div class="person-actions">
-              <button class="person-contact-btn" onclick="lifeMarkContacted(${i})">&#9993; Mark Contacted</button>
-              <button class="person-del-btn" onclick="lifeDeletePerson(${i})">Delete</button>
-            </div>
-          </div>`;
-      }).join('');
-    }
-
-    function lifeSavePerson() {
-      const name = (document.getElementById('person-name').value || '').trim();
-      if (!name) { document.getElementById('person-name').style.borderColor = 'var(--warn)'; return; }
-      document.getElementById('person-name').style.borderColor = '';
-      const person = {
-        name,
-        relationship: document.getElementById('person-rel').value,
-        birthday:     document.getElementById('person-bday').value || '',
-        phone:        document.getElementById('person-phone').value.trim(),
-        address:      document.getElementById('person-address').value.trim(),
-        notes:        document.getElementById('person-notes').value.trim(),
-        lastContacted: ''
-      };
-      const people = lifeGetPeople();
-      people.push(person);
-      lifeSavePeople(people);
-      ['person-name','person-phone','person-address','person-notes'].forEach(id => document.getElementById(id).value = '');
-      document.getElementById('person-bday').value = '';
-      lifeRenderPeople();
-      lifeCheckBirthdays();
-      showBadgeToast('Person saved');
-    }
-
-    function lifeMarkContacted(idx) {
-      const people = lifeGetPeople();
-      if (people[idx]) {
-        people[idx].lastContacted = new Date().toISOString().split('T')[0];
-        lifeSavePeople(people);
-        lifeRenderPeople();
-      }
-    }
-
-    function lifeDeletePerson(idx) {
-      const people = lifeGetPeople();
-      people.splice(idx, 1);
-      lifeSavePeople(people);
-      lifeRenderPeople();
-      lifeCheckBirthdays();
-    }
-
-    /* ── Events ── */
-
-    function lifeGetEvents() {
-      const s = localStorage.getItem('anchor_events');
-      return s ? JSON.parse(s) : [];
-    }
-    function lifeSaveEvents(arr) { localStorage.setItem('anchor_events', JSON.stringify(arr)); }
-
-    let lifeShowingPast = false;
-
-    function lifeRenderEvents() {
-      const events  = lifeGetEvents();
-      const today   = new Date().toISOString().split('T')[0];
-      const upcoming = events.filter(e => e.date >= today).sort((a, b) => a.date.localeCompare(b.date));
-      const past     = events.filter(e => e.date < today).sort((a, b) => b.date.localeCompare(a.date));
-
-      const upEl   = document.getElementById('events-upcoming-list');
-      const pastEl = document.getElementById('events-past-list');
-      const togEl  = document.getElementById('past-events-toggle');
-      if (!upEl) return;
-
-      if (!upcoming.length && !past.length) {
-        upEl.innerHTML = '<p style="font-size:13px;color:var(--muted);padding:8px 0;">No events yet.</p>';
-      } else {
-        upEl.innerHTML = upcoming.map(e => lifeEventHTML(e, false)).join('') ||
-          '<p style="font-size:13px;color:var(--muted);padding:8px 0;">No upcoming events.</p>';
-      }
-
-      if (past.length) {
-        togEl.style.display = 'block';
-        togEl.textContent   = lifeShowingPast ? 'Hide past events' : `Show ${past.length} past event${past.length !== 1 ? 's' : ''}`;
-        pastEl.style.display = lifeShowingPast ? 'block' : 'none';
-        pastEl.innerHTML     = past.map(e => lifeEventHTML(e, true)).join('');
-      } else {
-        togEl.style.display = 'none';
-      }
-    }
-
-    function lifeEventHTML(e, isPast) {
-      const d = new Date(e.date + 'T12:00:00');
-      const dateStr = d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
-      const timeStr = e.time ? ' · ' + e.time : '';
-      const recur   = e.recur !== 'none' && e.recur ? `<span class="event-recur-badge">${e.recur}</span>` : '';
-      return `
-        <div class="event-item">
-          <div class="event-dot${isPast ? ' past' : ''}"></div>
-          <div class="event-info">
-            <div class="event-name${isPast ? ' past' : ''}">${e.name}</div>
-            <div class="event-when${isPast ? ' past' : ''}">${dateStr}${timeStr}</div>
-            ${e.notes ? `<div class="event-notes">${e.notes}</div>` : ''}
-          </div>
-          ${recur}
-          <button class="event-del-btn" onclick="lifeDeleteEvent('${e.id}')" title="Delete">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/>
-            </svg>
-          </button>
-        </div>`;
-    }
-
-    function lifeTogglePastEvents() {
-      lifeShowingPast = !lifeShowingPast;
-      lifeRenderEvents();
-    }
-
-    function lifeSaveEvent() {
-      const name = (document.getElementById('event-name').value || '').trim();
-      const date = document.getElementById('event-date').value;
-      if (!name || !date) {
-        if (!name) document.getElementById('event-name').style.borderColor = 'var(--warn)';
-        if (!date) document.getElementById('event-date').style.borderColor = 'var(--warn)';
-        return;
-      }
-      document.getElementById('event-name').style.borderColor = '';
-      document.getElementById('event-date').style.borderColor = '';
-      const evt = {
-        id:    Date.now().toString(),
-        name, date,
-        time:  document.getElementById('event-time').value,
-        notes: document.getElementById('event-notes').value.trim(),
-        recur: document.getElementById('event-recur').value
-      };
-      const events = lifeGetEvents();
-      events.push(evt);
-      lifeSaveEvents(events);
-      ['event-name','event-notes'].forEach(id => document.getElementById(id).value = '');
-      document.getElementById('event-date').value = '';
-      document.getElementById('event-time').value = '';
-      document.getElementById('event-recur').value = 'none';
-      lifeRenderEvents();
-      showBadgeToast('Event saved');
-    }
-
-    function lifeDeleteEvent(id) {
-      lifeSaveEvents(lifeGetEvents().filter(e => e.id !== id));
-      lifeRenderEvents();
-    }
-
-    /* ── Moments ── */
-
-    const DEFAULT_MOMENTS = [
-      { id: 'm1', text: 'Take a trip somewhere warm', category: 'Travel', done: false },
-      { id: 'm2', text: 'See a live concert', category: 'Experience', done: false }
-    ];
-
-    function lifeGetMoments() {
-      const s = localStorage.getItem('anchor_moments');
-      if (s) return JSON.parse(s);
-      localStorage.setItem('anchor_moments', JSON.stringify(DEFAULT_MOMENTS));
-      return DEFAULT_MOMENTS;
-    }
-    function lifeSaveMoments(arr) { localStorage.setItem('anchor_moments', JSON.stringify(arr)); }
-
-    function lifeRenderMoments() {
-      const moments = lifeGetMoments();
-      const container = document.getElementById('moments-list');
-      if (!container) return;
-      if (!moments.length) {
-        container.innerHTML = '<p style="font-size:13px;color:var(--muted);padding:8px 0;">No moments yet. Add something to look forward to.</p>';
-        return;
-      }
-      const active = moments.filter(m => !m.done);
-      const done   = moments.filter(m => m.done);
-      const all    = [...active, ...done];
-      container.innerHTML = all.map(m => `
-        <div class="moment-item">
-          <div class="moment-cat-dot${m.done ? ' done' : ''}"></div>
-          <span class="moment-text${m.done ? ' done' : ''}">${m.text}</span>
-          <span class="moment-cat-badge">${m.category}</span>
-          ${!m.done
-            ? `<button class="moment-done-btn" onclick="lifeMomentDone('${m.id}')">Done ✓</button>`
-            : `<button class="moment-done-btn done-state" onclick="lifeMomentUndone('${m.id}')">Undo</button>`}
-          <button class="moment-del-btn" onclick="lifeDeleteMoment('${m.id}')" title="Delete">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/>
-            </svg>
-          </button>
-        </div>`).join('');
-    }
-
-    function lifeMomentDone(id) {
-      const m = lifeGetMoments();
-      const item = m.find(x => x.id === id);
-      if (item) { item.done = true; lifeSaveMoments(m); lifeRenderMoments(); }
-    }
-    function lifeMomentUndone(id) {
-      const m = lifeGetMoments();
-      const item = m.find(x => x.id === id);
-      if (item) { item.done = false; lifeSaveMoments(m); lifeRenderMoments(); }
-    }
-    function lifeDeleteMoment(id) {
-      lifeSaveMoments(lifeGetMoments().filter(x => x.id !== id));
-      lifeRenderMoments();
-    }
-    function lifeAddMoment() {
-      const text = (document.getElementById('moment-desc').value || '').trim();
-      if (!text) { document.getElementById('moment-desc').style.borderColor = 'var(--warn)'; return; }
-      document.getElementById('moment-desc').style.borderColor = '';
-      const moments = lifeGetMoments();
-      moments.unshift({ id: 'm' + Date.now(), text, category: document.getElementById('moment-cat').value, done: false });
-      lifeSaveMoments(moments);
-      document.getElementById('moment-desc').value = '';
-      lifeRenderMoments();
-    }
-
-    /* ── Birthday check (runs on load + on Life tab open) ── */
-
-    function lifeCheckBirthdays() {
-      const people = lifeGetPeople();
-      const soon   = people.filter(p => {
-        const d = lifeDaysUntilBirthday(p.birthday);
-        return d !== null && d <= 7;
-      });
-      const banner = document.getElementById('life-bday-banner');
-      if (banner) {
-        if (soon.length) {
-          banner.textContent = '🎂 Upcoming birthdays: ' + soon.map(p => {
-            const d = lifeDaysUntilBirthday(p.birthday);
-            return `${p.name} (${d === 0 ? 'today!' : 'in ' + d + 'd'})`;
-          }).join(', ');
-          banner.style.display = 'block';
-        } else {
-          banner.style.display = 'none';
-        }
-      }
-      // Surface on home tab if any upcoming
-      const homeBanner = document.getElementById('home-bday-banner');
-      if (homeBanner) {
-        if (soon.length) {
-          homeBanner.textContent = '🎂 ' + soon.map(p => {
-            const d = lifeDaysUntilBirthday(p.birthday);
-            return `${p.name}'s birthday ${d === 0 ? 'is today!' : 'in ' + d + 'd'}`;
-          }).join(' · ');
-          homeBanner.style.display = 'block';
-        } else {
-          homeBanner.style.display = 'none';
-        }
-      }
-    }
-
-    /* ── Life section nav + init ── */
-
-    (function lifeInit() {
-      document.getElementById('life-section-nav') && void 0; // noop guard
-
-      document.querySelector('#tab-life .life-section-nav').addEventListener('click', function(e) {
-        const pill = e.target.closest('.life-section-pill');
-        if (!pill) return;
-        const sec = pill.dataset.section;
-        document.querySelectorAll('.life-section-pill').forEach(p => p.classList.toggle('active', p === pill));
-        document.querySelectorAll('.life-section').forEach(s => s.classList.toggle('active', s.id === 'life-' + sec));
-      });
-    })();
-
-    document.querySelector('.nav-tab[data-tab="life"]').addEventListener('click', function () {
-      setTimeout(() => {
-        lifeRenderPeople();
-        lifeRenderEvents();
-        lifeRenderMoments();
-        lifeCheckBirthdays();
-      }, 50);
-    });
-
-    // Run birthday check on app load too
-    lifeCheckBirthdays();
-
-    // ── Projects tab ───────────────────────────────────────────────────────────
-
-    const DEFAULT_PROJECTS = [
-      {
-        id: 'p1', name: 'Home reset — bedroom', status: 'In Progress',
-        deadline: (function () {
-          const d = new Date();
-          d.setDate(d.getDate() + (7 - d.getDay())); // this Sunday
-          return d.toISOString().split('T')[0];
-        })(),
-        budget: 150, spent: 0,
-        tasks: [
-          { id: 't1', text: 'Clear nightstand', done: true, deadline: '' },
-          { id: 't2', text: 'Get new bedding', done: false, deadline: '' },
-          { id: 't3', text: 'Hang lighting', done: false, deadline: '' }
-        ]
-      },
-      {
-        id: 'p2', name: 'Life.Coach app', status: 'In Progress',
-        deadline: '', budget: null, spent: 0,
-        tasks: [
-          { id: 't4', text: 'Finish COACH phase 1', done: true, deadline: '' },
-          { id: 't5', text: 'Plan Anchor/Life.Coach v1', done: true, deadline: '' },
-          { id: 't6', text: 'Build out all tabs', done: false, deadline: '' }
-        ]
-      }
-    ];
-
-    const DEFAULT_IDEAS = [
-      { id: 'i1', text: 'Trip somewhere warm — look into flights', category: 'Travel' },
-      { id: 'i2', text: 'Mercari CSV app for small business', category: 'Business' }
-    ];
-
-    function projGetProjects() {
-      const s = localStorage.getItem('anchor_projects');
-      if (s) return JSON.parse(s);
-      localStorage.setItem('anchor_projects', JSON.stringify(DEFAULT_PROJECTS));
-      return DEFAULT_PROJECTS;
-    }
-    function projSaveProjects(arr) { localStorage.setItem('anchor_projects', JSON.stringify(arr)); }
-
-    function projGetIdeas() {
-      const s = localStorage.getItem('anchor_ideas');
-      if (s) return JSON.parse(s);
-      localStorage.setItem('anchor_ideas', JSON.stringify(DEFAULT_IDEAS));
-      return DEFAULT_IDEAS;
-    }
-    function projSaveIdeas(arr) { localStorage.setItem('anchor_ideas', JSON.stringify(arr)); }
-
-    function projTaskProgress(tasks) {
-      if (!tasks || !tasks.length) return 0;
-      return Math.round((tasks.filter(t => t.done).length / tasks.length) * 100);
-    }
-
-    function projStatusClass(status) {
-      if (status === 'In Progress') return 'inprogress';
-      if (status === 'Paused') return 'paused';
-      if (status === 'Complete') return 'complete';
-      return 'inprogress';
-    }
-
-    function projRenderProjects() {
-      const projects = projGetProjects();
-      const container = document.getElementById('projects-list');
-      if (!container) return;
-      if (!projects.length) {
-        container.innerHTML = '<p style="font-size:13px;color:var(--muted);margin-bottom:12px;">No projects yet.</p>';
-        return;
-      }
-      const today = new Date().toISOString().split('T')[0];
-      container.innerHTML = projects.map((proj, pi) => {
-        const pct = projTaskProgress(proj.tasks);
-        const deadlineStr = proj.deadline
-          ? `<div class="proj-meta-item">Deadline <span style="${proj.deadline < today ? 'color:var(--warn)' : ''}">${new Date(proj.deadline + 'T12:00:00').toLocaleDateString('en-US', {month:'short', day:'numeric'})}</span></div>`
-          : '';
-        const budgetStr = proj.budget != null
-          ? `<div class="proj-meta-item">Budget <span>$${proj.spent || 0} / $${proj.budget}</span></div>`
-          : '';
-        const tasksHTML = (proj.tasks || []).map((t, ti) => {
-          const dl = t.deadline
-            ? `<span class="proj-task-deadline${t.deadline < today && !t.done ? ' overdue' : ''}">${new Date(t.deadline + 'T12:00:00').toLocaleDateString('en-US', {month:'short', day:'numeric'})}</span>`
-            : '';
-          return `
-            <div class="proj-task">
-              <input type="checkbox" ${t.done ? 'checked' : ''}
-                onchange="projToggleTask('${proj.id}', ${ti}, this.checked)" />
-              <span class="proj-task-text${t.done ? ' done' : ''}">${t.text}</span>
-              ${dl}
-              <button class="proj-task-del" onclick="projDeleteTask('${proj.id}', ${ti})" title="Delete task">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
-                </svg>
-              </button>
-            </div>`;
-        }).join('');
-        return `
-          <div class="project-card" id="proj-card-${proj.id}">
-            <div class="proj-card-top">
-              <div class="proj-name">${proj.name}</div>
-              <span class="proj-status-badge ${projStatusClass(proj.status)}">${proj.status}</span>
-            </div>
-            ${(deadlineStr || budgetStr) ? `<div class="proj-meta-row">${deadlineStr}${budgetStr}</div>` : ''}
-            <div class="proj-progress-label">
-              <span class="proj-progress-text">Tasks</span>
-              <span class="proj-progress-pct">${pct}%</span>
-            </div>
-            <div class="proj-progress-bar">
-              <div class="proj-progress-fill" style="width:${pct}%"></div>
-            </div>
-            <div class="proj-tasks">${tasksHTML}</div>
-            <!-- Add task inline form -->
-            <div class="proj-add-task-form" id="add-task-form-${proj.id}" style="display:none;">
-              <input type="text" class="money-input" id="new-task-text-${proj.id}" placeholder="Task name" style="font-size:13px;padding:8px 10px;" />
-              <input type="date" class="money-input" id="new-task-date-${proj.id}" style="font-size:13px;padding:8px 10px;" />
-              <button class="proj-task-add-btn" onclick="projAddTask('${proj.id}')">Add</button>
-            </div>
-            <div class="proj-card-footer">
-              <button class="proj-task-add-btn" style="flex:1;" onclick="projToggleAddTask('${proj.id}')">+ Add Task</button>
-              <select class="proj-status-select" onchange="projUpdateStatus('${proj.id}', this.value)">
-                <option ${proj.status === 'In Progress' ? 'selected' : ''}>In Progress</option>
-                <option ${proj.status === 'Paused'     ? 'selected' : ''}>Paused</option>
-                <option ${proj.status === 'Complete'   ? 'selected' : ''}>Complete</option>
-              </select>
-              <button class="proj-del-btn" onclick="projDeleteProject('${proj.id}')">Delete</button>
-            </div>
-          </div>`;
-      }).join('');
-    }
-
-    function projToggleAddTask(pid) {
-      const form = document.getElementById('add-task-form-' + pid);
-      if (form) form.style.display = form.style.display === 'none' ? 'flex' : 'none';
-    }
-
-    function projAddTask(pid) {
-      const textEl = document.getElementById('new-task-text-' + pid);
-      const dateEl = document.getElementById('new-task-date-' + pid);
-      const text = (textEl.value || '').trim();
-      if (!text) { textEl.style.borderColor = 'var(--warn)'; return; }
-      textEl.style.borderColor = '';
-      const projects = projGetProjects();
-      const proj = projects.find(p => p.id === pid);
-      if (!proj) return;
-      proj.tasks.push({ id: 't' + Date.now(), text, done: false, deadline: dateEl.value || '' });
-      projSaveProjects(projects);
-      projScheduleTaskReminders(proj);
-      projRenderProjects();
-    }
-
-    function projToggleTask(pid, ti, checked) {
-      const projects = projGetProjects();
-      const proj = projects.find(p => p.id === pid);
-      if (proj && proj.tasks[ti]) {
-        proj.tasks[ti].done = checked;
-        // Auto-complete project if all tasks done
-        if (checked && proj.tasks.every(t => t.done)) proj.status = 'Complete';
-        projSaveProjects(projects);
-        projRenderProjects();
-      }
-    }
-
-    function projDeleteTask(pid, ti) {
-      const projects = projGetProjects();
-      const proj = projects.find(p => p.id === pid);
-      if (proj) { proj.tasks.splice(ti, 1); projSaveProjects(projects); projRenderProjects(); }
-    }
-
-    function projUpdateStatus(pid, status) {
-      const projects = projGetProjects();
-      const proj = projects.find(p => p.id === pid);
-      if (proj) { proj.status = status; projSaveProjects(projects); }
-    }
-
-    function projDeleteProject(pid) {
-      projSaveProjects(projGetProjects().filter(p => p.id !== pid));
-      projRenderProjects();
-    }
-
-    function projToggleDeadline() {
-      const on = document.getElementById('proj-deadline-toggle').checked;
-      document.getElementById('proj-deadline-date').style.display = on ? 'block' : 'none';
-    }
-
-    function projToggleBudget() {
-      const on = document.getElementById('proj-budget-toggle').checked;
-      document.getElementById('proj-budget-amount').style.display = on ? 'block' : 'none';
-    }
-
-    function projSaveProject() {
-      const name = (document.getElementById('proj-name-input').value || '').trim();
-      if (!name) { document.getElementById('proj-name-input').style.borderColor = 'var(--warn)'; return; }
-      document.getElementById('proj-name-input').style.borderColor = '';
-      const hasDeadline = document.getElementById('proj-deadline-toggle').checked;
-      const hasBudget   = document.getElementById('proj-budget-toggle').checked;
-      const proj = {
-        id: 'p' + Date.now(), name, status: 'In Progress',
-        deadline: hasDeadline ? document.getElementById('proj-deadline-date').value : '',
-        budget:   hasBudget   ? parseFloat(document.getElementById('proj-budget-amount').value) || 0 : null,
-        spent: 0, tasks: []
-      };
-      const projects = projGetProjects();
-      projects.unshift(proj);
-      projSaveProjects(projects);
-      document.getElementById('proj-name-input').value = '';
-      document.getElementById('proj-deadline-toggle').checked = false;
-      document.getElementById('proj-budget-toggle').checked = false;
-      document.getElementById('proj-deadline-date').style.display = 'none';
-      document.getElementById('proj-budget-amount').style.display = 'none';
-      projRenderProjects();
-      showBadgeToast('Project saved');
-    }
-
-    /* ── Ideas ── */
-
-    function projRenderIdeas() {
-      const ideas = projGetIdeas();
-      const container = document.getElementById('ideas-list');
-      if (!container) return;
-      if (!ideas.length) {
-        container.innerHTML = '<p style="font-size:13px;color:var(--muted);padding:8px 0;">No ideas yet.</p>';
-        return;
-      }
-      container.innerHTML = ideas.map(idea => `
-        <div class="idea-item">
-          <div class="idea-dot"></div>
-          <div class="idea-info">
-            <div class="idea-text">${idea.text}</div>
-            <div class="idea-cat">${idea.category}</div>
-          </div>
-          <div class="idea-actions">
-            <button class="idea-promote-btn" onclick="projPromoteIdea('${idea.id}')">&#8593; Promote</button>
-            <button class="idea-del-btn" onclick="projDeleteIdea('${idea.id}')">&#215; Delete</button>
-          </div>
-        </div>`).join('');
-    }
-
-    function projAddIdea() {
-      const text = (document.getElementById('idea-text-input').value || '').trim();
-      if (!text) { document.getElementById('idea-text-input').style.borderColor = 'var(--warn)'; return; }
-      document.getElementById('idea-text-input').style.borderColor = '';
-      const ideas = projGetIdeas();
-      ideas.unshift({ id: 'i' + Date.now(), text, category: document.getElementById('idea-cat-input').value });
-      projSaveIdeas(ideas);
-      document.getElementById('idea-text-input').value = '';
-      projRenderIdeas();
-    }
-
-    function projDeleteIdea(id) {
-      projSaveIdeas(projGetIdeas().filter(i => i.id !== id));
-      projRenderIdeas();
-    }
-
-    function projPromoteIdea(id) {
-      const idea = projGetIdeas().find(i => i.id === id);
-      if (!idea) return;
-      // Switch to Active section and pre-fill form
-      document.querySelectorAll('.proj-section-pill').forEach(p => p.classList.toggle('active', p.dataset.psec === 'active'));
-      document.querySelectorAll('.proj-section').forEach(s => s.classList.toggle('active', s.id === 'proj-active'));
-      const nameInput = document.getElementById('proj-name-input');
-      if (nameInput) { nameInput.value = idea.text; nameInput.scrollIntoView({ behavior: 'smooth', block: 'center' }); nameInput.focus(); }
-    }
-
-    /* ── Notifications for task deadlines ── */
-
-    function projScheduleTaskReminders(proj) {
-      if (!('Notification' in window) || Notification.permission !== 'granted') return;
-      const tomorrow = new Date();
-      tomorrow.setDate(tomorrow.getDate() + 1);
-      const tomorrowStr = tomorrow.toISOString().split('T')[0];
-      (proj.tasks || []).forEach(t => {
-        if (!t.done && t.deadline === tomorrowStr) {
-          new Notification('Life.Coach', { body: `Task due tomorrow: "${t.text}" in ${proj.name}`, icon: '' });
-        }
-      });
-    }
-
-    function projCheckAllReminders() {
-      if (!('Notification' in window) || Notification.permission !== 'granted') return;
-      projGetProjects().forEach(projScheduleTaskReminders);
-    }
-
-    /* ── Init ── */
-
-    (function projInit() {
-      document.querySelector('#tab-projects .proj-section-nav').addEventListener('click', function(e) {
-        const pill = e.target.closest('.proj-section-pill');
-        if (!pill) return;
-        const sec = pill.dataset.psec;
-        document.querySelectorAll('.proj-section-pill').forEach(p => p.classList.toggle('active', p === pill));
-        document.querySelectorAll('.proj-section').forEach(s => s.classList.toggle('active', s.id === 'proj-' + sec));
-        if (sec === 'ideas') projRenderIdeas();
-      });
-    })();
-
-    document.querySelector('.nav-tab[data-tab="projects"]').addEventListener('click', function () {
-      setTimeout(() => { projRenderProjects(); projRenderIdeas(); projCheckAllReminders(); }, 50);
-    });
 
     // ── Check-in tab ───────────────────────────────────────────────────────────
+
+    /* ── Inline journal drop-downs ── */
+
+    function ciToggleJournal(section) {
+      const drop = document.getElementById('ci-journal-drop-' + section);
+      const btn  = drop && drop.previousElementSibling;
+      if (!drop) return;
+      const open = drop.classList.toggle('open');
+      if (btn) btn.classList.toggle('open', open);
+      if (open) ciLoadJournal(section);
+    }
+
+    function ciToggleJournalTag(el) {
+      el.classList.toggle('selected');
+    }
+
+    function ciSaveJournal(section) {
+      const key   = todayKey();
+      const tags  = Array.from(document.querySelectorAll('#ci-journal-tags-' + section + ' .tag-pill.selected')).map(t => t.dataset.tag);
+      const text  = (document.getElementById('ci-journal-text-' + section) || {}).value || '';
+      if (!text.trim() && !tags.length) return;
+      const entry = { date: key, section, tags, text: text.trim(), saved: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) };
+      localStorage.setItem('coach_journal_' + section + '_' + key, JSON.stringify(entry));
+      const savedEl = document.getElementById('ci-journal-saved-' + section);
+      if (savedEl) savedEl.textContent = 'Saved ✓ at ' + entry.saved;
+    }
+
+    function ciLoadJournal(section) {
+      const key   = todayKey();
+      const entry = JSON.parse(localStorage.getItem('coach_journal_' + section + '_' + key) || 'null');
+      if (!entry) return;
+      const textEl = document.getElementById('ci-journal-text-' + section);
+      if (textEl) textEl.value = entry.text || '';
+      const tags = entry.tags || [];
+      document.querySelectorAll('#ci-journal-tags-' + section + ' .tag-pill').forEach(t => {
+        t.classList.toggle('selected', tags.includes(t.dataset.tag));
+      });
+      const savedEl = document.getElementById('ci-journal-saved-' + section);
+      if (savedEl && entry.saved) savedEl.textContent = 'Last saved: ' + entry.saved;
+    }
 
     /* ── Morning saved view ── */
 
@@ -6820,7 +5640,7 @@ Write Sprite's weekly performance report with sections: Nutrition, Training, Rec
     // ── Service Worker (cache-first offline + notification click) ─────────────
     if ('serviceWorker' in navigator) {
       const swSrc = `
-        const CACHE = 'lifecoach-v4';
+        const CACHE = 'lifecoach-v5';
         self.addEventListener('install',  () => self.skipWaiting());
         self.addEventListener('activate', e => e.waitUntil(
           caches.keys().then(keys => Promise.all(
@@ -6859,7 +5679,7 @@ Write Sprite's weekly performance report with sections: Nutrition, Training, Rec
           else if (tag === 'night')   homeGoCheckin('night');
           else if (tag === 'water')   homeNav('body');
           else if (tag === 'report')  homeNav('more');
-          else if (tag === 'bday')    homeNav('life');
+          else if (tag === 'bday')    homeNav('today');
         });
       } catch (_) {}
     }
@@ -6876,7 +5696,7 @@ Write Sprite's weekly performance report with sections: Nutrition, Training, Rec
           else if (notifParam === 'night')   homeGoCheckin('night');
           else if (notifParam === 'water')   homeNav('body');
           else if (notifParam === 'report')  homeNav('more');
-          else if (notifParam === 'bday')    homeNav('life');
+          else if (notifParam === 'bday')    homeNav('today');
         }, 300);
       }
       // Show notification permission prompt if not yet asked
